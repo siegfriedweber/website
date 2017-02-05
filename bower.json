@@ -1,0 +1,7 @@
+{
+  "name": "website-siegfriedweber",
+  "private": true,
+  "dependencies": {
+    "purescript-halogen": "^0.12.0"
+  }
+}
