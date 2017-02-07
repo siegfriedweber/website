@@ -4,9 +4,6 @@
   "dependencies": {
     "purescript-halogen": "^0.12.0",
     "purescript-halogen-css": "^4.0.0",
-    "purescript-css": "https://github.com/siegfriedweber/purescript-css.git#quote-fontfaceformat"
-  },
-  "resolutions": {
-    "purescript-css": "quote-fontfaceformat"
+    "purescript-css": "^2.1.0"
   }
 }
