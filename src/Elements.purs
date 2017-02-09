@@ -1,5 +1,9 @@
 module Elements
-    ( SectionStyle
+    ( Box
+    , SectionStyle
+    , Skill
+    , box
+    , boxes
     , defaultSectionStyle
     , heading
     , inlineImage
@@ -8,6 +12,8 @@ module Elements
     , paragraph
     , section
     , section_
+    , skillSet
+    , subHeading
     , styleDarkBackground
     , styleLightBackground
     ) where
@@ -45,8 +51,8 @@ defaultSectionStyle :: SectionStyle
 defaultSectionStyle =
     { marginTop       : C.nil
     , marginBottom    : C.nil
-    , paddingTop      : C.px 72.0
-    , paddingBottom   : C.px 72.0
+    , paddingTop      : C.px 36.0
+    , paddingBottom   : C.px 36.0
     , outerBackground : styleLightBackground
     , innerBackground : styleLightBackground
     }
@@ -78,8 +84,18 @@ heading :: forall p i. String -> HH.HTML p i
 heading text =
     HH.h1 [ HC.style do
               C.marginTop C.nil
-              C.marginBottom $ C.px 6.0
+              C.marginBottom $ C.px 24.0
               C.fontSize $ C.px 30.0
+              styleFont SourceSansProSemibold
+          ]
+          [ HH.text text ]
+
+subHeading :: forall p i. String -> HH.HTML p i
+subHeading text =
+    HH.h2 [ HC.style do
+              C.marginTop C.nil
+              C.marginBottom $ C.px 36.0
+              C.fontSize $ C.px 24.0
               styleFont SourceSansProSemibold
           ]
           [ HH.text text ]
@@ -123,5 +139,91 @@ linkedIcon name icon url =
              C.paddingLeft $ C.px 12.0
              C.paddingRight $ C.px 12.0
          ]
-         [ HH.img [ HP.src icon, HP.alt name ] ]
+         [ HH.img
+            [ HP.src icon
+            , HP.alt name
+            , HC.style $ CV.verticalAlign CV.Top
+            ]
+        ]
+
+type Skill =
+    { name       :: String
+    , desc       :: String
+    , percentage :: Number
+    }
+
+skillSet :: forall p i. Array Skill -> HH.HTML p i
+skillSet = map skillBar >>> map createListItem >>> createList
+  where
+    createListItem = HH.li_
+
+    createList = HH.ul
+        [ HC.style do
+            CL.listStyleType CC.none
+            C.marginTop C.nil
+            C.marginBottom C.nil
+            C.paddingLeft C.nil
+        ]
+
+skillBar :: forall p i. Skill -> Array (HH.HTML p i)
+skillBar skill =
+    [ HH.h3
+        [ HC.style do
+            C.display C.flex
+            C.justifyContent C.spaceBetween
+            C.alignItems CC.baseline
+            C.marginTop $ C.px 12.0
+            C.marginBottom $ C.px 8.0
+        ]
+        [ HH.span
+            [ HC.style do
+                styleFont SourceSansProSemibold
+                C.fontSize $ C.px 18.0
+            ]
+            [ HH.text skill.name ]
+        , HH.span
+            [ HC.style do
+                styleFont SourceSansProLight
+                C.fontSize $ C.px 16.0
+                C.color $ C.fromInt 0x404040
+            ]
+            [ HH.text skill.desc ]
+        ]
+    , bar skill.percentage
+    ]
+
+bar :: forall p i. Number -> HH.HTML p i
+bar percentage = HH.div
+    [ HC.style $ C.backgroundColor $ C.fromInt 0xa0a0a0
+    ]
+    [ HH.div
+        [ HC.style do
+            C.height $ C.px 8.0
+            C.width $ C.pct percentage
+            styleDarkBackground
+        ]
+        []
+    ]
+
+newtype Box p i = Box (HH.HTML p i)
+
+unBox :: forall p i. Box p i -> HH.HTML p i
+unBox (Box b) = b
+
+box :: forall p i. Array (HH.HTML p i) -> Box p i
+box = Box <<< HH.div [ HC.style do
+                         C.minWidth $ C.px 444.0
+                         C.marginBottom $ C.px 72.0
+                     ]
+
+boxes :: forall p i. Array (Box p i) -> HH.HTML p i
+boxes = map unBox >>> createBoxes
+  where
+    createBoxes = HH.div [ HC.style do
+                             C.display C.flex
+                             C.flexWrap C.wrap
+                             C.justifyContent C.spaceBetween
+                             C.marginTop $ C.px 36.0
+                             C.marginBottom $ C.px 36.0
+                         ]
 

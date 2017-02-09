@@ -32,6 +32,13 @@ header =
             [ E.heading "Siegfried Weber"
             , E.paragraph "Freiberuflicher Softwareentwickler und \
                         \Experte für funktionale Programmierung"
+            , E.skillSet
+                [ { name : "Haskell, PureScript", desc : "Experte", percentage : 90.0 }
+                , { name : "Java, Spring Boot", desc : "Experte", percentage : 100.0 }
+                , { name : "C++", desc : "lange nicht benutzt", percentage : 60.0 }
+                , { name : "HTML, CSS, JavaScript", desc : "Pro", percentage : 70.0 }
+                , { name : "Microservices", desc : "2 Jahre Erfahrung", percentage : 80.0 }
+                ]
             ]
         ]
   where
@@ -50,6 +57,7 @@ links =
     E.section E.defaultSectionStyle
         { paddingTop = C.px 24.0
         , paddingBottom = C.px 24.0
+        , marginBottom = C.px 36.0
         , innerBackground = E.styleDarkBackground
         }
         [ E.inlineList
@@ -67,12 +75,70 @@ about = E.section_
     , E.paragraph "Ich bin freiberuflicher Softwareentwickler und habe mich auf funktionale Programmierung spezialisiert."
     ]
 
+skills :: forall p i. HH.HTML p i
+skills = E.section_
+    [ E.heading "Meine Fertigkeiten"
+    , E.boxes
+        [ E.box
+            [ E.subHeading "Programmiersprachen"
+            , E.skillSet
+                [ { name : "Haskell",    desc : "Experte",             percentage : 90.0  }
+                , { name : "PureScript", desc : "Experte",             percentage : 90.0  }
+                , { name : "Java",       desc : "Experte",             percentage : 100.0 }
+                , { name : "Javascript", desc : "Pro",                 percentage : 80.0  }
+                , { name : "C++",        desc : "lange nicht benutzt", percentage : 60.0  }
+                ]
+            ]
+        , E.box
+            [ E.subHeading "Datenbankmanagementsysteme"
+            , E.skillSet
+                [ { name : "MongoDB",                desc : "Experte",   percentage : 100.0 }
+                , { name : "MySQL",                  desc : "Pro",       percentage : 70.0  }
+                , { name : "Google Cloud Datastore", desc : "am Lernen", percentage : 40.0  }
+                ]
+            ]
+        , E.box
+            [ E.subHeading "Werkzeuge"
+            , E.skillSet
+                [ { name : "Git",           desc : "Guru", percentage : 100.0 }
+                , { name : "Vim",           desc : "Guru", percentage : 100.0 }
+                , { name : "IntelliJ IDEA", desc : "Pro",  percentage : 70.0  }
+                ]
+            ]
+        , E.box
+            [ E.subHeading "Betriebssysteme"
+            , E.skillSet
+                [ { name : "Microsoft Windows", desc : "Experte",                  percentage : 90.0  }
+                , { name : "Debian GNU/Linux",  desc : "Experte",                  percentage : 100.0 }
+                , { name : "NixOS",             desc : "auf dem Weg zum Experten", percentage : 30.0  }
+                ]
+            ]
+        , E.box
+            [ E.subHeading "Branchen"
+            , E.skillSet
+                [ { name : "Finanzen",       desc : "Pro",  percentage : 70.0  }
+                , { name : "Versicherungen", desc : "Pro",  percentage : 80.0  }
+                , { name : "Computerspiele", desc : "Guru", percentage : 100.0 }
+                ]
+            ]
+        , E.box
+            [ E.subHeading "Sprachen"
+            , E.skillSet
+                [ { name : "Deutsch",     desc : "Muttersprache",      percentage : 100.0 }
+                , { name : "Englisch",    desc : "verhandlungssicher", percentage : 85.0  }
+                , { name : "Französisch", desc : "am Lernen",          percentage : 20.0  }
+                ]
+            ]
+        ]
+    ]
+
 website :: forall p i. HH.HTML p i
 website = HH.div_
     [ unsafeCoerce $ HS.stylesheet $ styleBody *> styleFontFaces
     , header
     , links
     , about
+    , skills
     ]
   where
     styleBody :: C.CSS
