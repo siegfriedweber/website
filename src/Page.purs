@@ -8,6 +8,8 @@ import Prelude
 import Unsafe.Coerce (unsafeCoerce)
 
 import CSS as C
+import CSS.Media as CM
+import Data.NonEmpty (singleton)
 import Halogen as H
 import Halogen.HTML.CSS as HS
 import Halogen.HTML.CSS.Indexed as HC
@@ -145,6 +147,8 @@ footer =
         , textColor       = E.lightTextColor
         }
         [ E.boxes E.defaultBoxStyle
+            { verticalSpace = 18.0
+            }
             [ E.Box
                 [ E.paragraphs
                     [ E.paragraph_ "Siegfried Weber\n\
@@ -167,7 +171,10 @@ footer =
 
 website :: forall p i. HH.HTML p i
 website = HH.div_
-    [ unsafeCoerce $ HS.stylesheet $ styleBody *> styleFontFaces
+    [ unsafeCoerce $ HS.stylesheet (do
+        styleBody
+        styleFontFaces
+        styleSections)
     , header
     , links
     , about
@@ -177,6 +184,20 @@ website = HH.div_
   where
     styleBody :: C.CSS
     styleBody = C.select C.body $ C.margin C.nil C.nil C.nil C.nil
+
+    styleSections :: C.CSS
+    styleSections = do
+        C.query CM.screen (singleton smallScreen) $ C.select classSection (C.width $ C.px 480.0)
+        C.query CM.screen (singleton largeScreen) $ C.select classSection (C.width $ C.px 960.0)
+
+    classSection :: C.Selector
+    classSection = C.Selector (C.Refinement [C.Class "section"]) C.Star
+
+    smallScreen :: C.Feature
+    smallScreen = C.Feature "max-width" $ pure $ C.value $ C.px 999.0
+
+    largeScreen :: C.Feature
+    largeScreen = C.Feature "min-width" $ pure $ C.value $ C.px 1000.0
 
 type State = Unit
 data Query a = Query a

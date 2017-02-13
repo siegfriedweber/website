@@ -88,8 +88,8 @@ section style content =
             style.outerBackground
         ]
         [ HH.div
-            [ HC.style do
-                 C.width $ C.px 960.0
+            [ HP.class_ $ HH.className "section"
+            , HC.style do
                  C.marginLeft CC.auto
                  C.marginRight CC.auto
                  C.paddingTop style.paddingTop
