@@ -66,6 +66,7 @@ links =
             , E.linkedIcon "Linked in" "images/linkedin.png" "https://de.linkedin.com/in/siegfriedweber"
             , E.linkedIcon "GitHub" "images/github.png" "https://github.com/siegfriedweber"
             , E.linkedIcon "Stack Overflow" "images/stackoverflow.png" "https://stackoverflow.com/users/7312398/siegfried-weber"
+            , E.linkedIcon "E-Mail" "images/mail.png" "mailto:mail@siegfriedweber.net"
             ]
         ]
 
