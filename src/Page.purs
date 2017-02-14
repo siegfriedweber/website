@@ -76,7 +76,7 @@ about :: forall p i. HH.HTML p i
 about = E.section_
     [ E.heading_ "Hallo, ich bin Siegfried!"
     , E.paragraphs
-        [ E.paragraph_ "Ich bin freiberuflicher Softwareentwickler und habe mich auf funktionale Programmierung spezialisiert."
+        [ E.paragraph_ "Ich bin freiberuflicher Softwareentwickler und immer auf der Suche nach interessanten Projekten sowohl im Rhein-Main-Gebiet als auch \"remote\". Meine Software genügt höchsten Ansprüchen und diese stelle ich auch an die Projekte. Wenn Sie also etwas Großartiges schaffen wollen, dann lassen Sie uns das gemeinsam tun!"
         ]
     ]
 
