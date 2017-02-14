@@ -28,6 +28,7 @@ header =
             E.styleDarkBackground
             C.backgroundImage $ C.url "images/header_background.jpg"
             C.backgroundRepeat C.noRepeat
+        , shadow = true
         }
         [ E.inlineImage "Siegfried Weber" "images/siegfried_weber.jpg"
         , HH.div [ HC.style styleIntro ]

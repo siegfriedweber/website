@@ -63,6 +63,7 @@ type SectionStyle =
     , outerBackground :: C.CSS
     , innerBackground :: C.CSS
     , textColor       :: C.Color
+    , shadow          :: Boolean
     }
 
 defaultSectionStyle :: SectionStyle
@@ -74,6 +75,7 @@ defaultSectionStyle =
     , outerBackground : styleLightBackground
     , innerBackground : styleLightBackground
     , textColor       : darkTextColor
+    , shadow          : false
     }
 
 section_ :: forall p i. Array (HH.HTML p i) -> HH.HTML p i
@@ -96,6 +98,7 @@ section style content =
                  C.paddingBottom style.paddingBottom
                  style.innerBackground
                  C.color style.textColor
+                 when style.shadow $ C.boxShadow C.nil C.nil (C.px 72.0) (C.rgba 0 0 0 0.8)
             ]
             content
         ]
