@@ -68,8 +68,8 @@ about = E.section_
 skills :: forall p i. HH.HTML p i
 skills = E.section_
     [ E.heading_ "Meine Fertigkeiten"
-    , E.boxes E.defaultBoxStyle
-        [ E.Box
+    , E.boxes E.boxStyleDefault
+        [ E.box
             [ E.subHeading "Programmiersprachen"
             , E.skillSet
                 [ { name : "Haskell",    desc : "Experte",             percentage : 90.0  }
@@ -79,7 +79,7 @@ skills = E.section_
                 , { name : "C++",        desc : "lange nicht benutzt", percentage : 60.0  }
                 ]
             ]
-        , E.Box
+        , E.box
             [ E.subHeading "Datenbankmanagementsysteme"
             , E.skillSet
                 [ { name : "MongoDB",                desc : "Experte",   percentage : 100.0 }
@@ -87,7 +87,7 @@ skills = E.section_
                 , { name : "Google Cloud Datastore", desc : "am Lernen", percentage : 40.0  }
                 ]
             ]
-        , E.Box
+        , E.box
             [ E.subHeading "Werkzeuge"
             , E.skillSet
                 [ { name : "Git",           desc : "Guru", percentage : 100.0 }
@@ -95,7 +95,7 @@ skills = E.section_
                 , { name : "IntelliJ IDEA", desc : "Pro",  percentage : 70.0  }
                 ]
             ]
-        , E.Box
+        , E.box
             [ E.subHeading "Betriebssysteme"
             , E.skillSet
                 [ { name : "Microsoft Windows", desc : "Experte",                  percentage : 90.0  }
@@ -103,7 +103,7 @@ skills = E.section_
                 , { name : "NixOS",             desc : "auf dem Weg zum Experten", percentage : 30.0  }
                 ]
             ]
-        , E.Box
+        , E.box
             [ E.subHeading "Branchen"
             , E.skillSet
                 [ { name : "Finanzen",       desc : "Pro",  percentage : 70.0  }
@@ -111,7 +111,7 @@ skills = E.section_
                 , { name : "Computerspiele", desc : "Guru", percentage : 100.0 }
                 ]
             ]
-        , E.Box
+        , E.box
             [ E.subHeading "Sprachen"
             , E.skillSet
                 [ { name : "Deutsch",     desc : "Muttersprache",      percentage : 100.0 }
@@ -125,10 +125,8 @@ skills = E.section_
 footer :: forall p i. HH.HTML p i
 footer =
     E.section E.sectionStyleFooter
-        [ E.boxes E.defaultBoxStyle
-            { verticalSpace = 18.0
-            }
-            [ E.Box
+        [ E.boxes E.boxStyleSmallSpacing
+            [ E.box
                 [ E.paragraphs
                     [ E.paragraph_ "Siegfried Weber\n\
                                    \Rheinallee 16-22\n\
@@ -136,7 +134,7 @@ footer =
                                    \Deutschland"
                     ]
                 ]
-            , E.Box
+            , E.box
                 [ E.paragraphs
                     [ E.paragraph'_
                         [ E.Text "Telefon: +49 151 55855451\n\

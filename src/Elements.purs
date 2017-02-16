@@ -1,11 +1,9 @@
 module Elements
-    ( module S
-    , Box(Box)
+    ( module B
+    , module S
     , Content(Text, Email)
     , Skill
     , allStyles
-    , boxes
-    , defaultBoxStyle
     , heading
     , heading_
     , inlineImage
@@ -39,6 +37,7 @@ import Halogen.HTML.CSS.Indexed as HC
 import Halogen.HTML.Indexed as HH
 import Halogen.HTML.Properties.Indexed as HP
 
+import Elements.Box as B
 import Elements.Colors (darkBackgroundColor, lightTextColor)
 import Elements.Section as S
 import Elements.Types (Style)
@@ -50,7 +49,7 @@ type HeadingStyle =
     }
 
 allStyles :: Array Style
-allStyles = S.sectionStyles
+allStyles = S.sectionStyles <> B.boxStyles
 
 defaultHeadingStyle :: HeadingStyle
 defaultHeadingStyle =
@@ -221,46 +220,6 @@ bar percentage = HH.div
         ]
         []
     ]
-
-newtype Box p i = Box (Array (HH.HTML p i))
-
-type BoxStyle =
-    { width :: Number
-    , horizontalSpace :: Number
-    , verticalSpace :: Number
-    }
-
-defaultBoxStyle :: BoxStyle
-defaultBoxStyle =
-    { width : 444.0
-    , horizontalSpace : 72.0
-    , verticalSpace : 72.0
-    }
-
-boxes :: forall p i. BoxStyle -> Array (Box p i) -> HH.HTML p i
-boxes style = map createBox >>>
-    HH.div [ HC.style do
-               C.display C.flex
-               C.flexWrap C.wrap
-               C.marginTop $ C.px (- verticalMargin)
-               C.marginBottom $ C.px (- verticalMargin)
-               C.marginLeft $ C.px (- horizontalMargin)
-               C.marginRight $ C.px (- horizontalMargin)
-           ]
-  where
-    horizontalMargin = style.horizontalSpace / 2.0
-    verticalMargin = style.verticalSpace / 2.0
-
-    createBox :: Box p i -> HH.HTML p i
-    createBox (Box b) = HH.div
-        [ HC.style do
-            C.width $ C.px style.width
-            C.marginTop $ C.px verticalMargin
-            C.marginBottom $ C.px verticalMargin
-            C.marginLeft $ C.px horizontalMargin
-            C.marginRight $ C.px horizontalMargin
-        ]
-        b
 
 type ClassCss =
     { className :: String
