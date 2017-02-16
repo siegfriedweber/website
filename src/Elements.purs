@@ -1,34 +1,24 @@
 module Elements
-    ( Box(Box)
+    ( module S
+    , Box(Box)
     , Content(Text, Email)
-    , SectionStyle
     , Skill
-    , Style
     , allStyles
     , boxes
-    , darkTextColor
     , defaultBoxStyle
     , heading
     , heading_
     , inlineImage
     , inlineList
-    , lightTextColor
     , linkedIcon
     , paragraphs
     , paragraph
     , paragraph_
     , paragraph'
     , paragraph'_
-    , section
-    , section_
-    , sectionStyleFooter
-    , sectionStyleLinks
-    , sectionStyleHeader
     , skillSet
     , subHeading
-    , styleDarkBackground
     , styleElements
-    , styleLightBackground
     ) where
 
 import Prelude
@@ -42,188 +32,25 @@ import CSS.TextAlign as CT
 import CSS.VerticalAlign as CV
 import Data.Array (mapMaybe)
 import Data.Foldable (sequence_)
-import Data.Maybe(Maybe(Just, Nothing))
+import Data.Maybe(Maybe)
 import Data.NonEmpty (NonEmpty, (:|), singleton)
 import Data.String (Pattern(Pattern), split)
 import Halogen.HTML.CSS.Indexed as HC
 import Halogen.HTML.Indexed as HH
 import Halogen.HTML.Properties.Indexed as HP
 
+import Elements.Colors (darkBackgroundColor, lightTextColor)
+import Elements.Section as S
+import Elements.Types (Style)
 import Foldable (intersperse)
 import Fonts (Font(SourceSansProLight, SourceSansProSemibold), styleFont)
-
-styleLightBackground :: C.CSS
-styleLightBackground = C.backgroundColor $ C.fromInt 0xf1f1f1
-
-styleDarkBackground :: C.CSS
-styleDarkBackground = C.backgroundColor $ C.fromInt 0x002b36
-
-lightTextColor :: C.Color
-lightTextColor = C.white
-
-darkTextColor :: C.Color
-darkTextColor = C.black
-
-type Style =
-    { className :: String
-    , cssCommon :: Maybe C.CSS
-    , cssSmall  :: Maybe C.CSS
-    , cssMedium :: Maybe C.CSS
-    , cssLarge  :: Maybe C.CSS
-    }
-
-defaultStyle :: Style
-defaultStyle =
-    { className : ""
-    , cssCommon : Nothing
-    , cssSmall  : Nothing
-    , cssMedium : Nothing
-    , cssLarge  : Nothing
-    }
-
-allStyles :: Array Style
-allStyles =
-    [ sectionStyleHeaderOuter
-    , sectionStyleHeaderInner
-    , sectionStyleDefaultOuter
-    , sectionStyleDefaultInner
-    , sectionStyleLinksOuter
-    , sectionStyleLinksInner
-    , sectionStyleFooterOuter
-    , sectionStyleFooterInner
-    ]
-
-newtype SectionStyle = SectionStyle
-    { outer :: Style
-    , inner :: Style
-    }
-
-sectionStyleHeader :: SectionStyle
-sectionStyleHeader = SectionStyle
-    { outer : sectionStyleHeaderOuter
-    , inner : sectionStyleHeaderInner
-    }
-
-sectionStyleHeaderOuter :: Style
-sectionStyleHeaderOuter = defaultStyle
-    { className = "sectionHeaderOuter"
-    , cssCommon = Just $ do
-        styleDarkBackground
-        C.backgroundImage $ C.url "images/header_background.jpg"
-        C.backgroundRepeat C.noRepeat
-    , cssSmall  = Just $ C.paddingTop $ C.px 24.0
-    , cssMedium = Just $ C.paddingTop $ C.px 150.0
-    , cssLarge  = Just $ C.paddingTop $ C.px 150.0
-    }
-
-defaultSectionInnerStyle :: Style
-defaultSectionInnerStyle = defaultStyle
-    { cssSmall  = Just $ C.width $ C.pct 100.0
-    , cssMedium = Just $ C.width $ C.px 480.0
-    , cssLarge  = Just $ C.width $ C.px 960.0
-    }
-
-sectionStyleHeaderInner :: Style
-sectionStyleHeaderInner = defaultSectionInnerStyle
-    { className = "sectionHeaderInner"
-    , cssCommon = Just $ do
-        C.marginLeft CC.auto
-        C.marginRight CC.auto
-        styleLightBackground
-        C.color darkTextColor
-        C.boxShadow C.nil C.nil (C.px 72.0) (C.rgba 0 0 0 0.8)
-    }
-
-sectionStyleLinks :: SectionStyle
-sectionStyleLinks = SectionStyle
-    { outer : sectionStyleLinksOuter
-    , inner : sectionStyleLinksInner
-    }
-
-sectionStyleLinksOuter :: Style
-sectionStyleLinksOuter = defaultStyle
-    { className = "sectionLinksOuter"
-    , cssCommon = Just $ do
-        C.paddingBottom $ C.px 36.0
-        styleLightBackground
-    }
-
-sectionStyleLinksInner :: Style
-sectionStyleLinksInner = defaultSectionInnerStyle
-    { className = "sectionLinksInner"
-    , cssCommon = Just $ do
-        C.marginLeft CC.auto
-        C.marginRight CC.auto
-        C.paddingTop $ C.px 24.0
-        C.paddingBottom $ C.px 24.0
-        styleDarkBackground
-    }
-
-sectionStyleFooter :: SectionStyle
-sectionStyleFooter = SectionStyle
-    { outer : sectionStyleFooterOuter
-    , inner : sectionStyleFooterInner
-    }
-
-sectionStyleFooterOuter :: Style
-sectionStyleFooterOuter = defaultStyle
-    { className = "sectionFooterOuter"
-    , cssCommon = Just styleDarkBackground
-    }
-
-sectionStyleFooterInner :: Style
-sectionStyleFooterInner = defaultSectionInnerStyle
-    { className = "sectionFooterInner"
-    , cssCommon = Just $ do
-        C.marginLeft CC.auto
-        C.marginRight CC.auto
-        C.paddingTop $ C.px 36.0
-        C.paddingBottom $ C.px 36.0
-        styleDarkBackground
-        C.color lightTextColor
-    }
-
-sectionStyleDefault :: SectionStyle
-sectionStyleDefault = SectionStyle
-    { outer : sectionStyleDefaultOuter
-    , inner : sectionStyleDefaultInner
-    }
-
-sectionStyleDefaultOuter :: Style
-sectionStyleDefaultOuter = defaultStyle
-    { className = "sectionStyleDefaultOuter"
-    , cssCommon = Just styleLightBackground
-    }
-
-sectionStyleDefaultInner :: Style
-sectionStyleDefaultInner = defaultSectionInnerStyle
-    { className = "sectionStyleDefaultInner"
-    , cssCommon = Just $ do
-        C.marginLeft CC.auto
-        C.marginRight CC.auto
-        C.paddingTop $ C.px 36.0
-        C.paddingBottom $ C.px 36.0
-        styleLightBackground
-        C.color darkTextColor
-    }
-
-section_ :: forall p i. Array (HH.HTML p i) -> HH.HTML p i
-section_ = section sectionStyleDefault
-
-section :: forall p i. SectionStyle -> Array (HH.HTML p i) -> HH.HTML p i
-section (SectionStyle style) content =
-    HH.div
-        [ HP.class_ $ HH.className style.outer.className
-        ]
-        [ HH.div
-            [ HP.class_ $ HH.className style.inner.className
-            ]
-            content
-        ]
 
 type HeadingStyle =
     { marginBottom :: Number
     }
+
+allStyles :: Array Style
+allStyles = S.sectionStyles
 
 defaultHeadingStyle :: HeadingStyle
 defaultHeadingStyle =
@@ -390,7 +217,7 @@ bar percentage = HH.div
         [ HC.style do
             C.height $ C.px 8.0
             C.width $ C.pct percentage
-            styleDarkBackground
+            C.backgroundColor darkBackgroundColor
         ]
         []
     ]
