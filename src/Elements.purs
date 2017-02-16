@@ -3,10 +3,11 @@ module Elements
     , Content(Text, Email)
     , SectionStyle
     , Skill
+    , Style
+    , allStyles
     , boxes
     , darkTextColor
     , defaultBoxStyle
-    , defaultSectionStyle
     , heading
     , heading_
     , inlineImage
@@ -20,9 +21,13 @@ module Elements
     , paragraph'_
     , section
     , section_
+    , sectionStyleFooter
+    , sectionStyleLinks
+    , sectionStyleHeader
     , skillSet
     , subHeading
     , styleDarkBackground
+    , styleElements
     , styleLightBackground
     ) where
 
@@ -32,9 +37,13 @@ import Control.Bind (bindFlipped)
 import CSS as C
 import CSS.Common as CC
 import CSS.ListStyle.Type as CL
+import CSS.Media as CM
 import CSS.TextAlign as CT
 import CSS.VerticalAlign as CV
-import Data.Array (singleton)
+import Data.Array (mapMaybe)
+import Data.Foldable (sequence_)
+import Data.Maybe(Maybe(Just, Nothing))
+import Data.NonEmpty (NonEmpty, (:|), singleton)
 import Data.String (Pattern(Pattern), split)
 import Halogen.HTML.CSS.Indexed as HC
 import Halogen.HTML.Indexed as HH
@@ -55,50 +64,159 @@ lightTextColor = C.white
 darkTextColor :: C.Color
 darkTextColor = C.black
 
-type SectionStyle =
-    { marginTop       :: C.Size C.Abs
-    , marginBottom    :: C.Size C.Abs
-    , paddingTop      :: C.Size C.Abs
-    , paddingBottom   :: C.Size C.Abs
-    , outerBackground :: C.CSS
-    , innerBackground :: C.CSS
-    , textColor       :: C.Color
-    , shadow          :: Boolean
+type Style =
+    { className :: String
+    , cssCommon :: Maybe C.CSS
+    , cssSmall  :: Maybe C.CSS
+    , cssMedium :: Maybe C.CSS
+    , cssLarge  :: Maybe C.CSS
     }
 
-defaultSectionStyle :: SectionStyle
-defaultSectionStyle =
-    { marginTop       : C.nil
-    , marginBottom    : C.nil
-    , paddingTop      : C.px 36.0
-    , paddingBottom   : C.px 36.0
-    , outerBackground : styleLightBackground
-    , innerBackground : styleLightBackground
-    , textColor       : darkTextColor
-    , shadow          : false
+defaultStyle :: Style
+defaultStyle =
+    { className : ""
+    , cssCommon : Nothing
+    , cssSmall  : Nothing
+    , cssMedium : Nothing
+    , cssLarge  : Nothing
+    }
+
+allStyles :: Array Style
+allStyles =
+    [ sectionStyleHeaderOuter
+    , sectionStyleHeaderInner
+    , sectionStyleDefaultOuter
+    , sectionStyleDefaultInner
+    , sectionStyleLinksOuter
+    , sectionStyleLinksInner
+    , sectionStyleFooterOuter
+    , sectionStyleFooterInner
+    ]
+
+newtype SectionStyle = SectionStyle
+    { outer :: Style
+    , inner :: Style
+    }
+
+sectionStyleHeader :: SectionStyle
+sectionStyleHeader = SectionStyle
+    { outer : sectionStyleHeaderOuter
+    , inner : sectionStyleHeaderInner
+    }
+
+sectionStyleHeaderOuter :: Style
+sectionStyleHeaderOuter = defaultStyle
+    { className = "sectionHeaderOuter"
+    , cssCommon = Just $ do
+        styleDarkBackground
+        C.backgroundImage $ C.url "images/header_background.jpg"
+        C.backgroundRepeat C.noRepeat
+    , cssSmall  = Just $ C.paddingTop $ C.px 24.0
+    , cssMedium = Just $ C.paddingTop $ C.px 150.0
+    , cssLarge  = Just $ C.paddingTop $ C.px 150.0
+    }
+
+defaultSectionInnerStyle :: Style
+defaultSectionInnerStyle = defaultStyle
+    { cssSmall  = Just $ C.width $ C.pct 100.0
+    , cssMedium = Just $ C.width $ C.px 480.0
+    , cssLarge  = Just $ C.width $ C.px 960.0
+    }
+
+sectionStyleHeaderInner :: Style
+sectionStyleHeaderInner = defaultSectionInnerStyle
+    { className = "sectionHeaderInner"
+    , cssCommon = Just $ do
+        C.marginLeft CC.auto
+        C.marginRight CC.auto
+        styleLightBackground
+        C.color darkTextColor
+        C.boxShadow C.nil C.nil (C.px 72.0) (C.rgba 0 0 0 0.8)
+    }
+
+sectionStyleLinks :: SectionStyle
+sectionStyleLinks = SectionStyle
+    { outer : sectionStyleLinksOuter
+    , inner : sectionStyleLinksInner
+    }
+
+sectionStyleLinksOuter :: Style
+sectionStyleLinksOuter = defaultStyle
+    { className = "sectionLinksOuter"
+    , cssCommon = Just $ do
+        C.paddingBottom $ C.px 36.0
+        styleLightBackground
+    }
+
+sectionStyleLinksInner :: Style
+sectionStyleLinksInner = defaultSectionInnerStyle
+    { className = "sectionLinksInner"
+    , cssCommon = Just $ do
+        C.marginLeft CC.auto
+        C.marginRight CC.auto
+        C.paddingTop $ C.px 24.0
+        C.paddingBottom $ C.px 24.0
+        styleDarkBackground
+    }
+
+sectionStyleFooter :: SectionStyle
+sectionStyleFooter = SectionStyle
+    { outer : sectionStyleFooterOuter
+    , inner : sectionStyleFooterInner
+    }
+
+sectionStyleFooterOuter :: Style
+sectionStyleFooterOuter = defaultStyle
+    { className = "sectionFooterOuter"
+    , cssCommon = Just styleDarkBackground
+    }
+
+sectionStyleFooterInner :: Style
+sectionStyleFooterInner = defaultSectionInnerStyle
+    { className = "sectionFooterInner"
+    , cssCommon = Just $ do
+        C.marginLeft CC.auto
+        C.marginRight CC.auto
+        C.paddingTop $ C.px 36.0
+        C.paddingBottom $ C.px 36.0
+        styleDarkBackground
+        C.color lightTextColor
+    }
+
+sectionStyleDefault :: SectionStyle
+sectionStyleDefault = SectionStyle
+    { outer : sectionStyleDefaultOuter
+    , inner : sectionStyleDefaultInner
+    }
+
+sectionStyleDefaultOuter :: Style
+sectionStyleDefaultOuter = defaultStyle
+    { className = "sectionStyleDefaultOuter"
+    , cssCommon = Just styleLightBackground
+    }
+
+sectionStyleDefaultInner :: Style
+sectionStyleDefaultInner = defaultSectionInnerStyle
+    { className = "sectionStyleDefaultInner"
+    , cssCommon = Just $ do
+        C.marginLeft CC.auto
+        C.marginRight CC.auto
+        C.paddingTop $ C.px 36.0
+        C.paddingBottom $ C.px 36.0
+        styleLightBackground
+        C.color darkTextColor
     }
 
 section_ :: forall p i. Array (HH.HTML p i) -> HH.HTML p i
-section_ = section defaultSectionStyle
+section_ = section sectionStyleDefault
 
 section :: forall p i. SectionStyle -> Array (HH.HTML p i) -> HH.HTML p i
-section style content =
+section (SectionStyle style) content =
     HH.div
-        [ HC.style do
-            C.paddingTop style.marginTop
-            C.paddingBottom style.marginBottom
-            style.outerBackground
+        [ HP.class_ $ HH.className style.outer.className
         ]
         [ HH.div
-            [ HP.class_ $ HH.className "section"
-            , HC.style do
-                 C.marginLeft CC.auto
-                 C.marginRight CC.auto
-                 C.paddingTop style.paddingTop
-                 C.paddingBottom style.paddingBottom
-                 style.innerBackground
-                 C.color style.textColor
-                 when style.shadow $ C.boxShadow C.nil C.nil (C.px 72.0) (C.rgba 0 0 0 0.8)
+            [ HP.class_ $ HH.className style.inner.className
             ]
             content
         ]
@@ -193,7 +311,7 @@ inlineList :: forall p i. Array (HH.HTML p i) -> HH.HTML p i
 inlineList = wrapItems >>> createList
   where
     wrapItems =
-        map $ HH.li [ HC.style $ C.display C.inlineBlock ] <<< singleton
+        map $ HH.li [ HC.style $ C.display C.inlineBlock ] <<< pure
 
     createList =
         HH.ul [ HC.style do
@@ -233,7 +351,7 @@ skillSet = map skillBar >>> map createListItem >>> createList
         [ HC.style do
             CL.listStyleType CC.none
             C.marginTop C.nil
-            C.marginBottom C.nil
+            C.marginBottom $ C.px 36.0
             C.paddingLeft C.nil
         ]
 
@@ -316,4 +434,60 @@ boxes style = map createBox >>>
             C.marginRight $ C.px horizontalMargin
         ]
         b
+
+type ClassCss =
+    { className :: String
+    , css       :: C.CSS
+    }
+
+styleElements :: C.CSS
+styleElements = stylesToCss allStyles
+  where
+    stylesToCss :: Array Style -> C.CSS
+    stylesToCss styles = do
+        mediaCss allScreens   filterCommon styles
+        mediaCss smallScreen  filterSmall  styles
+        mediaCss mediumScreen filterMedium styles
+        mediaCss largeScreen  filterLarge  styles
+
+    mediaCss :: NonEmpty Array C.Feature
+             -> (Style -> Maybe ClassCss)
+             -> Array Style
+             -> C.CSS
+    mediaCss features filter = mapMaybe filter
+        >>> map (\s -> C.select (classSelector s.className) s.css)
+        >>> sequence_
+        >>> C.query CM.screen features
+
+    classSelector :: String -> C.Selector
+    classSelector className =
+        C.Selector (C.Refinement [C.Class className]) C.Star
+
+    filterCommon :: Style -> Maybe ClassCss
+    filterCommon style = createClassCss style.className style.cssCommon
+
+    filterSmall :: Style -> Maybe ClassCss
+    filterSmall style = createClassCss style.className style.cssSmall
+
+    filterMedium :: Style -> Maybe ClassCss
+    filterMedium style = createClassCss style.className style.cssMedium
+
+    filterLarge :: Style -> Maybe ClassCss
+    filterLarge style = createClassCss style.className style.cssLarge
+
+    createClassCss :: String -> Maybe C.CSS -> Maybe ClassCss
+    createClassCss className = map $ \css -> { className, css }
+
+    allScreens :: NonEmpty Array C.Feature
+    allScreens = singleton $ C.Feature "min-width" $ pure $ C.value $ C.px 0.0
+
+    smallScreen :: NonEmpty Array C.Feature
+    smallScreen = singleton $ C.Feature "max-width" $ pure $ C.value $ C.px 480.0
+
+    mediumScreen :: NonEmpty Array C.Feature
+    mediumScreen = (C.Feature "min-width" $ pure $ C.value $ C.px 481.0)
+                :| [ C.Feature "max-width" $ pure $ C.value $ C.px 960.0 ]
+
+    largeScreen :: NonEmpty Array C.Feature
+    largeScreen = singleton $ C.Feature "min-width" $ pure $ C.value $ C.px 961.0
 

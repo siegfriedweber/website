@@ -8,8 +8,6 @@ import Prelude
 import Unsafe.Coerce (unsafeCoerce)
 
 import CSS as C
-import CSS.Media as CM
-import Data.NonEmpty (singleton)
 import Halogen as H
 import Halogen.HTML.CSS as HS
 import Halogen.HTML.CSS.Indexed as HC
@@ -20,16 +18,7 @@ import Fonts (styleFontFaces)
 
 header :: forall p i. HH.HTML p i
 header =
-    E.section E.defaultSectionStyle
-        { marginTop = C.px 150.0
-        , paddingTop = C.nil
-        , paddingBottom = C.nil
-        , outerBackground = do
-            E.styleDarkBackground
-            C.backgroundImage $ C.url "images/header_background.jpg"
-            C.backgroundRepeat C.noRepeat
-        , shadow = true
-        }
+    E.section E.sectionStyleHeader
         [ E.inlineImage "Siegfried Weber" "images/siegfried_weber.jpg"
         , HH.div [ HC.style styleIntro ]
             [ E.heading { marginBottom : 24.0 } "Siegfried Weber"
@@ -57,12 +46,7 @@ header =
 
 links :: forall p i. HH.HTML p i
 links =
-    E.section E.defaultSectionStyle
-        { paddingTop = C.px 24.0
-        , paddingBottom = C.px 24.0
-        , marginBottom = C.px 36.0
-        , innerBackground = E.styleDarkBackground
-        }
+    E.section E.sectionStyleLinks
         [ E.inlineList
             [ E.linkedIcon "Gulp" "images/gulp.png" "https://www.gulp.de/gulp2/home/profil/siegfriedweber"
             , E.linkedIcon "Xing" "images/xing.png" "https://www.xing.com/profile/Siegfried_Weber18"
@@ -82,9 +66,7 @@ about = E.section_
     ]
 
 skills :: forall p i. HH.HTML p i
-skills = E.section E.defaultSectionStyle
-    { paddingBottom = C.px 72.0
-    }
+skills = E.section_
     [ E.heading_ "Meine Fertigkeiten"
     , E.boxes E.defaultBoxStyle
         [ E.Box
@@ -142,11 +124,7 @@ skills = E.section E.defaultSectionStyle
 
 footer :: forall p i. HH.HTML p i
 footer =
-    E.section E.defaultSectionStyle
-        { outerBackground = E.styleDarkBackground
-        , innerBackground = E.styleDarkBackground
-        , textColor       = E.lightTextColor
-        }
+    E.section E.sectionStyleFooter
         [ E.boxes E.defaultBoxStyle
             { verticalSpace = 18.0
             }
@@ -175,7 +153,7 @@ website = HH.div_
     [ unsafeCoerce $ HS.stylesheet (do
         styleBody
         styleFontFaces
-        styleSections)
+        E.styleElements)
     , header
     , links
     , about
@@ -185,20 +163,6 @@ website = HH.div_
   where
     styleBody :: C.CSS
     styleBody = C.select C.body $ C.margin C.nil C.nil C.nil C.nil
-
-    styleSections :: C.CSS
-    styleSections = do
-        C.query CM.screen (singleton smallScreen) $ C.select classSection (C.width $ C.px 480.0)
-        C.query CM.screen (singleton largeScreen) $ C.select classSection (C.width $ C.px 960.0)
-
-    classSection :: C.Selector
-    classSection = C.Selector (C.Refinement [C.Class "section"]) C.Star
-
-    smallScreen :: C.Feature
-    smallScreen = C.Feature "max-width" $ pure $ C.value $ C.px 999.0
-
-    largeScreen :: C.Feature
-    largeScreen = C.Feature "min-width" $ pure $ C.value $ C.px 1000.0
 
 type State = Unit
 data Query a = Query a
