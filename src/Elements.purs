@@ -2,49 +2,31 @@ module Elements
     ( module B
     , module Icon
     , module Image
+    , module List
     , module S
     , module Skills
     , module Text
-    , inlineList
     , styleElements
     ) where
 
 import Prelude
 
 import CSS as C
-import CSS.Common as CC
-import CSS.ListStyle.Type as CL
 import CSS.Media as CM
-import CSS.TextAlign as CT
 import Data.Array (mapMaybe)
 import Data.Foldable (sequence_)
 import Data.Maybe(Maybe)
 import Data.NonEmpty (NonEmpty, (:|), singleton)
-import Halogen.HTML.CSS.Indexed as HC
 import Halogen.HTML.Indexed as HH
 
 import Elements.Box as B
 import Elements.Icon as Icon
 import Elements.Image as Image
+import Elements.List as List
 import Elements.Section as S
 import Elements.Skills as Skills
 import Elements.Text as Text
 import Elements.Types (Style)
-
-inlineList :: forall p i. Array (HH.HTML p i) -> HH.HTML p i
-inlineList = wrapItems >>> createList
-  where
-    wrapItems =
-        map $ HH.li [ HC.style $ C.display C.inlineBlock ] <<< pure
-
-    createList =
-        HH.ul [ HC.style do
-                  CT.textAlign CT.center
-                  CL.listStyleType CC.none
-                  C.marginTop C.nil
-                  C.marginBottom C.nil
-                  C.paddingLeft C.nil
-              ]
 
 type ClassCss =
     { className :: String
@@ -59,6 +41,7 @@ styleElements = stylesToCss allStyles
              <> B.boxStyles
              <> Icon.iconStyles
              <> Image.imageStyles
+             <> List.listStyles
              <> Skills.skillSetStyles
              <> Text.textStyles
 

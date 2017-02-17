@@ -47,7 +47,7 @@ header =
 links :: forall p i. HH.HTML p i
 links =
     E.section E.sectionStyleLinks
-        [ E.inlineList
+        [ E.list E.listStyleInline
             [ E.linkedIcon_ "Gulp" "images/gulp.png" "https://www.gulp.de/gulp2/home/profil/siegfriedweber"
             , E.linkedIcon_ "Xing" "images/xing.png" "https://www.xing.com/profile/Siegfried_Weber18"
             , E.linkedIcon_ "Linked in" "images/linkedin.png" "https://de.linkedin.com/in/siegfriedweber"
