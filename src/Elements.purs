@@ -2,10 +2,9 @@ module Elements
     ( module B
     , module S
     , module Skills
+    , module Text
     , Content(Text, Email)
     , allStyles
-    , heading
-    , heading_
     , inlineImage
     , inlineList
     , linkedIcon
@@ -14,7 +13,6 @@ module Elements
     , paragraph_
     , paragraph'
     , paragraph'_
-    , subHeading
     , styleElements
     ) where
 
@@ -40,6 +38,7 @@ import Elements.Box as B
 import Elements.Colors (lightTextColor)
 import Elements.Section as S
 import Elements.Skills as Skills
+import Elements.Text as Text
 import Elements.Types (Style)
 import Foldable (intersperse)
 import Fonts (Font(SourceSansProLight, SourceSansProSemibold), styleFont)
@@ -52,32 +51,7 @@ allStyles :: Array Style
 allStyles = S.sectionStyles
          <> B.boxStyles
          <> Skills.skillSetStyles
-
-defaultHeadingStyle :: HeadingStyle
-defaultHeadingStyle =
-    { marginBottom : 36.0
-    }
-
-heading_ :: forall p i. String -> HH.HTML p i
-heading_ = heading defaultHeadingStyle
-
-heading :: forall p i. HeadingStyle -> String -> HH.HTML p i
-heading style = textToHtml >>>
-    HH.h1 [ HC.style do
-              C.marginTop C.nil
-              C.marginBottom $ C.px style.marginBottom
-              C.fontSize $ C.px 30.0
-              styleFont SourceSansProSemibold
-          ]
-
-subHeading :: forall p i. String -> HH.HTML p i
-subHeading = textToHtml >>>
-    HH.h2 [ HC.style do
-              C.marginTop C.nil
-              C.marginBottom $ C.px 36.0
-              C.fontSize $ C.px 24.0
-              styleFont SourceSansProSemibold
-          ]
+         <> Text.textStyles
 
 data Content = Text String | Email String
 

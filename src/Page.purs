@@ -21,7 +21,7 @@ header =
     E.section E.sectionStyleHeader
         [ E.inlineImage "Siegfried Weber" "images/siegfried_weber.jpg"
         , HH.div [ HC.style styleIntro ]
-            [ E.heading { marginBottom : 24.0 } "Siegfried Weber"
+            [ E.heading E.headingStyleSmallMargin "Siegfried Weber"
             , E.paragraph { marginBottom : 36.0 }
                 "Freiberuflicher Softwareentwickler und \n\
                 \Experte für funktionale Programmierung"
@@ -70,7 +70,7 @@ skills = E.section_
     [ E.heading_ "Meine Fertigkeiten"
     , E.boxes E.boxStyleDefault
         [ E.box
-            [ E.subHeading "Programmiersprachen"
+            [ E.subheading_ "Programmiersprachen"
             , E.skillSet_
                 [ { name : "Haskell",    desc : "Experte",             percentage : 90.0  }
                 , { name : "PureScript", desc : "Experte",             percentage : 90.0  }
@@ -80,7 +80,7 @@ skills = E.section_
                 ]
             ]
         , E.box
-            [ E.subHeading "Datenbankmanagementsysteme"
+            [ E.subheading_ "Datenbankmanagementsysteme"
             , E.skillSet_
                 [ { name : "MongoDB",                desc : "Experte",   percentage : 100.0 }
                 , { name : "MySQL",                  desc : "Pro",       percentage : 70.0  }
@@ -88,7 +88,7 @@ skills = E.section_
                 ]
             ]
         , E.box
-            [ E.subHeading "Werkzeuge"
+            [ E.subheading_ "Werkzeuge"
             , E.skillSet_
                 [ { name : "Git",           desc : "Guru", percentage : 100.0 }
                 , { name : "Vim",           desc : "Guru", percentage : 100.0 }
@@ -96,7 +96,7 @@ skills = E.section_
                 ]
             ]
         , E.box
-            [ E.subHeading "Betriebssysteme"
+            [ E.subheading_ "Betriebssysteme"
             , E.skillSet_
                 [ { name : "Microsoft Windows", desc : "Experte",                  percentage : 90.0  }
                 , { name : "Debian GNU/Linux",  desc : "Experte",                  percentage : 100.0 }
@@ -104,7 +104,7 @@ skills = E.section_
                 ]
             ]
         , E.box
-            [ E.subHeading "Branchen"
+            [ E.subheading_ "Branchen"
             , E.skillSet_
                 [ { name : "Finanzen",       desc : "Pro",  percentage : 70.0  }
                 , { name : "Versicherungen", desc : "Pro",  percentage : 80.0  }
@@ -112,7 +112,7 @@ skills = E.section_
                 ]
             ]
         , E.box
-            [ E.subHeading "Sprachen"
+            [ E.subheading_ "Sprachen"
             , E.skillSet_
                 [ { name : "Deutsch",     desc : "Muttersprache",      percentage : 100.0 }
                 , { name : "Englisch",    desc : "verhandlungssicher", percentage : 85.0  }
