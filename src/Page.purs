@@ -22,9 +22,9 @@ header =
         [ E.inlineImage "Siegfried Weber" "images/siegfried_weber.jpg"
         , HH.div [ HC.style styleIntro ]
             [ E.heading E.headingStyleSmallMargin "Siegfried Weber"
-            , E.paragraph { marginBottom : 36.0 }
-                "Freiberuflicher Softwareentwickler und \n\
-                \Experte für funktionale Programmierung"
+            , E.paragraph E.paragraphStyleLargeMargin $
+                E.text "Freiberuflicher Softwareentwickler und \n\
+                         \Experte für funktionale Programmierung"
             , E.skillSet_
                 [ { name : "Haskell, PureScript", desc : "Experte", percentage : 90.0 }
                 , { name : "Java, Spring Boot", desc : "Experte", percentage : 100.0 }
@@ -60,9 +60,8 @@ links =
 about :: forall p i. HH.HTML p i
 about = E.section_
     [ E.heading_ "Hallo, ich bin Siegfried!"
-    , E.paragraphs
-        [ E.paragraph_ "Ich bin freiberuflicher Softwareentwickler und immer auf der Suche nach interessanten Projekten sowohl im Rhein-Main-Gebiet als auch \"remote\". Meine Software genügt höchsten Ansprüchen und diese stelle ich auch an die Projekte. Wenn Sie also etwas Großartiges schaffen wollen, dann lassen Sie uns das gemeinsam tun!"
-        ]
+    , E.paragraph E.paragraphStyleNoMargin $
+        E.text "Ich bin freiberuflicher Softwareentwickler und immer auf der Suche nach interessanten Projekten sowohl im Rhein-Main-Gebiet als auch \"remote\". Meine Software genügt höchsten Ansprüchen und diese stelle ich auch an die Projekte. Wenn Sie also etwas Großartiges schaffen wollen, dann lassen Sie uns das gemeinsam tun!"
     ]
 
 skills :: forall p i. HH.HTML p i
@@ -127,21 +126,18 @@ footer =
     E.section E.sectionStyleFooter
         [ E.boxes E.boxStyleSmallSpacing
             [ E.box
-                [ E.paragraphs
-                    [ E.paragraph_ "Siegfried Weber\n\
-                                   \Rheinallee 16-22\n\
-                                   \65439 Flörsheim am Main\n\
-                                   \Deutschland"
-                    ]
+                [ E.paragraph E.paragraphStyleNoMargin $
+                    E.text "Siegfried Weber\n\
+                           \Rheinallee 16-22\n\
+                           \65439 Flörsheim am Main\n\
+                           \Deutschland"
                 ]
             , E.box
-                [ E.paragraphs
-                    [ E.paragraph'_
-                        [ E.Text "Telefon: +49 151 55855451\n\
-                                 \E-Mail: "
-                        , E.Email "mail@siegfriedweber.net"
-                        ]
-                    ]
+                [ E.paragraph E.paragraphStyleNoMargin $
+                    E.text "Telefon: +49 151 55855451\n\
+                           \E-Mail: "
+                    <>
+                    E.email_ "mail@siegfriedweber.net"
                 ]
             ]
         ]

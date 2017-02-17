@@ -3,21 +3,14 @@ module Elements
     , module S
     , module Skills
     , module Text
-    , Content(Text, Email)
     , allStyles
     , inlineImage
     , inlineList
     , linkedIcon
-    , paragraphs
-    , paragraph
-    , paragraph_
-    , paragraph'
-    , paragraph'_
     , styleElements
     ) where
 
 import Prelude
-import Control.Bind (bindFlipped)
 
 import CSS as C
 import CSS.Common as CC
@@ -29,19 +22,15 @@ import Data.Array (mapMaybe)
 import Data.Foldable (sequence_)
 import Data.Maybe(Maybe)
 import Data.NonEmpty (NonEmpty, (:|), singleton)
-import Data.String (Pattern(Pattern), split)
 import Halogen.HTML.CSS.Indexed as HC
 import Halogen.HTML.Indexed as HH
 import Halogen.HTML.Properties.Indexed as HP
 
 import Elements.Box as B
-import Elements.Colors (lightTextColor)
 import Elements.Section as S
 import Elements.Skills as Skills
 import Elements.Text as Text
 import Elements.Types (Style)
-import Foldable (intersperse)
-import Fonts (Font(SourceSansProLight, SourceSansProSemibold), styleFont)
 
 type HeadingStyle =
     { marginBottom :: Number
@@ -52,53 +41,6 @@ allStyles = S.sectionStyles
          <> B.boxStyles
          <> Skills.skillSetStyles
          <> Text.textStyles
-
-data Content = Text String | Email String
-
-type ParagraphStyle =
-    { marginBottom :: Number
-    }
-
-defaultParagraphStyle :: ParagraphStyle
-defaultParagraphStyle =
-    { marginBottom : 18.0
-    }
-
-paragraphs :: forall p i. Array (HH.HTML p i) -> HH.HTML p i
-paragraphs = HH.div [ HC.style $ C.marginBottom $ C.px (- 18.0) ]
-
-paragraph_ :: forall p i. String -> HH.HTML p i
-paragraph_ = paragraph defaultParagraphStyle
-
-paragraph :: forall p i. ParagraphStyle -> String -> HH.HTML p i
-paragraph style = paragraph' style <<< pure <<< Text
-
-paragraph'_ :: forall p i. Array Content -> HH.HTML p i
-paragraph'_ = paragraph' defaultParagraphStyle
-
-paragraph' :: forall p i. ParagraphStyle -> Array Content -> HH.HTML p i
-paragraph' style = bindFlipped contentToHtml >>>
-    HH.p [ HC.style do
-             C.marginTop C.nil
-             C.marginBottom $ C.px style.marginBottom
-             C.fontSize $ C.px 18.0
-             styleFont SourceSansProLight
-         ]
-
-contentToHtml :: forall p' i'. Content -> Array (HH.HTML p' i')
-contentToHtml (Text s)  = textToHtml s
-contentToHtml (Email e) =
-    [ HH.a
-        [ HP.href $ "mailto:" <> e
-        , HC.style do
-            C.color lightTextColor
-            C.textDecoration C.noneTextDecoration
-        ]
-        [ HH.text e ]
-    ]
-
-textToHtml :: forall p i. String -> Array (HH.HTML p i)
-textToHtml = intersperse HH.br_ <<< map HH.text <<< split (Pattern "\n")
 
 inlineImage :: forall p i. String -> String -> HH.HTML p i
 inlineImage alt src =
