@@ -10,7 +10,6 @@ import Unsafe.Coerce (unsafeCoerce)
 import CSS as C
 import Halogen as H
 import Halogen.HTML.CSS as HS
-import Halogen.HTML.CSS.Indexed as HC
 import Halogen.HTML.Indexed as HH
 
 import Elements as E
@@ -19,30 +18,23 @@ import Fonts (styleFontFaces)
 header :: forall p i. HH.HTML p i
 header =
     E.section E.sectionStyleHeader
-        [ E.image E.imageInline "Siegfried Weber" "images/siegfried_weber.jpg"
-        , HH.div [ HC.style styleIntro ]
-            [ E.heading E.headingStyleSmallMargin "Siegfried Weber"
-            , E.paragraph E.paragraphStyleLargeMargin $
-                E.text "Freiberuflicher Softwareentwickler und \n\
-                         \Experte für funktionale Programmierung"
-            , E.skillSet_
-                [ { name : "Haskell, PureScript", desc : "Experte", percentage : 90.0 }
-                , { name : "Java, Spring Boot", desc : "Experte", percentage : 100.0 }
-                , { name : "HTML, CSS, JavaScript", desc : "Pro", percentage : 70.0 }
-                , { name : "Microservices", desc : "2 Jahre Erfahrung", percentage : 80.0 }
+        [ E.boxes E.boxesStyleNoSpacing
+            [ E.box_
+                [ E.image E.imageInline "Siegfried Weber" "images/siegfried_weber.jpg" ]
+            , E.box E.boxStyleRightSidePaddings
+                [ E.heading E.headingStyleSmallMargin "Siegfried Weber"
+                , E.paragraph E.paragraphStyleLargeMargin $
+                    E.text "Freiberuflicher Softwareentwickler und \n\
+                            \Experte für funktionale Programmierung"
+                , E.skillSet_
+                    [ { name : "Haskell, PureScript", desc : "Experte", percentage : 90.0 }
+                    , { name : "Java, Spring Boot", desc : "Experte", percentage : 100.0 }
+                    , { name : "HTML, CSS, JavaScript", desc : "Pro", percentage : 70.0 }
+                    , { name : "Microservices", desc : "2 Jahre Erfahrung", percentage : 80.0 }
+                    ]
                 ]
             ]
         ]
-  where
-    styleIntro :: C.CSS
-    styleIntro = do
-        C.display C.inlineBlock
-        C.width $ C.px 312.0
-        C.height $ C.px 372.0
-        C.paddingLeft $ C.px 72.0
-        C.paddingRight $ C.px 96.0
-        C.paddingTop $ C.px 72.0
-        C.paddingBottom $ C.px 36.0
 
 links :: forall p i. HH.HTML p i
 links =
@@ -67,8 +59,8 @@ about = E.section_
 skills :: forall p i. HH.HTML p i
 skills = E.section_
     [ E.heading_ "Meine Fertigkeiten"
-    , E.boxes E.boxStyleDefault
-        [ E.box
+    , E.boxes_
+        [ E.box_
             [ E.subheading_ "Programmiersprachen"
             , E.skillSet_
                 [ { name : "Haskell",    desc : "Experte",             percentage : 90.0  }
@@ -78,7 +70,7 @@ skills = E.section_
                 , { name : "C++",        desc : "lange nicht benutzt", percentage : 60.0  }
                 ]
             ]
-        , E.box
+        , E.box_
             [ E.subheading_ "Datenbankmanagementsysteme"
             , E.skillSet_
                 [ { name : "MongoDB",                desc : "Experte",   percentage : 100.0 }
@@ -86,7 +78,7 @@ skills = E.section_
                 , { name : "Google Cloud Datastore", desc : "am Lernen", percentage : 40.0  }
                 ]
             ]
-        , E.box
+        , E.box_
             [ E.subheading_ "Werkzeuge"
             , E.skillSet_
                 [ { name : "Git",           desc : "Guru", percentage : 100.0 }
@@ -94,7 +86,7 @@ skills = E.section_
                 , { name : "IntelliJ IDEA", desc : "Pro",  percentage : 70.0  }
                 ]
             ]
-        , E.box
+        , E.box_
             [ E.subheading_ "Betriebssysteme"
             , E.skillSet_
                 [ { name : "Microsoft Windows", desc : "Experte",                  percentage : 90.0  }
@@ -102,7 +94,7 @@ skills = E.section_
                 , { name : "NixOS",             desc : "auf dem Weg zum Experten", percentage : 30.0  }
                 ]
             ]
-        , E.box
+        , E.box_
             [ E.subheading_ "Branchen"
             , E.skillSet_
                 [ { name : "Finanzen",       desc : "Pro",  percentage : 70.0  }
@@ -110,7 +102,7 @@ skills = E.section_
                 , { name : "Computerspiele", desc : "Guru", percentage : 100.0 }
                 ]
             ]
-        , E.box
+        , E.box_
             [ E.subheading_ "Sprachen"
             , E.skillSet_
                 [ { name : "Deutsch",     desc : "Muttersprache",      percentage : 100.0 }
@@ -124,15 +116,15 @@ skills = E.section_
 footer :: forall p i. HH.HTML p i
 footer =
     E.section E.sectionStyleFooter
-        [ E.boxes E.boxStyleSmallSpacing
-            [ E.box
+        [ E.boxes E.boxesStyleSmallSpacing
+            [ E.box_
                 [ E.paragraph E.paragraphStyleNoMargin $
                     E.text "Siegfried Weber\n\
                            \Rheinallee 16-22\n\
                            \65439 Flörsheim am Main\n\
                            \Deutschland"
                 ]
-            , E.box
+            , E.box_
                 [ E.paragraph E.paragraphStyleNoMargin $
                     E.text "Telefon: +49 151 55855451\n\
                            \E-Mail: "

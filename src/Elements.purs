@@ -17,7 +17,6 @@ import Data.Array (mapMaybe)
 import Data.Foldable (sequence_)
 import Data.Maybe(Maybe)
 import Data.NonEmpty (NonEmpty, (:|), singleton)
-import Halogen.HTML.Indexed as HH
 
 import Elements.Box as B
 import Elements.Icon as Icon
