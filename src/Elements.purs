@@ -1,8 +1,8 @@
 module Elements
     ( module B
     , module S
+    , module Skills
     , Content(Text, Email)
-    , Skill
     , allStyles
     , heading
     , heading_
@@ -14,7 +14,6 @@ module Elements
     , paragraph_
     , paragraph'
     , paragraph'_
-    , skillSet
     , subHeading
     , styleElements
     ) where
@@ -38,8 +37,9 @@ import Halogen.HTML.Indexed as HH
 import Halogen.HTML.Properties.Indexed as HP
 
 import Elements.Box as B
-import Elements.Colors (darkBackgroundColor, lightTextColor)
+import Elements.Colors (lightTextColor)
 import Elements.Section as S
+import Elements.Skills as Skills
 import Elements.Types (Style)
 import Foldable (intersperse)
 import Fonts (Font(SourceSansProLight, SourceSansProSemibold), styleFont)
@@ -49,7 +49,9 @@ type HeadingStyle =
     }
 
 allStyles :: Array Style
-allStyles = S.sectionStyles <> B.boxStyles
+allStyles = S.sectionStyles
+         <> B.boxStyles
+         <> Skills.skillSetStyles
 
 defaultHeadingStyle :: HeadingStyle
 defaultHeadingStyle =
@@ -161,65 +163,6 @@ linkedIcon name icon url =
             , HC.style $ CV.verticalAlign CV.Top
             ]
         ]
-
-type Skill =
-    { name       :: String
-    , desc       :: String
-    , percentage :: Number
-    }
-
-skillSet :: forall p i. Array Skill -> HH.HTML p i
-skillSet = map skillBar >>> map createListItem >>> createList
-  where
-    createListItem = HH.li_
-
-    createList = HH.ul
-        [ HC.style do
-            CL.listStyleType CC.none
-            C.marginTop C.nil
-            C.marginBottom $ C.px 36.0
-            C.paddingLeft C.nil
-        ]
-
-skillBar :: forall p i. Skill -> Array (HH.HTML p i)
-skillBar skill =
-    [ HH.h3
-        [ HC.style do
-            C.display C.flex
-            C.justifyContent C.spaceBetween
-            C.alignItems CC.baseline
-            C.marginTop $ C.px 12.0
-            C.marginBottom $ C.px 8.0
-        ]
-        [ HH.span
-            [ HC.style do
-                styleFont SourceSansProSemibold
-                C.fontSize $ C.px 18.0
-            ]
-            [ HH.text skill.name ]
-        , HH.span
-            [ HC.style do
-                styleFont SourceSansProLight
-                C.fontSize $ C.px 16.0
-                C.color $ C.fromInt 0x404040
-            ]
-            [ HH.text skill.desc ]
-        ]
-    , bar skill.percentage
-    ]
-
-bar :: forall p i. Number -> HH.HTML p i
-bar percentage = HH.div
-    [ HC.style $ C.backgroundColor $ C.fromInt 0xa0a0a0
-    ]
-    [ HH.div
-        [ HC.style do
-            C.height $ C.px 8.0
-            C.width $ C.pct percentage
-            C.backgroundColor darkBackgroundColor
-        ]
-        []
-    ]
 
 type ClassCss =
     { className :: String

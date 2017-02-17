@@ -25,7 +25,7 @@ header =
             , E.paragraph { marginBottom : 36.0 }
                 "Freiberuflicher Softwareentwickler und \n\
                 \Experte für funktionale Programmierung"
-            , E.skillSet
+            , E.skillSet_
                 [ { name : "Haskell, PureScript", desc : "Experte", percentage : 90.0 }
                 , { name : "Java, Spring Boot", desc : "Experte", percentage : 100.0 }
                 , { name : "HTML, CSS, JavaScript", desc : "Pro", percentage : 70.0 }
@@ -71,7 +71,7 @@ skills = E.section_
     , E.boxes E.boxStyleDefault
         [ E.box
             [ E.subHeading "Programmiersprachen"
-            , E.skillSet
+            , E.skillSet_
                 [ { name : "Haskell",    desc : "Experte",             percentage : 90.0  }
                 , { name : "PureScript", desc : "Experte",             percentage : 90.0  }
                 , { name : "Java",       desc : "Experte",             percentage : 100.0 }
@@ -81,7 +81,7 @@ skills = E.section_
             ]
         , E.box
             [ E.subHeading "Datenbankmanagementsysteme"
-            , E.skillSet
+            , E.skillSet_
                 [ { name : "MongoDB",                desc : "Experte",   percentage : 100.0 }
                 , { name : "MySQL",                  desc : "Pro",       percentage : 70.0  }
                 , { name : "Google Cloud Datastore", desc : "am Lernen", percentage : 40.0  }
@@ -89,7 +89,7 @@ skills = E.section_
             ]
         , E.box
             [ E.subHeading "Werkzeuge"
-            , E.skillSet
+            , E.skillSet_
                 [ { name : "Git",           desc : "Guru", percentage : 100.0 }
                 , { name : "Vim",           desc : "Guru", percentage : 100.0 }
                 , { name : "IntelliJ IDEA", desc : "Pro",  percentage : 70.0  }
@@ -97,7 +97,7 @@ skills = E.section_
             ]
         , E.box
             [ E.subHeading "Betriebssysteme"
-            , E.skillSet
+            , E.skillSet_
                 [ { name : "Microsoft Windows", desc : "Experte",                  percentage : 90.0  }
                 , { name : "Debian GNU/Linux",  desc : "Experte",                  percentage : 100.0 }
                 , { name : "NixOS",             desc : "auf dem Weg zum Experten", percentage : 30.0  }
@@ -105,7 +105,7 @@ skills = E.section_
             ]
         , E.box
             [ E.subHeading "Branchen"
-            , E.skillSet
+            , E.skillSet_
                 [ { name : "Finanzen",       desc : "Pro",  percentage : 70.0  }
                 , { name : "Versicherungen", desc : "Pro",  percentage : 80.0  }
                 , { name : "Computerspiele", desc : "Guru", percentage : 100.0 }
@@ -113,7 +113,7 @@ skills = E.section_
             ]
         , E.box
             [ E.subHeading "Sprachen"
-            , E.skillSet
+            , E.skillSet_
                 [ { name : "Deutsch",     desc : "Muttersprache",      percentage : 100.0 }
                 , { name : "Englisch",    desc : "verhandlungssicher", percentage : 85.0  }
                 , { name : "Französisch", desc : "am Lernen",          percentage : 20.0  }
