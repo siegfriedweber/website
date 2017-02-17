@@ -19,7 +19,7 @@ import Fonts (styleFontFaces)
 header :: forall p i. HH.HTML p i
 header =
     E.section E.sectionStyleHeader
-        [ E.inlineImage "Siegfried Weber" "images/siegfried_weber.jpg"
+        [ E.image E.imageInline "Siegfried Weber" "images/siegfried_weber.jpg"
         , HH.div [ HC.style styleIntro ]
             [ E.heading E.headingStyleSmallMargin "Siegfried Weber"
             , E.paragraph E.paragraphStyleLargeMargin $

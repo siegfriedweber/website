@@ -1,10 +1,9 @@
 module Elements
     ( module B
+    , module Image
     , module S
     , module Skills
     , module Text
-    , allStyles
-    , inlineImage
     , inlineList
     , linkedIcon
     , styleElements
@@ -27,29 +26,11 @@ import Halogen.HTML.Indexed as HH
 import Halogen.HTML.Properties.Indexed as HP
 
 import Elements.Box as B
+import Elements.Image as Image
 import Elements.Section as S
 import Elements.Skills as Skills
 import Elements.Text as Text
 import Elements.Types (Style)
-
-type HeadingStyle =
-    { marginBottom :: Number
-    }
-
-allStyles :: Array Style
-allStyles = S.sectionStyles
-         <> B.boxStyles
-         <> Skills.skillSetStyles
-         <> Text.textStyles
-
-inlineImage :: forall p i. String -> String -> HH.HTML p i
-inlineImage alt src =
-    HH.img [ HP.src src
-           , HP.alt alt
-           , HC.style do
-               C.display C.inlineBlock
-               CV.verticalAlign CV.Top
-           ]
 
 inlineList :: forall p i. Array (HH.HTML p i) -> HH.HTML p i
 inlineList = wrapItems >>> createList
@@ -88,6 +69,13 @@ type ClassCss =
 styleElements :: C.CSS
 styleElements = stylesToCss allStyles
   where
+    allStyles :: Array Style
+    allStyles = S.sectionStyles
+             <> B.boxStyles
+             <> Image.imageStyles
+             <> Skills.skillSetStyles
+             <> Text.textStyles
+
     stylesToCss :: Array Style -> C.CSS
     stylesToCss styles = do
         mediaCss allScreens   filterCommon styles
