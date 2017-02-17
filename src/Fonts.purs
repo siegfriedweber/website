@@ -5,7 +5,6 @@ module Fonts
     ) where
 
 import Prelude
-
 import Data.NonEmpty ((:|), singleton)
 
 import CSS as C
