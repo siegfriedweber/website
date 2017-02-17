@@ -48,12 +48,12 @@ links :: forall p i. HH.HTML p i
 links =
     E.section E.sectionStyleLinks
         [ E.inlineList
-            [ E.linkedIcon "Gulp" "images/gulp.png" "https://www.gulp.de/gulp2/home/profil/siegfriedweber"
-            , E.linkedIcon "Xing" "images/xing.png" "https://www.xing.com/profile/Siegfried_Weber18"
-            , E.linkedIcon "Linked in" "images/linkedin.png" "https://de.linkedin.com/in/siegfriedweber"
-            , E.linkedIcon "GitHub" "images/github.png" "https://github.com/siegfriedweber"
-            , E.linkedIcon "Stack Overflow" "images/stackoverflow.png" "https://stackoverflow.com/users/7312398/siegfried-weber"
-            , E.linkedIcon "E-Mail" "images/mail.png" "mailto:mail@siegfriedweber.net"
+            [ E.linkedIcon_ "Gulp" "images/gulp.png" "https://www.gulp.de/gulp2/home/profil/siegfriedweber"
+            , E.linkedIcon_ "Xing" "images/xing.png" "https://www.xing.com/profile/Siegfried_Weber18"
+            , E.linkedIcon_ "Linked in" "images/linkedin.png" "https://de.linkedin.com/in/siegfriedweber"
+            , E.linkedIcon_ "GitHub" "images/github.png" "https://github.com/siegfriedweber"
+            , E.linkedIcon_ "Stack Overflow" "images/stackoverflow.png" "https://stackoverflow.com/users/7312398/siegfried-weber"
+            , E.linkedIcon_ "E-Mail" "images/mail.png" "mailto:mail@siegfriedweber.net"
             ]
         ]
 

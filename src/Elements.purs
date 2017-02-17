@@ -1,11 +1,11 @@
 module Elements
     ( module B
+    , module Icon
     , module Image
     , module S
     , module Skills
     , module Text
     , inlineList
-    , linkedIcon
     , styleElements
     ) where
 
@@ -16,16 +16,15 @@ import CSS.Common as CC
 import CSS.ListStyle.Type as CL
 import CSS.Media as CM
 import CSS.TextAlign as CT
-import CSS.VerticalAlign as CV
 import Data.Array (mapMaybe)
 import Data.Foldable (sequence_)
 import Data.Maybe(Maybe)
 import Data.NonEmpty (NonEmpty, (:|), singleton)
 import Halogen.HTML.CSS.Indexed as HC
 import Halogen.HTML.Indexed as HH
-import Halogen.HTML.Properties.Indexed as HP
 
 import Elements.Box as B
+import Elements.Icon as Icon
 import Elements.Image as Image
 import Elements.Section as S
 import Elements.Skills as Skills
@@ -47,20 +46,6 @@ inlineList = wrapItems >>> createList
                   C.paddingLeft C.nil
               ]
 
-linkedIcon :: forall p i. String -> String -> String -> HH.HTML p i
-linkedIcon name icon url =
-    HH.a [ HP.href url
-         , HC.style do
-             C.paddingLeft $ C.px 12.0
-             C.paddingRight $ C.px 12.0
-         ]
-         [ HH.img
-            [ HP.src icon
-            , HP.alt name
-            , HC.style $ CV.verticalAlign CV.Top
-            ]
-        ]
-
 type ClassCss =
     { className :: String
     , css       :: C.CSS
@@ -72,6 +57,7 @@ styleElements = stylesToCss allStyles
     allStyles :: Array Style
     allStyles = S.sectionStyles
              <> B.boxStyles
+             <> Icon.iconStyles
              <> Image.imageStyles
              <> Skills.skillSetStyles
              <> Text.textStyles
