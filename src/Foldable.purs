@@ -3,7 +3,6 @@ module Foldable
     ) where
 
 import Prelude
-
 import Data.Foldable (class Foldable, intercalate)
 import Data.Monoid (class Monoid)
 

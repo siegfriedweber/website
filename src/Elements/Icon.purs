@@ -7,7 +7,7 @@ module Elements.Icon
     ) where
 
 import Prelude
-import Data.Maybe(Maybe(Just))
+import Data.Maybe (Maybe(Just))
 
 import CSS as C
 import CSS.VerticalAlign as CV
@@ -25,9 +25,9 @@ newtype LinkedIconStyle = LinkedIconStyle
     }
 
 getIconStyles :: LinkedIconStyle -> Array Style
-getIconStyles (LinkedIconStyle style) =
-    [ style.link
-    , style.icon
+getIconStyles (LinkedIconStyle styles) =
+    [ styles.link
+    , styles.icon
     ]
 
 linkedIconStyleDefault :: LinkedIconStyle
@@ -48,11 +48,11 @@ linkedIcon_ :: forall p i. String -> String -> String -> HH.HTML p i
 linkedIcon_ = linkedIcon linkedIconStyleDefault
 
 linkedIcon :: forall p i. LinkedIconStyle -> String -> String -> String -> HH.HTML p i
-linkedIcon (LinkedIconStyle style) name icon url =
-    HH.a [ HP.href url, HP.class_ $ HH.className style.link.className ]
+linkedIcon (LinkedIconStyle styles) name icon url =
+    HH.a [ HP.href url, HP.class_ $ HH.className styles.link.className ]
          [ HH.img [ HP.src icon
                   , HP.alt name
-                  , HP.class_ $ HH.className style.icon.className
+                  , HP.class_ $ HH.className styles.icon.className
                   ]
          ]
 

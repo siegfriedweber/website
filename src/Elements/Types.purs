@@ -3,8 +3,9 @@ module Elements.Types
     , defaultStyle
     ) where
 
+import Data.Maybe (Maybe(Nothing))
+
 import CSS as C
-import Data.Maybe(Maybe(Nothing))
 
 type Style =
     { className :: String

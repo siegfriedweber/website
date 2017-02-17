@@ -1,28 +1,28 @@
 module Elements
-    ( module B
+    ( module Box
     , module Icon
     , module Image
     , module List
-    , module S
+    , module Section
     , module Skills
     , module Text
     , styleElements
     ) where
 
 import Prelude
-
-import CSS as C
-import CSS.Media as CM
 import Data.Array (mapMaybe)
 import Data.Foldable (sequence_)
 import Data.Maybe(Maybe)
 import Data.NonEmpty (NonEmpty, (:|), singleton)
 
-import Elements.Box as B
+import CSS as C
+import CSS.Media as CM
+
+import Elements.Box as Box
 import Elements.Icon as Icon
 import Elements.Image as Image
 import Elements.List as List
-import Elements.Section as S
+import Elements.Section as Section
 import Elements.Skills as Skills
 import Elements.Text as Text
 import Elements.Types (Style)
@@ -36,12 +36,12 @@ styleElements :: C.CSS
 styleElements = stylesToCss allStyles
   where
     allStyles :: Array Style
-    allStyles = S.sectionStyles
-             <> B.boxStyles
+    allStyles = Box.boxStyles
              <> Icon.iconStyles
              <> Image.imageStyles
              <> List.listStyles
              <> Skills.skillSetStyles
+             <> Section.sectionStyles
              <> Text.textStyles
 
     stylesToCss :: Array Style -> C.CSS

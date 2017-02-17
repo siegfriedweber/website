@@ -6,7 +6,7 @@ module Elements.List
     ) where
 
 import Prelude
-import Data.Maybe(Maybe(Just))
+import Data.Maybe (Maybe(Just))
 
 import CSS as C
 import CSS.Common as CC
@@ -53,5 +53,6 @@ list (ListStyle styles) = createList <<< wrapItems
   where
     createList = HH.ul [ HP.class_ $ HH.className styles.list.className ]
 
-    wrapItems = map $ HH.li [ HP.class_ $ HH.className styles.item.className ] <<< pure
+    wrapItems = map $
+        HH.li [ HP.class_ $ HH.className styles.item.className ] <<< pure
 

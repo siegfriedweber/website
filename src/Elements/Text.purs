@@ -25,7 +25,7 @@ module Elements.Text
     ) where
 
 import Prelude
-import Data.Maybe(Maybe(Just))
+import Data.Maybe (Maybe(Just))
 import Data.String (Pattern(Pattern), split)
 
 import CSS as C
@@ -143,10 +143,15 @@ linkStyleDefault = LinkStyle defaultStyle
         C.textDecoration C.noneTextDecoration
     }
 
-link_ :: forall p i. String -> Array (HH.HTML p i) -> Array (HH.HTML p i)
+link_ :: forall p i. String
+                  -> Array (HH.HTML p i)
+                  -> Array (HH.HTML p i)
 link_ = link linkStyleDefault
 
-link :: forall p i. LinkStyle -> String -> Array (HH.HTML p i) -> Array (HH.HTML p i)
+link :: forall p i. LinkStyle
+                 -> String
+                 -> Array (HH.HTML p i)
+                 -> Array (HH.HTML p i)
 link (LinkStyle style) ref = pure <<<
     HH.a [ HP.href ref, HP.class_ $ HH.className style.className ]
 

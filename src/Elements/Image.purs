@@ -1,12 +1,12 @@
 module Elements.Image
     ( ImageStyle
     , image
-    , imageInline
+    , imageStyleInline
     , imageStyles
     ) where
 
 import Prelude
-import Data.Maybe(Maybe(Just))
+import Data.Maybe (Maybe(Just))
 
 import CSS as C
 import CSS.VerticalAlign as CV
@@ -16,15 +16,15 @@ import Halogen.HTML.Properties.Indexed as HP
 import Elements.Types (Style, defaultStyle)
 
 imageStyles :: Array Style
-imageStyles = getImageStyles imageInline
+imageStyles = getImageStyles imageStyleInline
 
 newtype ImageStyle = ImageStyle Style
 
 getImageStyles :: ImageStyle -> Array Style
 getImageStyles (ImageStyle style) = [ style ]
 
-imageInline :: ImageStyle
-imageInline = ImageStyle defaultStyle
+imageStyleInline :: ImageStyle
+imageStyleInline = ImageStyle defaultStyle
     { className = "image-inline"
     , cssCommon = Just do
         C.display C.inlineBlock

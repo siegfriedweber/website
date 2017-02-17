@@ -15,7 +15,7 @@ module Elements.Box
     ) where
 
 import Prelude
-import Data.Maybe(Maybe(Just))
+import Data.Maybe (Maybe(Just))
 
 import CSS as C
 import Halogen.HTML.Indexed as HH
@@ -43,24 +43,24 @@ getBoxesStyles (BoxesStyle styles) =
 
 boxesStyleDefault :: BoxesStyle
 boxesStyleDefault = BoxesStyle
-    { boxes : boxesStyleFrame "boxes" 36.0 36.0
+    { boxes : boxesStyleBoxes "boxes" 36.0 36.0
     , box   : boxesStyleBox "boxes__item" 480.0 36.0 36.0
     }
 
 boxesStyleSmallSpacing :: BoxesStyle
 boxesStyleSmallSpacing = BoxesStyle
-    { boxes : boxesStyleFrame "boxes-small-spacing" 36.0 9.0
+    { boxes : boxesStyleBoxes "boxes-small-spacing" 36.0 9.0
     , box   : boxesStyleBox "boxes-small-spacing__item" 480.0 36.0 9.0
     }
 
 boxesStyleNoSpacing :: BoxesStyle
 boxesStyleNoSpacing = BoxesStyle
-    { boxes : boxesStyleFrame "boxes-no-spacing" 0.0 0.0
+    { boxes : boxesStyleBoxes "boxes-no-spacing" 0.0 0.0
     , box   : boxesStyleBox "boxes-no-spacing__item" 480.0 0.0 0.0
     }
 
-boxesStyleFrame :: String -> Number -> Number -> Style
-boxesStyleFrame className horizontalMargin verticalMargin = defaultStyle
+boxesStyleBoxes :: String -> Number -> Number -> Style
+boxesStyleBoxes className horizontalMargin verticalMargin = defaultStyle
     { className = className
     , cssCommon = Just do
         C.display C.flex

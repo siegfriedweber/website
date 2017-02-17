@@ -8,7 +8,7 @@ module Elements.Skills
     ) where
 
 import Prelude
-import Data.Maybe(Maybe(Just))
+import Data.Maybe (Maybe(Just))
 
 import CSS as C
 import CSS.Common as CC
@@ -23,7 +23,7 @@ import Fonts (Font(SourceSansProLight, SourceSansProSemibold), styleFont)
 
 type Skill =
     { name       :: String
-    , desc       :: String
+    , expertise  :: String
     , percentage :: Number
     }
 
@@ -31,7 +31,7 @@ newtype SkillSetStyle = SkillSetStyle
     { list          :: Style
     , header        :: Style
     , name          :: Style
-    , description   :: Style
+    , expertise     :: Style
     , barForeground :: Style
     , barBackground :: Style
     }
@@ -41,7 +41,7 @@ getStyles (SkillSetStyle style) =
     [ style.list
     , style.header
     , style.name
-    , style.description
+    , style.expertise
     , style.barForeground
     , style.barBackground
     ]
@@ -74,8 +74,8 @@ skillSetStyleDefault = SkillSetStyle
             styleFont SourceSansProSemibold
             C.fontSize $ C.px 18.0
         }
-    , description : defaultStyle
-        { className = "skill-set__description"
+    , expertise : defaultStyle
+        { className = "skill-set__expertise"
         , cssCommon = Just do
             styleFont SourceSansProLight
             C.fontSize $ C.px 16.0
@@ -113,8 +113,8 @@ skillBar styles@(SkillSetStyle style) skill =
             [ HP.class_ $ HH.className style.name.className ]
             [ HH.text skill.name ]
         , HH.span
-            [ HP.class_ $ HH.className style.description.className ]
-            [ HH.text skill.desc ]
+            [ HP.class_ $ HH.className style.expertise.className ]
+            [ HH.text skill.expertise ]
         ]
     , bar styles skill.percentage
     ]
