@@ -15,7 +15,6 @@ module Elements.Text
     , paragraph
     , paragraph_
     , paragraphStyleDefault
-    , paragraphStyleLargeMargin
     , paragraphStyleNoMargin
     , subheading
     , subheading_
@@ -43,7 +42,6 @@ textStyles = getHeadingStyles headingStyleDefault
           <> getSubheadingStyles subheadingStyleDefault
           <> getParagraphStyles paragraphStyleDefault
           <> getParagraphStyles paragraphStyleNoMargin
-          <> getParagraphStyles paragraphStyleLargeMargin
           <> getLinkStyles linkStyleDefault
 
 newtype HeadingStyle = HeadingStyle Style
@@ -55,7 +53,7 @@ headingStyleDefault :: HeadingStyle
 headingStyleDefault = headingStyle "heading" 36.0
 
 headingStyleSmallMargin :: HeadingStyle
-headingStyleSmallMargin = headingStyle "heading-small-margin" 24.0
+headingStyleSmallMargin = headingStyle "heading-small-margin" 9.0
 
 headingStyle :: String -> Number -> HeadingStyle
 headingStyle className marginBottom = HeadingStyle defaultStyle
@@ -106,9 +104,6 @@ paragraphStyleDefault = paragraphStyle "paragraph" 18.0
 
 paragraphStyleNoMargin :: ParagraphStyle
 paragraphStyleNoMargin = paragraphStyle "paragraph-no-margin" 0.0
-
-paragraphStyleLargeMargin :: ParagraphStyle
-paragraphStyleLargeMargin = paragraphStyle "paragraph-large-margin" 36.0
 
 paragraphStyle :: String -> Number -> ParagraphStyle
 paragraphStyle className marginBottom = ParagraphStyle defaultStyle

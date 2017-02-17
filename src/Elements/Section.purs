@@ -12,6 +12,7 @@ import Prelude
 import Data.Maybe (Maybe(Just))
 
 import CSS as C
+import CSS.Border as CB
 import CSS.Common as CC
 import Halogen.HTML.Indexed as HH
 import Halogen.HTML.Properties.Indexed as HP
@@ -40,11 +41,18 @@ getSectionStyles (SectionStyle styles) =
     , styles.inner
     ]
 
+defaultSectionInnerStyle :: Style
+defaultSectionInnerStyle = defaultStyle
+    { cssSmall  = Just $ C.width $ C.pct 100.0
+    , cssMedium = Just $ C.width $ C.px 480.0
+    , cssLarge  = Just $ C.width $ C.px 960.0
+    }
+
 sectionStyleHeader :: SectionStyle
 sectionStyleHeader = SectionStyle
     { outer : defaultStyle
         { className = "sectionHeaderOuter"
-        , cssCommon = Just $ do
+        , cssCommon = Just do
             C.backgroundColor darkBackgroundColor
             C.backgroundImage $ C.url "images/header_background.jpg"
             C.backgroundRepeat C.noRepeat
@@ -54,7 +62,7 @@ sectionStyleHeader = SectionStyle
         }
     , inner : defaultSectionInnerStyle
         { className = "sectionHeaderInner"
-        , cssCommon = Just $ do
+        , cssCommon = Just do
             C.marginLeft CC.auto
             C.marginRight CC.auto
             C.backgroundColor lightBackgroundColor
@@ -63,24 +71,17 @@ sectionStyleHeader = SectionStyle
         }
     }
 
-defaultSectionInnerStyle :: Style
-defaultSectionInnerStyle = defaultStyle
-    { cssSmall  = Just $ C.width $ C.pct 100.0
-    , cssMedium = Just $ C.width $ C.px 480.0
-    , cssLarge  = Just $ C.width $ C.px 960.0
-    }
-
 sectionStyleLinks :: SectionStyle
 sectionStyleLinks = SectionStyle
     { outer : defaultStyle
         { className = "section-links"
-        , cssCommon = Just $ do
-            C.paddingBottom $ C.px 36.0
+        , cssCommon = Just do
             C.backgroundColor lightBackgroundColor
+            CB.borderBottom CB.solid (C.px 36.0) lightBackgroundColor
         }
     , inner : defaultSectionInnerStyle
         { className = "section-links__inner"
-        , cssCommon = Just $ do
+        , cssCommon = Just do
             C.marginLeft CC.auto
             C.marginRight CC.auto
             C.paddingTop $ C.px 24.0
@@ -93,11 +94,13 @@ sectionStyleFooter :: SectionStyle
 sectionStyleFooter = SectionStyle
     { outer : defaultStyle
         { className = "section-footer"
-        , cssCommon = Just $ C.backgroundColor darkBackgroundColor
+        , cssCommon = Just do
+            C.backgroundColor darkBackgroundColor
+            CB.borderTop CB.solid (C.px 36.0) lightBackgroundColor
         }
     , inner : defaultSectionInnerStyle
         { className = "section-footer__inner"
-        , cssCommon = Just $ do
+        , cssCommon = Just do
             C.marginLeft CC.auto
             C.marginRight CC.auto
             C.paddingTop $ C.px 36.0
@@ -115,7 +118,7 @@ sectionStyleDefault = SectionStyle
         }
     , inner : defaultSectionInnerStyle
         { className = "section__inner"
-        , cssCommon = Just $ do
+        , cssCommon = Just do
             C.marginLeft CC.auto
             C.marginRight CC.auto
             C.paddingTop $ C.px 36.0

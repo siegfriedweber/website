@@ -24,7 +24,7 @@ header =
                 ]
             , E.box E.boxStyleRightSidePaddings
                 [ E.heading E.headingStyleSmallMargin "Siegfried Weber"
-                , E.paragraph E.paragraphStyleLargeMargin $
+                , E.paragraph_ $
                     E.text "Freiberuflicher Softwareentwickler und \n\
                             \Experte für funktionale Programmierung"
                 , E.skillSet_

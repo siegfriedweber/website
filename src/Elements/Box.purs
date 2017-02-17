@@ -100,8 +100,8 @@ boxStyleRightSidePaddings = BoxStyle defaultStyle
     , cssCommon = Just do
         C.paddingLeft $ C.px 72.0
         C.paddingRight $ C.px 96.0
-        C.paddingTop $ C.px 72.0
-        C.paddingBottom C.nil
+        C.paddingTop $ C.px 88.0
+        C.paddingBottom $ C.px 72.0
     }
 
 box_ :: forall p i. Array (HH.HTML p i) -> Box p i

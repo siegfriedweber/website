@@ -56,7 +56,7 @@ skillSetStyleDefault = SkillSetStyle
         , cssCommon = Just do
             CL.listStyleType CC.none
             C.marginTop C.nil
-            C.marginBottom $ C.px 36.0
+            C.marginBottom C.nil
             C.paddingLeft C.nil
         }
     , header : defaultStyle
