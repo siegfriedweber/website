@@ -91,7 +91,7 @@ skills = E.section_
     [ E.heading_ "Meine Fertigkeiten"
     , E.boxes_
         [ E.box_
-            [ E.subheading_ "Programmiersprachen"
+            [ E.subheading_ "Programmier­sprachen"
             , E.skillSet_
                 [ { name       : "Haskell"
                   , expertise  : "Experte"
@@ -116,7 +116,7 @@ skills = E.section_
                 ]
             ]
         , E.box_
-            [ E.subheading_ "Datenbankmanagementsysteme"
+            [ E.subheading_ "Datenbank­management­systeme"
             , E.skillSet_
                 [ { name       : "MongoDB"
                   , expertise  : "Experte"
