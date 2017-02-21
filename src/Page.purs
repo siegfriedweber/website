@@ -19,7 +19,7 @@ header =
     E.section E.sectionStyleHeader
         [ E.boxes E.boxesStyleNoSpacing
             [ E.box_
-                [ E.image E.imageStyleInline
+                [ E.image E.imageStyleFill
                     "Siegfried Weber" "images/siegfried_weber.jpg"
                 ]
             , E.box E.boxStyleRightSidePaddings

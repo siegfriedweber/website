@@ -1,7 +1,7 @@
 module Elements.Image
     ( ImageStyle
     , image
-    , imageStyleInline
+    , imageStyleFill
     , imageStyles
     ) where
 
@@ -16,17 +16,18 @@ import Halogen.HTML.Properties.Indexed as HP
 import Elements.Types (Style, defaultStyle)
 
 imageStyles :: Array Style
-imageStyles = getImageStyles imageStyleInline
+imageStyles = getImageStyles imageStyleFill
 
 newtype ImageStyle = ImageStyle Style
 
 getImageStyles :: ImageStyle -> Array Style
 getImageStyles (ImageStyle style) = [ style ]
 
-imageStyleInline :: ImageStyle
-imageStyleInline = ImageStyle defaultStyle
+imageStyleFill :: ImageStyle
+imageStyleFill = ImageStyle defaultStyle
     { className = "image-inline"
     , cssCommon = Just do
+        C.width $ C.pct 100.0
         C.display C.inlineBlock
         CV.verticalAlign CV.Top
     }

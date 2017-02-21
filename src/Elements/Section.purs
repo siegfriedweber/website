@@ -9,7 +9,7 @@ module Elements.Section
     ) where
 
 import Prelude
-import Data.Maybe (Maybe(Just))
+import Data.Maybe (Maybe(Just, Nothing))
 
 import CSS as C
 import CSS.Border as CB
@@ -43,7 +43,7 @@ getSectionStyles (SectionStyle styles) =
 
 defaultSectionInnerStyle :: Style
 defaultSectionInnerStyle = defaultStyle
-    { cssSmall  = Just $ C.width $ C.pct 100.0
+    { cssSmall  = Just $ C.width $ C.pct 90.0
     , cssMedium = Just $ C.width $ C.px 480.0
     , cssLarge  = Just $ C.width $ C.px 960.0
     }
@@ -52,13 +52,16 @@ sectionStyleHeader :: SectionStyle
 sectionStyleHeader = SectionStyle
     { outer : defaultStyle
         { className = "sectionHeaderOuter"
-        , cssCommon = Just do
+        , cssMedium = Just do
+            C.paddingTop $ C.px 72.0
             C.backgroundColor darkBackgroundColor
             C.backgroundImage $ C.url "images/header_background.jpg"
             C.backgroundRepeat C.noRepeat
-        , cssSmall  = Just $ C.paddingTop $ C.px 24.0
-        , cssMedium = Just $ C.paddingTop $ C.px 150.0
-        , cssLarge  = Just $ C.paddingTop $ C.px 150.0
+        , cssLarge  = Just do
+            C.paddingTop $ C.px 150.0
+            C.backgroundColor darkBackgroundColor
+            C.backgroundImage $ C.url "images/header_background.jpg"
+            C.backgroundRepeat C.noRepeat
         }
     , inner : defaultSectionInnerStyle
         { className = "sectionHeaderInner"
@@ -67,7 +70,8 @@ sectionStyleHeader = SectionStyle
             C.marginRight CC.auto
             C.backgroundColor lightBackgroundColor
             C.color darkTextColor
-            C.boxShadow C.nil C.nil (C.px 72.0) (C.rgba 0 0 0 0.8)
+            C.boxShadow C.nil C.nil (C.px 36.0) (C.rgba 0 0 0 0.8)
+        , cssSmall  = Nothing
         }
     }
 
@@ -87,6 +91,7 @@ sectionStyleLinks = SectionStyle
             C.paddingTop $ C.px 24.0
             C.paddingBottom $ C.px 24.0
             C.backgroundColor darkBackgroundColor
+        , cssSmall  = Nothing
         }
     }
 

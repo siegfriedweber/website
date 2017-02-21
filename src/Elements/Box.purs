@@ -63,10 +63,11 @@ boxesStyleBoxes :: String -> Number -> Number -> Style
 boxesStyleBoxes className horizontalMargin verticalMargin = defaultStyle
     { className = className
     , cssCommon = Just do
-        C.display C.flex
-        C.flexWrap C.wrap
         C.marginTop $ C.px (- verticalMargin)
         C.marginBottom $ C.px (- verticalMargin)
+    , cssLarge  = Just do
+        C.display C.flex
+        C.flexWrap C.wrap
         C.marginLeft $ C.px (- horizontalMargin)
         C.marginRight $ C.px (- horizontalMargin)
     }
@@ -75,9 +76,10 @@ boxesStyleBox :: String -> Number -> Number -> Number -> Style
 boxesStyleBox className width horizontalMargin verticalMargin = defaultStyle
     { className = className
     , cssCommon = Just do
-        C.width $ C.px $ width - horizontalMargin
         C.marginTop $ C.px verticalMargin
         C.marginBottom $ C.px verticalMargin
+    , cssLarge  = Just do
+        C.width $ C.px $ width - horizontalMargin
         C.marginLeft $ C.px horizontalMargin
         C.marginRight $ C.px horizontalMargin
     }
@@ -97,10 +99,20 @@ boxStyleDefault = BoxStyle defaultStyle
 boxStyleRightSidePaddings :: BoxStyle
 boxStyleRightSidePaddings = BoxStyle defaultStyle
     { className = "boxes__item-inner-right-side-paddings"
-    , cssCommon = Just do
-        C.paddingLeft $ C.px 72.0
-        C.paddingRight $ C.px 96.0
-        C.paddingTop $ C.px 88.0
+    , cssSmall  = Just do
+        C.paddingLeft   $ C.pct 5.0
+        C.paddingRight  $ C.pct 5.0
+        C.paddingTop    $ C.px 36.0
+        C.paddingBottom $ C.px 36.0
+    , cssMedium = Just do
+        C.paddingLeft   $ C.px 72.0
+        C.paddingRight  $ C.px 72.0
+        C.paddingTop    $ C.px 72.0
+        C.paddingBottom $ C.px 72.0
+    , cssLarge  = Just do
+        C.paddingLeft   $ C.px 72.0
+        C.paddingRight  $ C.px 96.0
+        C.paddingTop    $ C.px 88.0
         C.paddingBottom $ C.px 72.0
     }
 

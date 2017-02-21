@@ -38,13 +38,16 @@ listStyleInline = ListStyle
         , cssCommon = Just do
             CT.textAlign CT.center
             CL.listStyleType CC.none
-            C.marginTop C.nil
-            C.marginBottom C.nil
+            C.marginTop $ C.px (-9.0)
+            C.marginBottom $ C.px (-9.0)
             C.paddingLeft C.nil
         }
     , item : defaultStyle
         { className = "list-inline__item"
-        , cssCommon = Just $ C.display C.inlineBlock
+        , cssCommon = Just do
+            C.display C.inlineBlock
+            C.marginTop $ C.px 9.0
+            C.marginBottom $ C.px 9.0
         }
     }
 

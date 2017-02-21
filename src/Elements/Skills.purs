@@ -13,6 +13,7 @@ import Data.Maybe (Maybe(Just))
 import CSS as C
 import CSS.Common as CC
 import CSS.ListStyle.Type as CL
+import CSS.TextAlign as CA
 import Halogen.HTML.CSS.Indexed as HC
 import Halogen.HTML.Indexed as HH
 import Halogen.HTML.Properties.Indexed as HP
@@ -78,6 +79,7 @@ skillSetStyleDefault = SkillSetStyle
         { className = "skill-set__expertise"
         , cssCommon = Just do
             styleFont SourceSansProLight
+            CA.textAlign CA.rightTextAlign
             C.fontSize $ C.px 16.0
             C.color $ C.fromInt 0x404040
         }
