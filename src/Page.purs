@@ -1,18 +1,21 @@
 module Page
-    ( Query
-    , ui
+    ( content
     ) where
 
 import Prelude
-import Unsafe.Coerce (unsafeCoerce)
 
-import CSS as C
-import Halogen as H
-import Halogen.HTML.CSS as HS
 import Halogen.HTML.Indexed as HH
 
 import Elements as E
-import Fonts (styleFontFaces)
+
+content :: forall p i. HH.HTML p i
+content = HH.div_
+    [ header
+    , links
+    , about
+    , skills
+    , footer
+    ]
 
 header :: forall p i. HH.HTML p i
 header =
@@ -25,8 +28,8 @@ header =
             , E.box E.boxStyleRightSidePaddings
                 [ E.heading E.headingStyleSmallMargin "Siegfried Weber"
                 , E.paragraph_ $
-                    E.text "Freiberuflicher Softwareentwickler und \n\
-                            \Experte für funktionale Programmierung"
+                    E.text "Freiberuflicher Softwareentwickler und\n\
+                           \Experte für funktionale Programmierung"
                 , E.skillSet_
                     [ { name       : "Haskell, PureScript"
                       , expertise  : "Experte"
@@ -222,32 +225,4 @@ footer =
                 ]
             ]
         ]
-
-website :: forall p i. HH.HTML p i
-website = HH.div_
-    [ unsafeCoerce $ HS.stylesheet (do
-        styleBody
-        styleFontFaces
-        E.styleElements)
-    , header
-    , links
-    , about
-    , skills
-    , footer
-    ]
-  where
-    styleBody :: C.CSS
-    styleBody = C.select C.body $ C.margin C.nil C.nil C.nil C.nil
-
-type State = Unit
-data Query a = Query a
-
-ui :: forall g. H.Component State Query g
-ui = H.component { render, eval }
-  where
-    render :: State -> H.ComponentHTML Query
-    render = const $ website
-
-    eval :: Query ~> H.ComponentDSL State Query g
-    eval (Query next) = pure next
 
