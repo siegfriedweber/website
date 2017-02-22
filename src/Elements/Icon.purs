@@ -11,8 +11,8 @@ import Data.Maybe (Maybe(Just))
 
 import CSS as C
 import CSS.VerticalAlign as CV
-import Halogen.HTML.Indexed as HH
-import Halogen.HTML.Properties.Indexed as HP
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
 
 import Elements.Types (Style, defaultStyle)
 
@@ -49,10 +49,10 @@ linkedIcon_ = linkedIcon linkedIconStyleDefault
 
 linkedIcon :: forall p i. LinkedIconStyle -> String -> String -> String -> HH.HTML p i
 linkedIcon (LinkedIconStyle styles) name icon url =
-    HH.a [ HP.href url, HP.class_ $ HH.className styles.link.className ]
+    HH.a [ HP.href url, HP.class_ $ HH.ClassName styles.link.className ]
          [ HH.img [ HP.src icon
                   , HP.alt name
-                  , HP.class_ $ HH.className styles.icon.className
+                  , HP.class_ $ HH.ClassName styles.icon.className
                   ]
          ]
 

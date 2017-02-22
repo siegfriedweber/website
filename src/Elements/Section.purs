@@ -14,8 +14,8 @@ import Data.Maybe (Maybe(Just, Nothing))
 import CSS as C
 import CSS.Border as CB
 import CSS.Common as CC
-import Halogen.HTML.Indexed as HH
-import Halogen.HTML.Properties.Indexed as HP
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
 
 import Elements.Colors ( darkBackgroundColor
                        , darkTextColor
@@ -138,8 +138,8 @@ section_ = section sectionStyleDefault
 
 section :: forall p i. SectionStyle -> Array (HH.HTML p i) -> HH.HTML p i
 section (SectionStyle style) content =
-    HH.div [ HP.class_ $ HH.className style.outer.className ]
-        [ HH.div [ HP.class_ $ HH.className style.inner.className ]
+    HH.div [ HP.class_ $ HH.ClassName style.outer.className ]
+        [ HH.div [ HP.class_ $ HH.ClassName style.inner.className ]
             content
         ]
 

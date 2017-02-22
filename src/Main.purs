@@ -2,11 +2,13 @@ module Main where
 
 import Prelude
 import Control.Monad.Eff (Eff)
-import Control.Monad.Free (liftF)
+import Data.Maybe (Maybe(Nothing))
 
-import Halogen (HalogenEffects, HalogenFP(HaltHF), component, runUI)
-import Halogen.HTML.Indexed (div_)
-import Halogen.Util (awaitBody, runHalogenAff)
+import Halogen (component)
+import Halogen.Aff (HalogenEffects, awaitBody, runHalogenAff)
+import Halogen.HTML (div_)
+import Halogen.Query.HalogenM (halt)
+import Halogen.VDom.Driver (runUI)
 
 import Page (content)
 import Styles (styles)
@@ -14,7 +16,9 @@ import Styles (styles)
 main :: Eff (HalogenEffects ()) Unit
 main = runHalogenAff $ awaitBody >>= runUI ui unit
   where
-    ui = component { render : const $ div_ [ styles, content ]
-                   , eval   : const $ liftF $ HaltHF "no query"
+    ui = component { initialState : const unit
+                   , render       : const $ div_ [ styles, content ]
+                   , eval         : const $ halt "no query"
+                   , receiver     : const Nothing
                    }
 

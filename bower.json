@@ -2,8 +2,8 @@
   "name": "website-siegfriedweber",
   "private": true,
   "dependencies": {
-    "purescript-halogen": "^0.12.0",
-    "purescript-halogen-css": "^4.0.0",
+    "purescript-halogen": "^1.0.0",
+    "purescript-halogen-css": "^5.0.0",
     "purescript-css": "^2.1.0"
   }
 }

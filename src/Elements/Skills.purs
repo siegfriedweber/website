@@ -14,9 +14,9 @@ import CSS as C
 import CSS.Common as CC
 import CSS.ListStyle.Type as CL
 import CSS.TextAlign as CA
-import Halogen.HTML.CSS.Indexed as HC
-import Halogen.HTML.Indexed as HH
-import Halogen.HTML.Properties.Indexed as HP
+import Halogen.HTML.CSS as HC
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
 
 import Elements.Colors (darkBackgroundColor)
 import Elements.Types (Style, defaultStyle)
@@ -105,17 +105,17 @@ skillSet styles@(SkillSetStyle style) = map (skillBar styles)
                                     >>> createList
   where
     createListItem = HH.li_
-    createList = HH.ul [ HP.class_ $ HH.className style.list.className ]
+    createList = HH.ul [ HP.class_ $ HH.ClassName style.list.className ]
 
 skillBar :: forall p i. SkillSetStyle -> Skill -> Array (HH.HTML p i)
 skillBar styles@(SkillSetStyle style) skill =
     [ HH.h3
-        [ HP.class_ $ HH.className style.header.className ]
+        [ HP.class_ $ HH.ClassName style.header.className ]
         [ HH.span
-            [ HP.class_ $ HH.className style.name.className ]
+            [ HP.class_ $ HH.ClassName style.name.className ]
             [ HH.text skill.name ]
         , HH.span
-            [ HP.class_ $ HH.className style.expertise.className ]
+            [ HP.class_ $ HH.ClassName style.expertise.className ]
             [ HH.text skill.expertise ]
         ]
     , bar styles skill.percentage
@@ -123,9 +123,9 @@ skillBar styles@(SkillSetStyle style) skill =
 
 bar :: forall p i. SkillSetStyle -> Number -> HH.HTML p i
 bar (SkillSetStyle style) percentage = HH.div
-    [ HP.class_ $ HH.className style.barBackground.className ]
+    [ HP.class_ $ HH.ClassName style.barBackground.className ]
     [ HH.div
-        [ HP.class_ $ HH.className style.barForeground.className
+        [ HP.class_ $ HH.ClassName style.barForeground.className
         , HC.style $ C.width $ C.pct percentage
         ]
         []

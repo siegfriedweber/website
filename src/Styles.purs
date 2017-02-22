@@ -6,7 +6,7 @@ import Prelude
 
 import CSS as C
 import Halogen.HTML.CSS as HS
-import Halogen.HTML.Indexed as HH
+import Halogen.HTML as HH
 
 import Elements (styleElements)
 import Fonts (styleFontFaces)

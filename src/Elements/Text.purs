@@ -28,8 +28,8 @@ import Data.Maybe (Maybe(Just))
 import Data.String (Pattern(Pattern), split)
 
 import CSS as C
-import Halogen.HTML.Indexed as HH
-import Halogen.HTML.Properties.Indexed as HP
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
 
 import Elements.Colors (lightTextColor)
 import Elements.Types (Style, defaultStyle)
@@ -70,7 +70,7 @@ heading_ = heading headingStyleDefault
 
 heading :: forall p i. HeadingStyle -> String -> HH.HTML p i
 heading (HeadingStyle style) =
-    HH.h1 [ HP.class_ $ HH.className style.className ] <<< pure <<< HH.text
+    HH.h1 [ HP.class_ $ HH.ClassName style.className ] <<< pure <<< HH.text
 
 newtype SubheadingStyle = SubheadingStyle Style
 
@@ -92,7 +92,7 @@ subheading_ = subheading subheadingStyleDefault
 
 subheading :: forall p i. SubheadingStyle -> String -> HH.HTML p i
 subheading (SubheadingStyle style) =
-    HH.h2 [ HP.class_ $ HH.className style.className ] <<< pure <<< HH.text
+    HH.h2 [ HP.class_ $ HH.ClassName style.className ] <<< pure <<< HH.text
 
 newtype ParagraphStyle = ParagraphStyle Style
 
@@ -120,7 +120,7 @@ paragraph_ = paragraph paragraphStyleDefault
 
 paragraph :: forall p i. ParagraphStyle -> Array (HH.HTML p i) -> HH.HTML p i
 paragraph (ParagraphStyle style) =
-    HH.p [ HP.class_ $ HH.className style.className ]
+    HH.p [ HP.class_ $ HH.ClassName style.className ]
 
 text :: forall p i. String -> Array (HH.HTML p i)
 text = intersperse HH.br_ <<< map HH.text <<< split (Pattern "\n")
@@ -148,7 +148,7 @@ link :: forall p i. LinkStyle
                  -> Array (HH.HTML p i)
                  -> Array (HH.HTML p i)
 link (LinkStyle style) ref = pure <<<
-    HH.a [ HP.href ref, HP.class_ $ HH.className style.className ]
+    HH.a [ HP.href ref, HP.class_ $ HH.ClassName style.className ]
 
 email_ :: forall p i. String -> Array (HH.HTML p i)
 email_ = email linkStyleDefault

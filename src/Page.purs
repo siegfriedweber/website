@@ -4,7 +4,7 @@ module Page
 
 import Prelude
 
-import Halogen.HTML.Indexed as HH
+import Halogen.HTML as HH
 
 import Elements as E
 

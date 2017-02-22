@@ -18,8 +18,8 @@ import Prelude
 import Data.Maybe (Maybe(Just))
 
 import CSS as C
-import Halogen.HTML.Indexed as HH
-import Halogen.HTML.Properties.Indexed as HP
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
 
 import Elements.Types (Style, defaultStyle)
 
@@ -127,14 +127,14 @@ boxes_ = boxes boxesStyleDefault
 
 boxes :: forall p i. BoxesStyle -> Array (Box p i) -> HH.HTML p i
 boxes (BoxesStyle boxesStyles) = map createBox >>>
-    HH.div [ HP.class_ $ HH.className boxesStyles.boxes.className ]
+    HH.div [ HP.class_ $ HH.ClassName boxesStyles.boxes.className ]
   where
     createBox :: Box p i -> HH.HTML p i
     createBox (Box (BoxStyle boxStyle) content) =
         HH.div
-            [ HP.class_ $ HH.className boxesStyles.box.className ]
+            [ HP.class_ $ HH.ClassName boxesStyles.box.className ]
             [ HH.div
-                [ HP.class_ $ HH.className boxStyle.className ]
+                [ HP.class_ $ HH.ClassName boxStyle.className ]
                 content
             ]
 

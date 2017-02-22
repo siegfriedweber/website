@@ -10,8 +10,8 @@ import Data.Maybe (Maybe(Just))
 
 import CSS as C
 import CSS.VerticalAlign as CV
-import Halogen.HTML.Indexed as HH
-import Halogen.HTML.Properties.Indexed as HP
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
 
 import Elements.Types (Style, defaultStyle)
 
@@ -36,6 +36,6 @@ image :: forall p i. ImageStyle -> String -> String -> HH.HTML p i
 image (ImageStyle style) alt src =
     HH.img [ HP.src src
            , HP.alt alt
-           , HP.class_ $ HH.className style.className
+           , HP.class_ $ HH.ClassName style.className
            ]
 

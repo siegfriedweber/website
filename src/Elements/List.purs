@@ -12,8 +12,8 @@ import CSS as C
 import CSS.Common as CC
 import CSS.ListStyle.Type as CL
 import CSS.TextAlign as CT
-import Halogen.HTML.Indexed as HH
-import Halogen.HTML.Properties.Indexed as HP
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
 
 import Elements.Types (Style, defaultStyle)
 
@@ -54,8 +54,8 @@ listStyleInline = ListStyle
 list :: forall p i. ListStyle -> Array (HH.HTML p i) -> HH.HTML p i
 list (ListStyle styles) = createList <<< wrapItems
   where
-    createList = HH.ul [ HP.class_ $ HH.className styles.list.className ]
+    createList = HH.ul [ HP.class_ $ HH.ClassName styles.list.className ]
 
     wrapItems = map $
-        HH.li [ HP.class_ $ HH.className styles.item.className ] <<< pure
+        HH.li [ HP.class_ $ HH.ClassName styles.item.className ] <<< pure
 
