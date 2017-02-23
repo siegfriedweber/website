@@ -7,18 +7,19 @@ import Prelude
 import Halogen.HTML as HH
 
 import Elements as E
+import Language (Language)
 
-content :: forall p i. HH.HTML p i
-content = HH.div_
-    [ header
+content :: forall p i. Language -> HH.HTML p i
+content language = E.multilingualContent language
+    [ header language
     , links
-    , about
-    , skills
-    , footer
+    , about language
+    , skills language
+    , footer language
     ]
 
-header :: forall p i. HH.HTML p i
-header =
+header :: forall p i. Language -> HH.HTML p i
+header language =
     E.section E.sectionStyleHeader
         [ E.boxes E.boxesStyleNoSpacing
             [ E.box_
@@ -27,24 +28,39 @@ header =
                 ]
             , E.box E.boxStyleRightSidePaddings
                 [ E.heading E.headingStyleSmallMargin "Siegfried Weber"
-                , E.paragraph_ $
-                    E.text "Freiberuflicher Softwareentwickler und\n\
+                , E.paragraph_ $ E.text $ E.choose language
+                    { de : "Freiberuflicher Softwareentwickler und\n\
                            \Experte für funktionale Programmierung"
+                    , en : "Freelance software developer and\n\
+                           \expert for functional programming"
+                    }
                 , E.skillSet_
                     [ { name       : "Haskell, PureScript"
-                      , expertise  : "Experte"
+                      , expertise  : E.choose language
+                                     { de : "Experte"
+                                     , en : "Expert"
+                                     }
                       , percentage : 90.0
                       }
                     , { name       : "Java, Spring Boot"
-                      , expertise  : "Experte"
+                      , expertise  : E.choose language
+                                     { de : "Experte"
+                                     , en : "Expert"
+                                     }
                       , percentage : 100.0
                       }
                     , { name       : "HTML, CSS, JavaScript"
-                      , expertise  : "Pro"
+                      , expertise  : E.choose language
+                                     { de : "Pro"
+                                     , en : "Pro"
+                                     }
                       , percentage : 70.0
                       }
                     , { name       : "Microservices"
-                      , expertise  : "2 Jahre Erfahrung"
+                      , expertise  : E.choose language
+                                     { de : "2 Jahre Erfahrung"
+                                     , en : "2 years of experience"
+                                     }
                       , percentage : 80.0
                       }
                     ]
@@ -77,128 +93,236 @@ links =
             ]
         ]
 
-about :: forall p i. HH.HTML p i
-about = E.section_
-    [ E.heading_ "Hallo, ich bin Siegfried!"
-    , E.paragraph E.paragraphStyleNoMargin $
-        E.text "Ich bin freiberuflicher Softwareentwickler und immer auf \
+about :: forall p i. Language -> HH.HTML p i
+about language = E.section_
+    [ E.heading_ $ E.choose language
+        { de : "Hallo, ich bin Siegfried!"
+        , en : "Hello, I am Siegfried!"
+        }
+    , E.paragraph E.paragraphStyleNoMargin $ E.text $ E.choose language
+        { de : "Ich bin freiberuflicher Softwareentwickler und immer auf \
                \der Suche nach interessanten Projekten sowohl im \
                \Rhein-Main-Gebiet als auch \"remote\". Meine Software \
                \genügt höchsten Ansprüchen und diese stelle ich auch an \
                \die Projekte. Wenn Sie also etwas Großartiges schaffen \
                \wollen, dann lassen Sie uns das gemeinsam tun!"
+        , en : "I am a freelance software developer and always looking \
+               \for interesting projects near Frankfurt/Main as well as \
+               \remote. My software fulfills the highest demands and \
+               \those I also have on the projects. So if you want to \
+               \create something great then let us do it together!"
+        }
     ]
 
-skills :: forall p i. HH.HTML p i
-skills = E.section_
-    [ E.heading_ "Meine Fertigkeiten"
+skills :: forall p i. Language -> HH.HTML p i
+skills language = E.section_
+    [ E.heading_ $ E.choose language
+        { de : "Meine Fertigkeiten"
+        , en : "My skills"
+        }
     , E.boxes_
         [ E.box_
-            [ E.subheading_ "Programmier­sprachen"
+            [ E.subheading_ $ E.choose language
+                { de : "Programmier­sprachen"
+                , en : "Programming languages"
+                }
             , E.skillSet_
                 [ { name       : "Haskell"
-                  , expertise  : "Experte"
+                  , expertise  : E.choose language
+                                 { de : "Experte"
+                                 , en : "Expert"
+                                 }
                   , percentage : 90.0
                   }
                 , { name       : "PureScript"
-                  , expertise  : "Experte"
+                  , expertise  : E.choose language
+                                 { de : "Experte"
+                                 , en : "Expert"
+                                 }
                   , percentage : 90.0
                   }
                 , { name       : "Java"
-                  , expertise  : "Experte"
+                  , expertise  : E.choose language
+                                 { de : "Experte"
+                                 , en : "Expert"
+                                 }
                   , percentage : 100.0
                   }
                 , { name       : "Javascript"
-                  , expertise  : "Pro"
+                  , expertise  : E.choose language
+                                 { de : "Pro"
+                                 , en : "Pro"
+                                 }
                   , percentage : 80.0
                   }
                 , { name       : "C++"
-                  , expertise  : "lange nicht benutzt"
+                  , expertise  : E.choose language
+                                 { de : "lange nicht benutzt"
+                                 , en : "Haven't used it for a while"
+                                 }
                   , percentage : 60.0
                   }
                 ]
             ]
         , E.box_
-            [ E.subheading_ "Datenbank­management­systeme"
+            [ E.subheading_ $ E.choose language
+                { de : "Datenbank­management­systeme"
+                , en : "Database management systems"
+                }
             , E.skillSet_
                 [ { name       : "MongoDB"
-                  , expertise  : "Experte"
+                  , expertise  : E.choose language
+                                 { de : "Experte"
+                                 , en : "Expert"
+                                 }
                   , percentage : 100.0
                   }
                 , { name       : "MySQL"
-                  , expertise  : "Pro"
+                  , expertise  : E.choose language
+                                 { de : "Pro"
+                                 , en : "Pro"
+                                 }
                   , percentage : 70.0
                   }
                 , { name       : "Google Cloud Datastore"
-                  , expertise  : "am Lernen"
+                  , expertise  : E.choose language
+                                 { de : "am Lernen"
+                                 , en : "Learning"
+                                 }
                   , percentage : 40.0
                   }
                 ]
             ]
         , E.box_
-            [ E.subheading_ "Werkzeuge"
+            [ E.subheading_ $ E.choose language
+                { de : "Werkzeuge"
+                , en : "Tools"
+                }
             , E.skillSet_
                 [ { name       : "Git"
-                  , expertise  : "Guru"
+                  , expertise  : E.choose language
+                                 { de : "Guru"
+                                 , en : "Guru"
+                                 }
                   , percentage : 100.0
                   }
                 , { name       : "Vim"
-                  , expertise  : "Guru"
+                  , expertise  : E.choose language
+                                 { de : "Guru"
+                                 , en : "Guru"
+                                 }
                   , percentage : 100.0
                   }
                 , { name       : "IntelliJ IDEA"
-                  , expertise  : "Pro"
+                  , expertise  : E.choose language
+                                 { de : "Pro"
+                                 , en : "Pro"
+                                 }
                   , percentage : 70.0
                   }
                 ]
             ]
         , E.box_
-            [ E.subheading_ "Betriebssysteme"
+            [ E.subheading_ $ E.choose language
+                { de : "Betriebssysteme"
+                , en : "Operating systems"
+                }
             , E.skillSet_
                 [ { name       : "Microsoft Windows"
-                  , expertise  : "Experte"
+                  , expertise  : E.choose language
+                                 { de : "Experte"
+                                 , en : "Expert"
+                                 }
                   , percentage : 90.0
                   }
                 , { name       : "Debian GNU/Linux"
-                  , expertise  : "Experte"
+                  , expertise  : E.choose language
+                                 { de : "Experte"
+                                 , en : "Expert"
+                                 }
                   , percentage : 100.0
                   }
                 , { name       : "NixOS"
-                  , expertise  : "auf dem Weg zum Experten"
+                  , expertise  : E.choose language
+                                 { de : "auf dem Weg zum Experten"
+                                 , en : "On the way to an expert"
+                                 }
                   , percentage : 30.0
                   }
                 ]
             ]
         , E.box_
-            [ E.subheading_ "Branchen"
+            [ E.subheading_ $ E.choose language
+                { de : "Branchen"
+                , en : "Sectors"
+                }
             , E.skillSet_
-                [ { name       : "Finanzen"
-                  , expertise  : "Pro"
+                [ { name       : E.choose language
+                                 { de : "Finanzen"
+                                 , en : "Financial sector"
+                                 }
+                  , expertise  : E.choose language
+                                 { de : "Pro"
+                                 , en : "Pro"
+                                 }
                   , percentage : 70.0
                   }
-                , { name       : "Versicherungen"
-                  , expertise  : "Pro"
+                , { name       : E.choose language
+                                 { de : "Versicherungen"
+                                 , en : "Insurance business"
+                                 }
+                  , expertise  : E.choose language
+                                 { de : "Pro"
+                                 , en : "Pro"
+                                 }
                   , percentage : 80.0
                   }
-                , { name       : "Computerspiele"
-                  , expertise  : "Guru"
+                , { name       : E.choose language
+                                 { de : "Computerspiele"
+                                 , en : "Gaming industry"
+                                 }
+                  , expertise  : E.choose language
+                                 { de : "Guru"
+                                 , en : "Guru"
+                                 }
                   , percentage : 100.0
                   }
                 ]
             ]
         , E.box_
-            [ E.subheading_ "Sprachen"
+            [ E.subheading_ $ E.choose language
+                { de : "Sprachen"
+                , en : "Languages"
+                }
             , E.skillSet_
-                [ { name       : "Deutsch"
-                  , expertise  : "Muttersprache"
+                [ { name       : E.choose language
+                                 { de : "Deutsch"
+                                 , en : "German"
+                                 }
+                  , expertise  : E.choose language
+                                 { de : "Muttersprache"
+                                 , en : "Native language"
+                                 }
                   , percentage : 100.0
                   }
-                , { name       : "Englisch"
-                  , expertise  : "verhandlungssicher"
+                , { name       : E.choose language
+                                 { de : "Englisch"
+                                 , en : "English"
+                                 }
+                  , expertise  : E.choose language
+                                 { de : "verhandlungssicher"
+                                 , en : "Business fluent"
+                                 }
                   , percentage : 85.0
                   }
-                , { name       : "Französisch"
-                  , expertise  : "am Lernen"
+                , { name       : E.choose language
+                                 { de : "Französisch"
+                                 , en : "French"
+                                 }
+                  , expertise  : E.choose language
+                                 { de : "am Lernen"
+                                 , en : "Still learning"
+                                 }
                   , percentage : 20.0
                   }
                 ]
@@ -206,21 +330,32 @@ skills = E.section_
         ]
     ]
 
-footer :: forall p i. HH.HTML p i
-footer =
+footer :: forall p i. Language -> HH.HTML p i
+footer language =
     E.section E.sectionStyleFooter
         [ E.boxes E.boxesStyleSmallSpacing
             [ E.box_
-                [ E.paragraph E.paragraphStyleNoMargin $
-                    E.text "Siegfried Weber\n\
-                           \Rheinallee 16-22\n\
-                           \65439 Flörsheim am Main\n\
-                           \Deutschland"
+                [ E.paragraph E.paragraphStyleNoMargin $ E.text $
+                    "Siegfried Weber\n\
+                    \Rheinallee 16-22\n\
+                    \65439 Flörsheim am Main\n" <>
+                    E.choose language
+                        { de : "Deutschland"
+                        , en : "Germany"
+                        }
                 ]
             , E.box_
                 [ E.paragraph E.paragraphStyleNoMargin $
-                    E.text "Telefon: +49 151 55855451\n\
-                           \E-Mail: " <>
+                    E.text (E.choose language
+                                { de : "Telefon:"
+                                , en : "Phone:"
+                                } <>
+                            " +49 151 55855451\n" <>
+                            E.choose language
+                                { de : "E-Mail:"
+                                , en : "E-mail:"
+                                } <>
+                            " ") <>
                     E.email_ "mail@siegfriedweber.net"
                 ]
             ]

@@ -10,15 +10,21 @@ import Halogen.HTML (div_)
 import Halogen.Query.HalogenM (halt)
 import Halogen.VDom.Driver (runUI)
 
+import Language (LANGUAGE, getUserLanguage, selectSupportedLanguage)
 import Page (content)
 import Styles (styles)
 
-main :: Eff (HalogenEffects ()) Unit
-main = runHalogenAff $ awaitBody >>= runUI ui unit
+main :: Eff (HalogenEffects (language :: LANGUAGE)) Unit
+main = do
+    language <- selectSupportedLanguage <$> getUserLanguage
+    runHalogenAff $ awaitBody >>= runUI (ui { language }) unit
   where
-    ui = component { initialState : const unit
-                   , render       : const $ div_ [ styles, content ]
-                   , eval         : const $ halt "no query"
-                   , receiver     : const Nothing
-                   }
+    ui state = component
+        { initialState : const state
+        , render       : \state' -> div_ [ styles
+                                         , content state'.language
+                                         ]
+        , eval         : const $ halt "no query"
+        , receiver     : const Nothing
+        }
 

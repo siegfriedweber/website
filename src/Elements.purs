@@ -2,6 +2,7 @@ module Elements
     ( module Box
     , module Icon
     , module Image
+    , module Language
     , module List
     , module Section
     , module Skills
@@ -21,6 +22,7 @@ import CSS.Media as CM
 import Elements.Box as Box
 import Elements.Icon as Icon
 import Elements.Image as Image
+import Elements.Language as Language
 import Elements.List as List
 import Elements.Section as Section
 import Elements.Skills as Skills
