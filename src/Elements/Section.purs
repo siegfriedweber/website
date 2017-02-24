@@ -51,7 +51,7 @@ defaultSectionInnerStyle = defaultStyle
 sectionStyleHeader :: SectionStyle
 sectionStyleHeader = SectionStyle
     { outer : defaultStyle
-        { className = "sectionHeaderOuter"
+        { className = "section-header"
         , cssMedium = Just do
             C.paddingTop $ C.px 72.0
             C.backgroundColor darkBackgroundColor
@@ -64,12 +64,13 @@ sectionStyleHeader = SectionStyle
             C.backgroundRepeat C.noRepeat
         }
     , inner : defaultSectionInnerStyle
-        { className = "sectionHeaderInner"
+        { className = "section-header__inner"
         , cssCommon = Just do
             C.marginLeft CC.auto
             C.marginRight CC.auto
-            C.backgroundColor lightBackgroundColor
             C.color darkTextColor
+        , cssScreen = Just do
+            C.backgroundColor lightBackgroundColor
             C.boxShadow C.nil C.nil (C.px 36.0) (C.rgba 0 0 0 0.8)
         , cssSmall  = Nothing
         }
@@ -79,13 +80,14 @@ sectionStyleLinks :: SectionStyle
 sectionStyleLinks = SectionStyle
     { outer : defaultStyle
         { className = "section-links"
-        , cssCommon = Just do
+        , cssScreen = Just do
             C.backgroundColor lightBackgroundColor
             CB.borderBottom CB.solid (C.px 36.0) lightBackgroundColor
+        , cssPrint  = Just $ C.display C.displayNone
         }
     , inner : defaultSectionInnerStyle
         { className = "section-links__inner"
-        , cssCommon = Just do
+        , cssScreen = Just do
             C.marginLeft CC.auto
             C.marginRight CC.auto
             C.paddingTop $ C.px 24.0
@@ -99,19 +101,25 @@ sectionStyleFooter :: SectionStyle
 sectionStyleFooter = SectionStyle
     { outer : defaultStyle
         { className = "section-footer"
-        , cssCommon = Just do
+        , cssScreen = Just do
             C.backgroundColor darkBackgroundColor
             CB.borderTop CB.solid (C.px 36.0) lightBackgroundColor
+        , cssPrint  = Just do
+            C.marginTop $ C.px 18.0
+            CB.borderTop CB.solid (C.px 1.0) C.black
         }
     , inner : defaultSectionInnerStyle
         { className = "section-footer__inner"
         , cssCommon = Just do
             C.marginLeft CC.auto
             C.marginRight CC.auto
-            C.paddingTop $ C.px 36.0
-            C.paddingBottom $ C.px 36.0
+        , cssScreen = Just do
             C.backgroundColor darkBackgroundColor
             C.color lightTextColor
+            C.paddingTop $ C.px 36.0
+            C.paddingBottom $ C.px 36.0
+        , cssPrint  = Just $
+            C.paddingTop $ C.px 18.0
         }
     }
 
@@ -119,17 +127,22 @@ sectionStyleDefault :: SectionStyle
 sectionStyleDefault = SectionStyle
     { outer : defaultStyle
         { className = "section"
-        , cssCommon = Just $ C.backgroundColor lightBackgroundColor
+        , cssScreen = Just $
+            C.backgroundColor lightBackgroundColor
         }
     , inner : defaultSectionInnerStyle
         { className = "section__inner"
         , cssCommon = Just do
             C.marginLeft CC.auto
             C.marginRight CC.auto
+        , cssScreen = Just do
             C.paddingTop $ C.px 36.0
             C.paddingBottom $ C.px 36.0
             C.backgroundColor lightBackgroundColor
             C.color darkTextColor
+        , cssPrint = Just do
+            C.paddingTop $ C.px 18.0
+            C.paddingBottom $ C.px 18.0
         }
     }
 

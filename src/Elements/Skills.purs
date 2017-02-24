@@ -11,6 +11,7 @@ import Prelude
 import Data.Maybe (Maybe(Just))
 
 import CSS as C
+import CSS.Border as CB
 import CSS.Common as CC
 import CSS.ListStyle.Type as CL
 import CSS.TextAlign as CA
@@ -81,17 +82,20 @@ skillSetStyleDefault = SkillSetStyle
             styleFont SourceSansProLight
             CA.textAlign CA.rightTextAlign
             C.fontSize $ C.px 16.0
+        , cssScreen = Just $
             C.color $ C.fromInt 0x404040
         }
     , barForeground : defaultStyle
         { className = "skill-set__bar-foreground"
-        , cssCommon = Just do
+        , cssScreen = Just do
             C.height $ C.px 8.0
             C.backgroundColor darkBackgroundColor
+        , cssPrint  = Just $
+            CB.borderTop CB.solid (C.px 8.0) C.black
         }
     , barBackground : defaultStyle
         { className = "skill-set__bar-background"
-        , cssCommon = Just $
+        , cssScreen = Just $
             C.backgroundColor $ C.fromInt 0xa0a0a0
         }
     }

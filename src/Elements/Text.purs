@@ -50,20 +50,36 @@ getHeadingStyles :: HeadingStyle -> Array Style
 getHeadingStyles (HeadingStyle style) = [ style ]
 
 headingStyleDefault :: HeadingStyle
-headingStyleDefault = headingStyle "heading" 36.0
+headingStyleDefault = headingStyle
+    { className : "heading"
+    , marginBottomScreen : 36.0
+    , marginBottomPrint : 18.0
+    }
 
 headingStyleSmallMargin :: HeadingStyle
-headingStyleSmallMargin = headingStyle "heading-small-margin" 9.0
-
-headingStyle :: String -> Number -> HeadingStyle
-headingStyle className marginBottom = HeadingStyle defaultStyle
-    { className = className
-    , cssCommon = Just do
-        C.marginTop C.nil
-        C.marginBottom $ C.px marginBottom
-        C.fontSize $ C.px 30.0
-        styleFont SourceSansProSemibold
+headingStyleSmallMargin = headingStyle
+    { className : "heading-small-margin"
+    , marginBottomScreen : 9.0
+    , marginBottomPrint : 9.0
     }
+
+headingStyle :: { className          :: String
+                , marginBottomScreen :: Number
+                , marginBottomPrint  :: Number
+                }
+             -> HeadingStyle
+headingStyle params =
+    HeadingStyle defaultStyle
+        { className = params.className
+        , cssCommon = Just do
+            C.marginTop C.nil
+            C.fontSize $ C.px 30.0
+            styleFont SourceSansProSemibold
+        , cssScreen = Just $
+            C.marginBottom $ C.px params.marginBottomScreen
+        , cssPrint  = Just $
+            C.marginBottom $ C.px params.marginBottomPrint
+        }
 
 heading_ :: forall p i. String -> HH.HTML p i
 heading_ = heading headingStyleDefault
@@ -82,9 +98,12 @@ subheadingStyleDefault = SubheadingStyle defaultStyle
     { className = "subheading"
     , cssCommon = Just do
         C.marginTop C.nil
-        C.marginBottom $ C.px 36.0
         C.fontSize $ C.px 24.0
         styleFont SourceSansProSemibold
+    , cssScreen = Just $
+        C.marginBottom $ C.px 36.0
+    , cssPrint  = Just $
+        C.marginBottom $ C.px 18.0
     }
 
 subheading_ :: forall p i. String -> HH.HTML p i
@@ -133,9 +152,12 @@ getLinkStyles (LinkStyle style) = [ style ]
 linkStyleDefault :: LinkStyle
 linkStyleDefault = LinkStyle defaultStyle
     { className = "link"
-    , cssCommon = Just do
-        C.color lightTextColor -- TODO change to inherit
+    , cssCommon = Just $
         C.textDecoration C.noneTextDecoration
+    , cssScreen = Just $
+        C.color lightTextColor -- TODO change to inherit
+    , cssPrint  = Just $
+        C.color C.black
     }
 
 link_ :: forall p i. String

@@ -18,6 +18,7 @@ import Prelude
 import Data.Maybe (Maybe(Just))
 
 import CSS as C
+import CSS.VerticalAlign as CV
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 
@@ -43,45 +44,92 @@ getBoxesStyles (BoxesStyle styles) =
 
 boxesStyleDefault :: BoxesStyle
 boxesStyleDefault = BoxesStyle
-    { boxes : boxesStyleBoxes "boxes" 36.0 36.0
-    , box   : boxesStyleBox "boxes__item" 480.0 36.0 36.0
+    { boxes : boxesStyleBoxes { className : "boxes"
+                              , verticalMargin : 36.0
+                              , horizontalMarginScreen : 36.0
+                              , horizontalMarginPrintInPct : 3.0
+                              }
+    , box   : boxesStyleBox { className : "boxes__item"
+                            , verticalMargin : 36.0
+                            , widthScreen : 480.0
+                            , horizontalMarginScreen : 36.0
+                            , horizontalMarginPrintInPct : 3.0
+                            }
     }
 
 boxesStyleSmallSpacing :: BoxesStyle
 boxesStyleSmallSpacing = BoxesStyle
-    { boxes : boxesStyleBoxes "boxes-small-spacing" 36.0 9.0
-    , box   : boxesStyleBox "boxes-small-spacing__item" 480.0 36.0 9.0
+    { boxes : boxesStyleBoxes { className : "boxes-small-spacing"
+                              , verticalMargin : 9.0
+                              , horizontalMarginScreen : 36.0
+                              , horizontalMarginPrintInPct : 3.0
+                              }
+    , box   : boxesStyleBox { className : "boxes-small-spacing__item"
+                            , verticalMargin : 9.0
+                            , widthScreen : 480.0
+                            , horizontalMarginScreen : 36.0
+                            , horizontalMarginPrintInPct : 3.0
+                            }
     }
 
 boxesStyleNoSpacing :: BoxesStyle
 boxesStyleNoSpacing = BoxesStyle
-    { boxes : boxesStyleBoxes "boxes-no-spacing" 0.0 0.0
-    , box   : boxesStyleBox "boxes-no-spacing__item" 480.0 0.0 0.0
+    { boxes : boxesStyleBoxes { className : "boxes-no-spacing"
+                              , verticalMargin : 0.0
+                              , horizontalMarginScreen : 0.0
+                              , horizontalMarginPrintInPct : 0.0
+                              }
+    , box   : boxesStyleBox { className : "boxes-no-spacing__item"
+                            , verticalMargin : 0.0
+                            , widthScreen : 480.0
+                            , horizontalMarginScreen : 0.0
+                            , horizontalMarginPrintInPct : 0.0
+                            }
     }
 
-boxesStyleBoxes :: String -> Number -> Number -> Style
-boxesStyleBoxes className horizontalMargin verticalMargin = defaultStyle
-    { className = className
+boxesStyleBoxes :: { className                  :: String
+                   , verticalMargin             :: Number
+                   , horizontalMarginScreen     :: Number
+                   , horizontalMarginPrintInPct :: Number
+                   }
+                -> Style
+boxesStyleBoxes params = defaultStyle
+    { className = params.className
     , cssCommon = Just do
-        C.marginTop $ C.px (- verticalMargin)
-        C.marginBottom $ C.px (- verticalMargin)
+        C.marginTop $ C.px (- params.verticalMargin)
+        C.marginBottom $ C.px (- params.verticalMargin)
     , cssLarge  = Just do
-        C.display C.flex
-        C.flexWrap C.wrap
-        C.marginLeft $ C.px (- horizontalMargin)
-        C.marginRight $ C.px (- horizontalMargin)
+        C.marginLeft $ C.px (- params.horizontalMarginScreen)
+        C.marginRight $ C.px (- params.horizontalMarginScreen)
+    , cssPrint  = Just do
+        C.marginLeft $ C.pct (- params.horizontalMarginPrintInPct)
+        C.marginRight $ C.pct (- params.horizontalMarginPrintInPct)
     }
 
-boxesStyleBox :: String -> Number -> Number -> Number -> Style
-boxesStyleBox className width horizontalMargin verticalMargin = defaultStyle
-    { className = className
+boxesStyleBox :: { className                  :: String
+                 , verticalMargin             :: Number
+                 , widthScreen                :: Number
+                 , horizontalMarginScreen     :: Number
+                 , horizontalMarginPrintInPct :: Number
+                 }
+              -> Style
+boxesStyleBox params = defaultStyle
+    { className = params.className
     , cssCommon = Just do
-        C.marginTop $ C.px verticalMargin
-        C.marginBottom $ C.px verticalMargin
+        C.marginTop $ C.px params.verticalMargin
+        C.marginBottom $ C.px params.verticalMargin
     , cssLarge  = Just do
-        C.width $ C.px $ width - horizontalMargin
-        C.marginLeft $ C.px horizontalMargin
-        C.marginRight $ C.px horizontalMargin
+        C.display C.inlineBlock
+        CV.verticalAlign CV.Top
+        C.width $ C.px $ params.widthScreen - params.horizontalMarginScreen
+        C.marginLeft $ C.px params.horizontalMarginScreen
+        C.marginRight $ C.px params.horizontalMarginScreen
+    , cssPrint = Just do
+        C.display C.inlineBlock
+        CV.verticalAlign CV.Top
+        C.width $ C.pct $ 50.0 - 2.0 * params.horizontalMarginPrintInPct
+        C.marginLeft $ C.pct params.horizontalMarginPrintInPct
+        C.marginRight $ C.pct params.horizontalMarginPrintInPct
     }
 
 newtype BoxStyle = BoxStyle Style
@@ -114,6 +162,8 @@ boxStyleRightSidePaddings = BoxStyle defaultStyle
         C.paddingRight  $ C.px 96.0
         C.paddingTop    $ C.px 88.0
         C.paddingBottom $ C.px 72.0
+    , cssPrint  = Just $
+        C.paddingLeft   $ C.pct  8.0
     }
 
 box_ :: forall p i. Array (HH.HTML p i) -> Box p i
