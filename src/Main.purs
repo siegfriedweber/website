@@ -1,13 +1,19 @@
 module Main where
 
 import Prelude
+import Control.Monad.Aff (Aff)
 import Control.Monad.Eff (Eff)
-import Data.Maybe (Maybe(Nothing))
+import Control.Monad.Eff.Exception (error)
+import Control.Monad.Error.Class (throwError)
+import Data.Const (Const)
+import Data.Maybe (Maybe(Nothing), maybe)
+import Data.Newtype (unwrap)
 
-import Halogen (component)
-import Halogen.Aff (HalogenEffects, awaitBody, runHalogenAff)
-import Halogen.HTML (div_)
-import Halogen.Query.HalogenM (halt)
+import DOM (DOM)
+import DOM.HTML.Types (HTMLElement)
+import Halogen (Component, ComponentHTML, component)
+import Halogen.Aff (HalogenEffects, awaitLoad, runHalogenAff, selectElement)
+import Halogen.HTML (HTML)
 import Halogen.VDom.Driver (runUI)
 
 import Language (LANGUAGE, getUserLanguage, selectSupportedLanguage)
@@ -17,14 +23,33 @@ import Styles (styles)
 main :: Eff (HalogenEffects (language :: LANGUAGE)) Unit
 main = do
     language <- selectSupportedLanguage <$> getUserLanguage
-    runHalogenAff $ awaitBody >>= runUI (ui { language }) unit
+    runHalogenAff do
+        awaitLoad
+        staticUi styles "head"
+        staticUi (content language) "body"
   where
-    ui state = component
-        { initialState : const state
-        , render       : \state' -> div_ [ styles
-                                         , content state'.language
-                                         ]
-        , eval         : const $ halt "no query"
+    staticUi :: forall eff
+              . ComponentHTML (Const Void)
+             -> String
+             -> Aff (HalogenEffects eff) Unit
+    staticUi content = getHtmlElement
+                   >=> runUI (staticComponent content) unit
+                   >=> const (pure unit)
+
+    getHtmlElement :: forall eff
+                    . String
+                   -> Aff (dom :: DOM | eff) HTMLElement
+    getHtmlElement = selectElement
+                 >=> maybe (throwError $ error "Could not find element")
+                        pure
+
+    staticComponent :: forall m
+                     . ComponentHTML (Const Void)
+                    -> Component HTML (Const Void) Unit Void m
+    staticComponent content = component
+        { initialState : const unit
+        , render       : const content
+        , eval         : absurd <<< unwrap
         , receiver     : const Nothing
         }
 
