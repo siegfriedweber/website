@@ -40,21 +40,21 @@ header language =
                                      { de : "Experte"
                                      , en : "Expert"
                                      }
-                      , percentage : 90.0
+                      , percentage : 85.0
                       }
                     , { name       : "Java, Spring Boot"
                       , expertise  : E.choose language
                                      { de : "Experte"
                                      , en : "Expert"
                                      }
-                      , percentage : 100.0
+                      , percentage : 95.0
                       }
                     , { name       : "HTML, CSS, JavaScript"
                       , expertise  : E.choose language
-                                     { de : "Pro"
-                                     , en : "Pro"
+                                     { de : "Profi"
+                                     , en : "Proficient"
                                      }
-                      , percentage : 70.0
+                      , percentage : 80.0
                       }
                     , { name       : "Microservices"
                       , expertise  : E.choose language
@@ -96,28 +96,33 @@ links =
 about :: forall p i. Language -> HH.HTML p i
 about language = E.section_
     [ E.heading_ $ E.choose language
-        { de : "Hallo, ich bin Siegfried!"
-        , en : "Hello, I am Siegfried!"
+        { de : "Hallo, ich bin Siegfried Weber!"
+        , en : "Hello, I am Siegfried Weber!"
         }
     , E.paragraph E.paragraphStyleNoMargin $ E.text $ E.choose language
-        { de : "Ich bin freiberuflicher Softwareentwickler und immer auf \
-               \der Suche nach interessanten Projekten sowohl im \
-               \Rhein-Main-Gebiet als auch \"remote\". Meine Software \
-               \genügt höchsten Ansprüchen und diese stelle ich auch an \
-               \die Projekte. Wenn Sie also etwas Großartiges schaffen \
+        { de : "Ich bin freiberuflicher Softwareentwickler und immer an \
+               \spannenden Projekten interessiert, vorzugsweise \"remote\" \
+               \oder im Rhein-Main-Gebiet. \
+               \Komplexen fachlichen Anforderungen stelle ich mich sehr \
+               \gerne. Meine Umsetzung genügt dabei höchsten Ansprüchen. \
+               \Andererseits stelle ich auch hohe Ansprüche an die \
+               \Projekte. Wenn Sie also etwas Großartiges schaffen \
                \wollen, dann lassen Sie uns das gemeinsam tun!"
-        , en : "I am a freelance software developer and always looking \
-               \for interesting projects near Frankfurt/Main as well as \
-               \remote. My software fulfills the highest demands and \
-               \those I also have on the projects. So if you want to \
-               \create something great then let us do it together!"
+        , en : "I am a freelance software developer and always interested \
+               \in exciting projects near Frankfurt/Main as well as \
+               \remote. \
+               \Complex requirements do not pose a problem for me. My \
+               \implementation of them fulfills the highest demands. \
+               \On the other side I also make high demands on the \
+               \projects as well. So if you intend to create something \
+               \great then let us do it together!"
         }
     ]
 
 skills :: forall p i. Language -> HH.HTML p i
 skills language = E.section_
     [ E.heading_ $ E.choose language
-        { de : "Meine Fertigkeiten"
+        { de : "Meine Kompetenzen"
         , en : "My skills"
         }
     , E.boxes_
@@ -127,40 +132,40 @@ skills language = E.section_
                 , en : "Programming languages"
                 }
             , E.skillSet_
-                [ { name       : "Haskell"
+                [ { name       : "Haskell (Servant, ...)"
                   , expertise  : E.choose language
                                  { de : "Experte"
                                  , en : "Expert"
                                  }
-                  , percentage : 90.0
+                  , percentage : 85.0
                   }
-                , { name       : "PureScript"
+                , { name       : "PureScript (Halogen)"
                   , expertise  : E.choose language
                                  { de : "Experte"
                                  , en : "Expert"
                                  }
-                  , percentage : 90.0
+                  , percentage : 85.0
                   }
-                , { name       : "Java"
+                , { name       : "Java (Spring Boot)"
                   , expertise  : E.choose language
                                  { de : "Experte"
                                  , en : "Expert"
                                  }
-                  , percentage : 100.0
+                  , percentage : 95.0
                   }
-                , { name       : "Javascript"
+                , { name       : "Javascript (AngularJS)"
                   , expertise  : E.choose language
-                                 { de : "Pro"
-                                 , en : "Pro"
+                                 { de : "Profi"
+                                 , en : "Proficient"
                                  }
                   , percentage : 80.0
                   }
-                , { name       : "C++"
+                , { name       : "C++ (STL)"
                   , expertise  : E.choose language
-                                 { de : "lange nicht benutzt"
+                                 { de : "Länger nicht verwendet"
                                  , en : "Haven't used it for a while"
                                  }
-                  , percentage : 60.0
+                  , percentage : 65.0
                   }
                 ]
             ]
@@ -175,19 +180,19 @@ skills language = E.section_
                                  { de : "Experte"
                                  , en : "Expert"
                                  }
-                  , percentage : 100.0
+                  , percentage : 95.0
                   }
                 , { name       : "MySQL"
                   , expertise  : E.choose language
-                                 { de : "Pro"
-                                 , en : "Pro"
+                                 { de : "Profi"
+                                 , en : "Proficient"
                                  }
                   , percentage : 70.0
                   }
                 , { name       : "Google Cloud Datastore"
                   , expertise  : E.choose language
-                                 { de : "am Lernen"
-                                 , en : "Learning"
+                                 { de : "Fortgeschritten"
+                                 , en : "Advanced"
                                  }
                   , percentage : 40.0
                   }
@@ -201,24 +206,53 @@ skills language = E.section_
             , E.skillSet_
                 [ { name       : "Git"
                   , expertise  : E.choose language
-                                 { de : "Guru"
-                                 , en : "Guru"
+                                 { de : "Experte"
+                                 , en : "Expert"
                                  }
                   , percentage : 100.0
                   }
                 , { name       : "Vim"
                   , expertise  : E.choose language
-                                 { de : "Guru"
-                                 , en : "Guru"
+                                 { de : "Experte"
+                                 , en : "Expert"
                                  }
-                  , percentage : 100.0
+                  , percentage : 95.0
                   }
                 , { name       : "IntelliJ IDEA"
                   , expertise  : E.choose language
-                                 { de : "Pro"
-                                 , en : "Pro"
+                                 { de : "Profi"
+                                 , en : "Proficient"
                                  }
                   , percentage : 70.0
+                  }
+                ]
+            ]
+        , E.box_
+            [ E.subheading_ $ E.choose language
+                { de : "Methoden"
+                , en : "Methods"
+                }
+            , E.skillSet_
+                [ { name       : "Scrum/Kanban"
+                  , expertise  : E.choose language
+                                 { de : "Experte"
+                                 , en : "Expert"
+                                 }
+                  , percentage : 85.0
+                  }
+                , { name       : "Microservices"
+                  , expertise  : E.choose language
+                                 { de : "2 Jahre Erfahrung"
+                                 , en : "2 years of experience"
+                                 }
+                  , percentage : 95.0
+                  }
+                , { name       : "REST"
+                  , expertise  : E.choose language
+                                 { de : "Experte"
+                                 , en : "Expert"
+                                 }
+                  , percentage : 100.0
                   }
                 ]
             ]
@@ -244,10 +278,10 @@ skills language = E.section_
                   }
                 , { name       : "NixOS"
                   , expertise  : E.choose language
-                                 { de : "auf dem Weg zum Experten"
-                                 , en : "On the way to an expert"
+                                 { de : "Fortgeschritten"
+                                 , en : "Advanced"
                                  }
-                  , percentage : 30.0
+                  , percentage : 50.0
                   }
                 ]
             ]
@@ -262,8 +296,8 @@ skills language = E.section_
                                  , en : "Financial sector"
                                  }
                   , expertise  : E.choose language
-                                 { de : "Pro"
-                                 , en : "Pro"
+                                 { de : "Profi"
+                                 , en : "Proficient"
                                  }
                   , percentage : 70.0
                   }
@@ -272,8 +306,8 @@ skills language = E.section_
                                  , en : "Insurance business"
                                  }
                   , expertise  : E.choose language
-                                 { de : "Pro"
-                                 , en : "Pro"
+                                 { de : "Profi"
+                                 , en : "Proficient"
                                  }
                   , percentage : 80.0
                   }
@@ -282,8 +316,8 @@ skills language = E.section_
                                  , en : "Gaming industry"
                                  }
                   , expertise  : E.choose language
-                                 { de : "Guru"
-                                 , en : "Guru"
+                                 { de : "Experte"
+                                 , en : "Expert"
                                  }
                   , percentage : 100.0
                   }
@@ -310,7 +344,7 @@ skills language = E.section_
                                  , en : "English"
                                  }
                   , expertise  : E.choose language
-                                 { de : "verhandlungssicher"
+                                 { de : "Verhandlungssicher"
                                  , en : "Business fluent"
                                  }
                   , percentage : 85.0
@@ -320,10 +354,10 @@ skills language = E.section_
                                  , en : "French"
                                  }
                   , expertise  : E.choose language
-                                 { de : "am Lernen"
-                                 , en : "Still learning"
+                                 { de : "Mittelstufe"
+                                 , en : "Intermediate"
                                  }
-                  , percentage : 20.0
+                  , percentage : 30.0
                   }
                 ]
             ]
