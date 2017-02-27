@@ -25,6 +25,7 @@ module Elements.Text
 
 import Prelude
 import Data.Maybe (Maybe(Just))
+import Data.Newtype (class Newtype, unwrap)
 import Data.String (Pattern(Pattern), split)
 
 import CSS as C
@@ -37,17 +38,18 @@ import Foldable (intersperse)
 import Fonts (Font(SourceSansProLight, SourceSansProSemibold), styleFont)
 
 textStyles :: Array Style
-textStyles = getHeadingStyles headingStyleDefault
-          <> getHeadingStyles headingStyleSmallMargin
-          <> getSubheadingStyles subheadingStyleDefault
-          <> getParagraphStyles paragraphStyleDefault
-          <> getParagraphStyles paragraphStyleNoMargin
-          <> getLinkStyles linkStyleDefault
+textStyles =
+    [ unwrap headingStyleDefault
+    , unwrap headingStyleSmallMargin
+    , unwrap subheadingStyleDefault
+    , unwrap paragraphStyleDefault
+    , unwrap paragraphStyleNoMargin
+    , unwrap linkStyleDefault
+    ]
 
 newtype HeadingStyle = HeadingStyle Style
 
-getHeadingStyles :: HeadingStyle -> Array Style
-getHeadingStyles (HeadingStyle style) = [ style ]
+derive instance newtypeHeadingStyle :: Newtype HeadingStyle _
 
 headingStyleDefault :: HeadingStyle
 headingStyleDefault = headingStyle
@@ -90,8 +92,7 @@ heading (HeadingStyle style) =
 
 newtype SubheadingStyle = SubheadingStyle Style
 
-getSubheadingStyles :: SubheadingStyle -> Array Style
-getSubheadingStyles (SubheadingStyle style) = [ style ]
+derive instance newtypeSubheadingStyle :: Newtype SubheadingStyle _
 
 subheadingStyleDefault :: SubheadingStyle
 subheadingStyleDefault = SubheadingStyle defaultStyle
@@ -115,8 +116,7 @@ subheading (SubheadingStyle style) =
 
 newtype ParagraphStyle = ParagraphStyle Style
 
-getParagraphStyles :: ParagraphStyle -> Array Style
-getParagraphStyles (ParagraphStyle style) = [ style ]
+derive instance newtypeParagraphStyle :: Newtype ParagraphStyle _
 
 paragraphStyleDefault :: ParagraphStyle
 paragraphStyleDefault = paragraphStyle "paragraph" 18.0
@@ -146,8 +146,7 @@ text = intersperse HH.br_ <<< map HH.text <<< split (Pattern "\n")
 
 newtype LinkStyle = LinkStyle Style
 
-getLinkStyles :: LinkStyle -> Array Style
-getLinkStyles (LinkStyle style) = [ style ]
+derive instance newtypeLinkStyle :: Newtype LinkStyle _
 
 linkStyleDefault :: LinkStyle
 linkStyleDefault = LinkStyle defaultStyle

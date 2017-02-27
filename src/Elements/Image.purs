@@ -7,6 +7,7 @@ module Elements.Image
 
 import Prelude
 import Data.Maybe (Maybe(Just))
+import Data.Newtype (class Newtype, unwrap)
 
 import CSS as C
 import CSS.VerticalAlign as CV
@@ -16,12 +17,11 @@ import Halogen.HTML.Properties as HP
 import Elements.Types (Style, defaultStyle)
 
 imageStyles :: Array Style
-imageStyles = getImageStyles imageStyleFill
+imageStyles = [ unwrap imageStyleFill ]
 
 newtype ImageStyle = ImageStyle Style
 
-getImageStyles :: ImageStyle -> Array Style
-getImageStyles (ImageStyle style) = [ style ]
+derive instance newtypeImageStyle :: Newtype ImageStyle _
 
 imageStyleFill :: ImageStyle
 imageStyleFill = ImageStyle defaultStyle
