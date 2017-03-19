@@ -29,7 +29,7 @@ fontFace SourceSansProLight =
     { name   : "Source Sans Pro Light"
     , family : "Source Sans Pro"
     , weight : toFontWeight "300"
-    , files  : [ { filename: "fonts/SourceSansPro-Light.otf.woff"
+    , files  : [ { filename: "/fonts/SourceSansPro-Light.otf.woff"
                  , format: C.WOFF
                  }
                ]
@@ -38,7 +38,7 @@ fontFace SourceSansProSemibold =
     { name   : "Source Sans Pro Semibold"
     , family : "Source Sans Pro"
     , weight : toFontWeight "600"
-    , files  : [ { filename: "fonts/SourceSansPro-Semibold.otf.woff"
+    , files  : [ { filename: "/fonts/SourceSansPro-Semibold.otf.woff"
                  , format: C.WOFF
                  }
                ]

@@ -55,12 +55,12 @@ sectionStyleHeader = SectionStyle
         , cssMedium = Just do
             C.paddingTop $ C.px 72.0
             C.backgroundColor darkBackgroundColor
-            C.backgroundImage $ C.url "images/header_background.jpg"
+            C.backgroundImage $ C.url "images/header_background-1.jpg"
             C.backgroundRepeat C.noRepeat
         , cssLarge  = Just do
             C.paddingTop $ C.px 150.0
             C.backgroundColor darkBackgroundColor
-            C.backgroundImage $ C.url "images/header_background.jpg"
+            C.backgroundImage $ C.url "images/header_background-1.jpg"
             C.backgroundRepeat C.noRepeat
         }
     , inner : defaultSectionInnerStyle

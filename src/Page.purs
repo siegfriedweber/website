@@ -24,7 +24,7 @@ header language =
         [ E.boxes E.boxesStyleNoSpacing
             [ E.box_
                 [ E.image E.imageStyleFill
-                    "Siegfried Weber" "images/siegfried_weber.jpg"
+                    "Siegfried Weber" "images/siegfried_weber-2.jpg"
                 ]
             , E.box E.boxStyleRightSidePaddings
                 [ E.heading E.headingStyleSmallMargin "Siegfried Weber"
@@ -73,22 +73,22 @@ links =
     E.section E.sectionStyleLinks
         [ E.list E.listStyleInline
             [ E.linkedIcon_ "Gulp"
-                            "images/gulp.png"
+                            "images/gulp-1.png"
                             "https://www.gulp.de/gulp2/home/profil/siegfriedweber"
             , E.linkedIcon_ "Xing"
-                            "images/xing.png"
+                            "images/xing-1.png"
                             "https://www.xing.com/profile/Siegfried_Weber18"
             , E.linkedIcon_ "Linked in"
-                            "images/linkedin.png"
+                            "images/linkedin-1.png"
                             "https://de.linkedin.com/in/siegfriedweber"
             , E.linkedIcon_ "GitHub"
-                            "images/github.png"
+                            "images/github-1.png"
                             "https://github.com/siegfriedweber"
             , E.linkedIcon_ "Stack Overflow"
-                            "images/stackoverflow.png"
+                            "images/stackoverflow-1.png"
                             "https://stackoverflow.com/users/7312398/siegfried-weber"
             , E.linkedIcon_ "E-Mail"
-                            "images/mail.png"
+                            "images/mail-1.png"
                             "mailto:mail@siegfriedweber.net"
             ]
         ]
