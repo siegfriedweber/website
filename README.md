@@ -1,6 +1,6 @@
 # Website
 
-The source code for the website http://siegfriedweber.net.
+The source code for the website https://www.siegfriedweber.net.
 
 ## Technology
 
