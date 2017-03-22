@@ -16,6 +16,8 @@ module Elements.Text
     , paragraph_
     , paragraphStyleDefault
     , paragraphStyleNoMargin
+    , phone
+    , phone_
     , subheading
     , subheading_
     , subheadingStyleDefault
@@ -26,7 +28,7 @@ module Elements.Text
 import Prelude
 import Data.Maybe (Maybe(Just))
 import Data.Newtype (class Newtype, unwrap)
-import Data.String (Pattern(Pattern), split)
+import Data.String (Pattern(Pattern), Replacement(Replacement), replaceAll, split)
 
 import CSS as C
 import Halogen.HTML as HH
@@ -170,6 +172,14 @@ link :: forall p i. LinkStyle
                  -> Array (HH.HTML p i)
 link (LinkStyle style) ref = pure <<<
     HH.a [ HP.href ref, HP.class_ $ HH.ClassName style.className ]
+
+phone_ :: forall p i. String -> Array (HH.HTML p i)
+phone_ = phone linkStyleDefault
+
+phone :: forall p i. LinkStyle -> String -> Array (HH.HTML p i)
+phone style ref = link style ("tel:" <> uri) $ text ref
+  where
+    uri = replaceAll (Pattern " ") (Replacement "") ref
 
 email_ :: forall p i. String -> Array (HH.HTML p i)
 email_ = email linkStyleDefault

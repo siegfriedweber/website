@@ -381,15 +381,17 @@ footer language =
             , E.box_
                 [ E.paragraph E.paragraphStyleNoMargin $
                     E.text (E.choose language
-                                { de : "Telefon:"
-                                , en : "Phone:"
-                                } <>
-                            " +49 151 55855451\n" <>
-                            E.choose language
-                                { de : "E-Mail:"
-                                , en : "E-mail:"
-                                } <>
-                            " ") <>
+                                { de : "Telefon: "
+                                , en : "Phone: "
+                                }
+                           ) <>
+                    E.phone_ "+49 151 55855451" <>
+                    E.text "\n" <>
+                    E.text (E.choose language
+                                { de : "E-Mail: "
+                                , en : "E-mail: "
+                                }
+                           ) <>
                     E.email_ "mail@siegfriedweber.net"
                 ]
             ]
