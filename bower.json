@@ -4,6 +4,7 @@
   "dependencies": {
     "purescript-halogen": "^1.0.0",
     "purescript-halogen-css": "^5.0.0",
-    "purescript-css": "^2.1.0"
+    "purescript-css": "^2.1.0",
+    "purescript-argonaut": "^2.0.0"
   }
 }

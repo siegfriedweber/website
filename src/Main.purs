@@ -17,6 +17,7 @@ import Halogen.HTML (HTML)
 import Halogen.VDom.Driver (runUI)
 
 import Language (LANGUAGE, getUserLanguage, selectSupportedLanguage)
+import LinkedData (linkedData)
 import Page (content)
 import Styles (styles)
 
@@ -25,6 +26,7 @@ main = do
     language <- selectSupportedLanguage <$> getUserLanguage
     runHalogenAff do
         awaitLoad
+        staticUi (linkedData language) "head"
         staticUi styles "head"
         staticUi (content language) "body"
   where
