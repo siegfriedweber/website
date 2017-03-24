@@ -1,6 +1,14 @@
 "use strict";
 
-exports.userLanguage = function () {
-    return navigator.language || navigator.userLanguage;
+exports.navigatorLanguages = function () {
+    return navigator.languages;
+}
+
+exports.navigatorLanguage = function () {
+    return navigator.language;
+}
+
+exports.navigatorUserLanguage = function () {
+    return navigator.userLanguage;
 }
 

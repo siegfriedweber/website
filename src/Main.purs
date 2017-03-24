@@ -16,14 +16,14 @@ import Halogen.Aff (HalogenEffects, awaitLoad, runHalogenAff, selectElement)
 import Halogen.HTML (HTML)
 import Halogen.VDom.Driver (runUI)
 
-import Language (LANGUAGE, getUserLanguage, selectSupportedLanguage)
+import Language (LANGUAGE, getDisplayLanguage)
 import LinkedData (linkedData)
 import Page (content)
 import Styles (styles)
 
 main :: Eff (HalogenEffects (language :: LANGUAGE)) Unit
 main = do
-    language <- selectSupportedLanguage <$> getUserLanguage
+    language <- getDisplayLanguage
     runHalogenAff do
         awaitLoad
         staticUi (linkedData language) "head"
