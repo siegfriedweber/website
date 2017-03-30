@@ -16,3 +16,15 @@ The file [src/Page.purs](https://github.com/siegfriedweber/website/blob/master/s
 * Support for screen and print
 * Localization: According to the detected language the content is shown in English or German.
 
+## Content Security Policy
+
+The website requires at least the following content security policy:
+
+Directive     | Policy
+---------------------------------
+`default-src` | `'none'`
+`font-src`    | `'self'`
+`img-src`     | `'self'`
+`script-src`  | `'self'`
+`style-src`   | `'unsafe-inline'`
+
