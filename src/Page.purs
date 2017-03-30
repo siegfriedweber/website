@@ -35,33 +35,33 @@ header language =
                            \expert for functional programming"
                     }
                 , E.skillSet_
-                    [ { name       : "Haskell, PureScript"
-                      , expertise  : E.choose language
-                                     { de : "Experte"
-                                     , en : "Expert"
-                                     }
-                      , percentage : 85.0
+                    [ { name      : "Haskell, PureScript"
+                      , expertise : E.choose language
+                                    { de : "Experte"
+                                    , en : "Expert"
+                                    }
+                      , rating    : 9
                       }
-                    , { name       : "Java, Spring Boot"
-                      , expertise  : E.choose language
-                                     { de : "Experte"
-                                     , en : "Expert"
-                                     }
-                      , percentage : 95.0
+                    , { name      : "Java, Spring Boot"
+                      , expertise : E.choose language
+                                    { de : "Experte"
+                                    , en : "Expert"
+                                    }
+                      , rating    : 10
                       }
-                    , { name       : "HTML, CSS, JavaScript"
-                      , expertise  : E.choose language
-                                     { de : "Profi"
-                                     , en : "Proficient"
-                                     }
-                      , percentage : 80.0
+                    , { name      : "HTML, CSS, JavaScript"
+                      , expertise : E.choose language
+                                    { de : "Profi"
+                                    , en : "Proficient"
+                                    }
+                      , rating    : 8
                       }
-                    , { name       : "Microservices"
-                      , expertise  : E.choose language
-                                     { de : "2 Jahre Erfahrung"
-                                     , en : "2 years of experience"
-                                     }
-                      , percentage : 80.0
+                    , { name      : "Microservices"
+                      , expertise : E.choose language
+                                    { de : "2 Jahre Erfahrung"
+                                    , en : "2 years of experience"
+                                    }
+                      , rating    : 8
                       }
                     ]
                 ]
@@ -132,40 +132,40 @@ skills language = E.section_
                 , en : "Programming languages"
                 }
             , E.skillSet_
-                [ { name       : "Haskell (Servant, ...)"
-                  , expertise  : E.choose language
-                                 { de : "Experte"
-                                 , en : "Expert"
-                                 }
-                  , percentage : 85.0
+                [ { name      : "Haskell (Servant, ...)"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 9
                   }
-                , { name       : "PureScript (Halogen)"
-                  , expertise  : E.choose language
-                                 { de : "Experte"
-                                 , en : "Expert"
-                                 }
-                  , percentage : 85.0
+                , { name      : "PureScript (Halogen)"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 9
                   }
-                , { name       : "Java (Spring Boot)"
-                  , expertise  : E.choose language
-                                 { de : "Experte"
-                                 , en : "Expert"
-                                 }
-                  , percentage : 95.0
+                , { name      : "Java (Spring Boot)"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 10
                   }
-                , { name       : "Javascript (AngularJS)"
-                  , expertise  : E.choose language
-                                 { de : "Profi"
-                                 , en : "Proficient"
-                                 }
-                  , percentage : 80.0
+                , { name      : "Javascript (AngularJS)"
+                  , expertise : E.choose language
+                                { de : "Profi"
+                                , en : "Proficient"
+                                }
+                  , rating    : 8
                   }
-                , { name       : "C++ (STL)"
-                  , expertise  : E.choose language
-                                 { de : "Länger nicht verwendet"
-                                 , en : "Haven't used it for a while"
-                                 }
-                  , percentage : 65.0
+                , { name      : "C++ (STL)"
+                  , expertise : E.choose language
+                                { de : "Länger nicht verwendet"
+                                , en : "Haven't used it for a while"
+                                }
+                  , rating    : 7
                   }
                 ]
             ]
@@ -175,26 +175,26 @@ skills language = E.section_
                 , en : "Database management systems"
                 }
             , E.skillSet_
-                [ { name       : "MongoDB"
-                  , expertise  : E.choose language
-                                 { de : "Experte"
-                                 , en : "Expert"
-                                 }
-                  , percentage : 95.0
+                [ { name      : "MongoDB"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 9
                   }
-                , { name       : "MySQL"
-                  , expertise  : E.choose language
-                                 { de : "Profi"
-                                 , en : "Proficient"
-                                 }
-                  , percentage : 70.0
+                , { name      : "MySQL"
+                  , expertise : E.choose language
+                                { de : "Profi"
+                                , en : "Proficient"
+                                }
+                  , rating    : 7
                   }
-                , { name       : "Google Cloud Datastore"
-                  , expertise  : E.choose language
-                                 { de : "Fortgeschritten"
-                                 , en : "Advanced"
-                                 }
-                  , percentage : 40.0
+                , { name      : "Google Cloud Datastore"
+                  , expertise : E.choose language
+                                { de : "Fortgeschritten"
+                                , en : "Advanced"
+                                }
+                  , rating    : 4
                   }
                 ]
             ]
@@ -204,26 +204,26 @@ skills language = E.section_
                 , en : "Tools"
                 }
             , E.skillSet_
-                [ { name       : "Git"
-                  , expertise  : E.choose language
-                                 { de : "Experte"
-                                 , en : "Expert"
-                                 }
-                  , percentage : 100.0
+                [ { name      : "Git"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 10
                   }
-                , { name       : "Vim"
-                  , expertise  : E.choose language
-                                 { de : "Experte"
-                                 , en : "Expert"
-                                 }
-                  , percentage : 95.0
+                , { name      : "Vim"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 9
                   }
-                , { name       : "IntelliJ IDEA"
-                  , expertise  : E.choose language
-                                 { de : "Profi"
-                                 , en : "Proficient"
-                                 }
-                  , percentage : 70.0
+                , { name      : "IntelliJ IDEA"
+                  , expertise : E.choose language
+                                { de : "Profi"
+                                , en : "Proficient"
+                                }
+                  , rating    : 7
                   }
                 ]
             ]
@@ -233,26 +233,26 @@ skills language = E.section_
                 , en : "Methods"
                 }
             , E.skillSet_
-                [ { name       : "Scrum/Kanban"
-                  , expertise  : E.choose language
-                                 { de : "Experte"
-                                 , en : "Expert"
-                                 }
-                  , percentage : 85.0
+                [ { name      : "Scrum/Kanban"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 8
                   }
-                , { name       : "Microservices"
-                  , expertise  : E.choose language
-                                 { de : "2 Jahre Erfahrung"
-                                 , en : "2 years of experience"
-                                 }
-                  , percentage : 95.0
+                , { name      : "Microservices"
+                  , expertise : E.choose language
+                                { de : "2 Jahre Erfahrung"
+                                , en : "2 years of experience"
+                                }
+                  , rating    : 9
                   }
-                , { name       : "REST"
-                  , expertise  : E.choose language
-                                 { de : "Experte"
-                                 , en : "Expert"
-                                 }
-                  , percentage : 100.0
+                , { name      : "REST"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 10
                   }
                 ]
             ]
@@ -262,26 +262,26 @@ skills language = E.section_
                 , en : "Operating systems"
                 }
             , E.skillSet_
-                [ { name       : "Microsoft Windows"
-                  , expertise  : E.choose language
-                                 { de : "Experte"
-                                 , en : "Expert"
-                                 }
-                  , percentage : 90.0
+                [ { name      : "Microsoft Windows"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 9
                   }
-                , { name       : "Debian GNU/Linux"
-                  , expertise  : E.choose language
-                                 { de : "Experte"
-                                 , en : "Expert"
-                                 }
-                  , percentage : 100.0
+                , { name      : "Debian GNU/Linux"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 10
                   }
-                , { name       : "NixOS"
-                  , expertise  : E.choose language
-                                 { de : "Fortgeschritten"
-                                 , en : "Advanced"
-                                 }
-                  , percentage : 50.0
+                , { name      : "NixOS"
+                  , expertise : E.choose language
+                                { de : "Fortgeschritten"
+                                , en : "Advanced"
+                                }
+                  , rating    : 6
                   }
                 ]
             ]
@@ -291,35 +291,35 @@ skills language = E.section_
                 , en : "Sectors"
                 }
             , E.skillSet_
-                [ { name       : E.choose language
-                                 { de : "Finanzen"
-                                 , en : "Financial sector"
-                                 }
-                  , expertise  : E.choose language
-                                 { de : "Profi"
-                                 , en : "Proficient"
-                                 }
-                  , percentage : 70.0
+                [ { name      : E.choose language
+                                { de : "Finanzen"
+                                , en : "Financial sector"
+                                }
+                  , expertise : E.choose language
+                                { de : "Profi"
+                                , en : "Proficient"
+                                }
+                  , rating    : 7
                   }
-                , { name       : E.choose language
-                                 { de : "Versicherungen"
-                                 , en : "Insurance business"
-                                 }
-                  , expertise  : E.choose language
-                                 { de : "Profi"
-                                 , en : "Proficient"
-                                 }
-                  , percentage : 80.0
+                , { name      : E.choose language
+                                { de : "Versicherungen"
+                                , en : "Insurance business"
+                                }
+                  , expertise : E.choose language
+                                { de : "Profi"
+                                , en : "Proficient"
+                                }
+                  , rating    : 8
                   }
-                , { name       : E.choose language
-                                 { de : "Computerspiele"
-                                 , en : "Gaming industry"
-                                 }
-                  , expertise  : E.choose language
-                                 { de : "Experte"
-                                 , en : "Expert"
-                                 }
-                  , percentage : 100.0
+                , { name      : E.choose language
+                                { de : "Computerspiele"
+                                , en : "Gaming industry"
+                                }
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 10
                   }
                 ]
             ]
@@ -329,35 +329,35 @@ skills language = E.section_
                 , en : "Languages"
                 }
             , E.skillSet_
-                [ { name       : E.choose language
-                                 { de : "Deutsch"
-                                 , en : "German"
-                                 }
-                  , expertise  : E.choose language
-                                 { de : "Muttersprache"
-                                 , en : "Native language"
-                                 }
-                  , percentage : 100.0
+                [ { name      : E.choose language
+                                { de : "Deutsch"
+                                , en : "German"
+                                }
+                  , expertise : E.choose language
+                                { de : "Muttersprache"
+                                , en : "Native language"
+                                }
+                  , rating    : 10
                   }
-                , { name       : E.choose language
-                                 { de : "Englisch"
-                                 , en : "English"
-                                 }
-                  , expertise  : E.choose language
-                                 { de : "Verhandlungssicher"
-                                 , en : "Business fluent"
-                                 }
-                  , percentage : 85.0
+                , { name      : E.choose language
+                                { de : "Englisch"
+                                , en : "English"
+                                }
+                  , expertise : E.choose language
+                                { de : "Verhandlungssicher"
+                                , en : "Business fluent"
+                                }
+                  , rating    : 8
                   }
-                , { name       : E.choose language
-                                 { de : "Französisch"
-                                 , en : "French"
-                                 }
-                  , expertise  : E.choose language
-                                 { de : "Mittelstufe"
-                                 , en : "Intermediate"
-                                 }
-                  , percentage : 30.0
+                , { name      : E.choose language
+                                { de : "Französisch"
+                                , en : "French"
+                                }
+                  , expertise : E.choose language
+                                { de : "Mittelstufe"
+                                , en : "Intermediate"
+                                }
+                  , rating    : 3
                   }
                 ]
             ]
