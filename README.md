@@ -21,7 +21,7 @@ The file [src/Page.purs](https://github.com/siegfriedweber/website/blob/master/s
 The website requires at least the following content security policy:
 
 Directive     | Policy
----------------------------------
+------------- | -----------------
 `default-src` | `'none'`
 `font-src`    | `'self'`
 `img-src`     | `'self'`
