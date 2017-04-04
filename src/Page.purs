@@ -114,8 +114,8 @@ about language = E.section_
                \Complex requirements do not pose a problem for me. My \
                \implementation of them fulfills the highest demands. \
                \On the other side I also make high demands on the \
-               \projects as well. So if you intend to create something \
-               \great then let us do it together!"
+               \projects. So if you intend to create something great \
+               \then let us do it together!"
         }
     ]
 
@@ -153,7 +153,7 @@ skills language = E.section_
                                 }
                   , rating    : 10
                   }
-                , { name      : "Javascript (AngularJS)"
+                , { name      : "JavaScript (AngularJS)"
                   , expertise : E.choose language
                                 { de : "Profi"
                                 , en : "Proficient"
@@ -167,34 +167,12 @@ skills language = E.section_
                                 }
                   , rating    : 7
                   }
-                ]
-            ]
-        , E.box_
-            [ E.subheading_ $ E.choose language
-                { de : "Datenbank­management­systeme"
-                , en : "Database management systems"
-                }
-            , E.skillSet_
-                [ { name      : "MongoDB"
+                , { name      : "Scala"
                   , expertise : E.choose language
-                                { de : "Experte"
-                                , en : "Expert"
+                                { de : "Länger nicht verwendet"
+                                , en : "Haven't used it for a while"
                                 }
-                  , rating    : 9
-                  }
-                , { name      : "MySQL"
-                  , expertise : E.choose language
-                                { de : "Profi"
-                                , en : "Proficient"
-                                }
-                  , rating    : 7
-                  }
-                , { name      : "Google Cloud Datastore"
-                  , expertise : E.choose language
-                                { de : "Fortgeschritten"
-                                , en : "Advanced"
-                                }
-                  , rating    : 4
+                  , rating    : 6
                   }
                 ]
             ]
@@ -204,14 +182,7 @@ skills language = E.section_
                 , en : "Tools"
                 }
             , E.skillSet_
-                [ { name      : "Git"
-                  , expertise : E.choose language
-                                { de : "Experte"
-                                , en : "Expert"
-                                }
-                  , rating    : 10
-                  }
-                , { name      : "Vim"
+                [ { name      : "Vim"
                   , expertise : E.choose language
                                 { de : "Experte"
                                 , en : "Expert"
@@ -224,6 +195,27 @@ skills language = E.section_
                                 , en : "Proficient"
                                 }
                   , rating    : 7
+                  }
+                , { name      : "Eclipse"
+                  , expertise : E.choose language
+                                { de : "Profi"
+                                , en : "Proficient"
+                                }
+                  , rating    : 8
+                  }
+                , { name      : "Git"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 10
+                  }
+                , { name      : "Jenkins"
+                  , expertise : E.choose language
+                                { de : "Profi"
+                                , en : "Proficient"
+                                }
+                  , rating    : 8
                   }
                 ]
             ]
@@ -253,6 +245,35 @@ skills language = E.section_
                                 , en : "Expert"
                                 }
                   , rating    : 10
+                  }
+                ]
+            ]
+        , E.box_
+            [ E.subheading_ $ E.choose language
+                { de : "Datenbank­management­systeme"
+                , en : "Database management systems"
+                }
+            , E.skillSet_
+                [ { name      : "MongoDB"
+                  , expertise : E.choose language
+                                { de : "Experte"
+                                , en : "Expert"
+                                }
+                  , rating    : 9
+                  }
+                , { name      : "MySQL"
+                  , expertise : E.choose language
+                                { de : "Profi"
+                                , en : "Proficient"
+                                }
+                  , rating    : 7
+                  }
+                , { name      : "Google Cloud Datastore"
+                  , expertise : E.choose language
+                                { de : "Fortgeschritten"
+                                , en : "Advanced"
+                                }
+                  , rating    : 4
                   }
                 ]
             ]
