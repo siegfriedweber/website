@@ -15,6 +15,7 @@ in
   pkgs.stdenv.mkDerivation  {
     name = "website";
     buildInputs = with pkgs; [
+      git
       haskellPackages.purescript
       nodejs
       nodePackages.bower

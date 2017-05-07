@@ -6,7 +6,7 @@ module Language
     ) where
 
 import Prelude
-import Control.Monad.Eff (Eff)
+import Control.Monad.Eff (kind Effect, Eff)
 import Control.Monad.Except (runExcept)
 import Data.Array (catMaybes, fromFoldable, head)
 import Data.Either (Either, either, fromRight)
@@ -54,7 +54,7 @@ getDisplayLanguage = do
     twoLetterCodeRegex = unsafePartial $ fromRight $
         regex "^[a-z][a-z](?:\\-\\w+)*$" noFlags
 
-foreign import data LANGUAGE :: !
+foreign import data LANGUAGE :: Effect
 
 readLanguages :: forall e. Eff (language :: LANGUAGE | e) (Array String)
 readLanguages = readForeignStringArray <$> navigatorLanguages

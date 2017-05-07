@@ -11,6 +11,7 @@ import Data.Newtype (unwrap)
 
 import DOM (DOM)
 import DOM.HTML.Types (HTMLElement)
+import DOM.Node.ParentNode (QuerySelector(QuerySelector))
 import Halogen (Component, ComponentHTML, component)
 import Halogen.Aff (HalogenEffects, awaitLoad, runHalogenAff, selectElement)
 import Halogen.HTML (HTML)
@@ -41,7 +42,7 @@ main = do
     getHtmlElement :: forall eff
                     . String
                    -> Aff (dom :: DOM | eff) HTMLElement
-    getHtmlElement = selectElement
+    getHtmlElement = selectElement <<< QuerySelector
                  >=> maybe (throwError $ error "Could not find element")
                         pure
 
