@@ -15,6 +15,7 @@ content language = E.multilingualContent language
     , links
     , about language
     , skills language
+    , exali
     , footer language
     ]
 
@@ -384,6 +385,12 @@ skills language = E.section_
             ]
         ]
     ]
+
+exali :: forall p i. HH.HTML p i
+exali =
+    E.section_
+        [ E.linkedIcon_ "Weiter zur IT-Haftpflicht von Siegfried Weber, Flörsheim am Main" "https://www.exali.de/siegel/Haftpflicht_Siegel_2_a42d2266a3bae930f0024c87da406fd5.png" "http://www.exali.de/siegel/Siegfried-Weber"
+        ]
 
 footer :: forall p i. Language -> HH.HTML p i
 footer language =

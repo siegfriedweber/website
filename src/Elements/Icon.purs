@@ -49,7 +49,7 @@ linkedIcon_ = linkedIcon linkedIconStyleDefault
 
 linkedIcon :: forall p i. LinkedIconStyle -> String -> String -> String -> HH.HTML p i
 linkedIcon (LinkedIconStyle styles) name icon url =
-    HH.a [ HP.href url, HP.class_ $ HH.ClassName styles.link.className ]
+    HH.a [ HP.rel "nofollow", HP.href url, HP.class_ $ HH.ClassName styles.link.className ]
          [ HH.img [ HP.src icon
                   , HP.alt name
                   , HP.class_ $ HH.ClassName styles.icon.className

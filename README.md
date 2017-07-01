@@ -24,7 +24,7 @@ Directive     | Policy
 ------------- | -----------------
 `default-src` | `'none'`
 `font-src`    | `'self'`
-`img-src`     | `'self'`
+`img-src`     | `'self' https://www.exali.de/`
 `script-src`  | `'self'`
 `style-src`   | `'unsafe-inline'`
 
