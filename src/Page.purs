@@ -14,8 +14,9 @@ content language = E.multilingualContent language
     [ header language
     , links
     , about language
+    , availability language
     , skills language
-    , exali
+    , coverage language
     , footer language
     ]
 
@@ -117,6 +118,18 @@ about language = E.section_
                \On the other side I also make high demands on the \
                \projects. So if you intend to create something great \
                \then let us do it together!"
+        }
+    ]
+
+availability :: forall p i. Language -> HH.HTML p i
+availability language = E.section_
+    [ E.heading_ $ E.choose language
+        { de : "Verfügbarkeit"
+        , en : "Availability"
+        }
+    , E.paragraph E.paragraphStyleNoMargin $ E.text $ E.choose language
+        { de : "Für Vollzeitprojekte bin ich erst wieder ab Januar 2018 verfügbar."
+        , en : "I will be available for fulltime projects from January 2018."
         }
     ]
 
@@ -386,11 +399,14 @@ skills language = E.section_
         ]
     ]
 
-exali :: forall p i. HH.HTML p i
-exali =
-    E.section_
-        [ E.linkedIcon_ "Weiter zur IT-Haftpflicht von Siegfried Weber, Flörsheim am Main" "https://www.exali.de/siegel/Haftpflicht_Siegel_2_a42d2266a3bae930f0024c87da406fd5.png" "http://www.exali.de/siegel/Siegfried-Weber"
-        ]
+coverage :: forall p i. Language -> HH.HTML p i
+coverage language = E.section_
+    [ E.heading_ $ E.choose language
+        { de : "Absicherung"
+        , en : "Coverage"
+        }
+    , E.linkedIcon_ "Weiter zur IT-Haftpflicht von Siegfried Weber, Flörsheim am Main" "https://www.exali.de/siegel/Haftpflicht_Siegel_2_a42d2266a3bae930f0024c87da406fd5.png" "http://www.exali.de/siegel/Siegfried-Weber"
+    ]
 
 footer :: forall p i. Language -> HH.HTML p i
 footer language =
