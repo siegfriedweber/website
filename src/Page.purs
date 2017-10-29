@@ -415,8 +415,8 @@ footer language =
             [ E.box_
                 [ E.paragraph E.paragraphStyleNoMargin $ E.text $
                     "Siegfried Weber\n\
-                    \Rheinallee 16-22\n\
-                    \65439 Flörsheim am Main\n" <>
+                    \Bernhardstr. 16\n\
+                    \63741 Aschaffenburg\n" <>
                     E.choose language
                         { de : "Deutschland"
                         , en : "Germany"
