@@ -60,8 +60,8 @@ header language =
                       }
                     , { name      : "Microservices"
                       , expertise : E.choose language
-                                    { de : "2 Jahre Erfahrung"
-                                    , en : "2 years of experience"
+                                    { de : "3 Jahre Erfahrung"
+                                    , en : "3 years of experience"
                                     }
                       , rating    : 8
                       }
@@ -128,8 +128,8 @@ availability language = E.section_
         , en : "Availability"
         }
     , E.paragraph E.paragraphStyleNoMargin $ E.text $ E.choose language
-        { de : "Für Vollzeitprojekte bin ich erst wieder ab Januar 2018 verfügbar."
-        , en : "I will be available for fulltime projects from January 2018."
+        { de : "Für Vollzeitprojekte bin ich erst wieder ab April 2018 verfügbar."
+        , en : "I will be available for fulltime projects from April 2018."
         }
     ]
 
@@ -201,14 +201,14 @@ skills language = E.section_
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
-                  , rating    : 9
+                  , rating    : 10
                   }
                 , { name      : "IntelliJ IDEA"
                   , expertise : E.choose language
                                 { de : "Profi"
                                 , en : "Proficient"
                                 }
-                  , rating    : 7
+                  , rating    : 9
                   }
                 , { name      : "Eclipse"
                   , expertise : E.choose language
@@ -248,8 +248,8 @@ skills language = E.section_
                   }
                 , { name      : "Microservices"
                   , expertise : E.choose language
-                                { de : "2 Jahre Erfahrung"
-                                , en : "2 years of experience"
+                                { de : "3 Jahre Erfahrung"
+                                , en : "3 years of experience"
                                 }
                   , rating    : 9
                   }
@@ -282,12 +282,12 @@ skills language = E.section_
                                 }
                   , rating    : 7
                   }
-                , { name      : "Google Cloud Datastore"
+                , { name      : "SQLite"
                   , expertise : E.choose language
                                 { de : "Fortgeschritten"
                                 , en : "Advanced"
                                 }
-                  , rating    : 4
+                  , rating    : 5
                   }
                 ]
             ]
@@ -316,7 +316,7 @@ skills language = E.section_
                                 { de : "Fortgeschritten"
                                 , en : "Advanced"
                                 }
-                  , rating    : 6
+                  , rating    : 9
                   }
                 ]
             ]
@@ -327,6 +327,16 @@ skills language = E.section_
                 }
             , E.skillSet_
                 [ { name      : E.choose language
+                                { de : "Transport & Verkehr"
+                                , en : "Transportation"
+                                }
+                  , expertise : E.choose language
+                                { de : "Profi"
+                                , en : "Proficient"
+                                }
+                  , rating    : 7
+                  }
+                , { name      : E.choose language
                                 { de : "Finanzen"
                                 , en : "Financial sector"
                                 }
@@ -392,7 +402,7 @@ skills language = E.section_
                                 { de : "Mittelstufe"
                                 , en : "Intermediate"
                                 }
-                  , rating    : 3
+                  , rating    : 5
                   }
                 ]
             ]
