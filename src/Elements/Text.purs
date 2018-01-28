@@ -37,7 +37,7 @@ import Halogen.HTML.Properties as HP
 import Elements.Colors (lightTextColor)
 import Elements.Types (Style, defaultStyle)
 import Foldable (intersperse)
-import Fonts (Font(SourceSansProLight, SourceSansProSemibold), styleFont)
+import Fonts (Font(MontserratLight, SourceSansProLight), styleFont)
 
 textStyles :: Array Style
 textStyles =
@@ -78,7 +78,8 @@ headingStyle params =
         , cssCommon = Just do
             C.marginTop C.nil
             C.fontSize $ C.px 30.0
-            styleFont SourceSansProSemibold
+            C.letterSpacing $ C.em (-0.01)
+            styleFont MontserratLight
         , cssScreen = Just $
             C.marginBottom $ C.px params.marginBottomScreen
         , cssPrint  = Just $
@@ -102,7 +103,7 @@ subheadingStyleDefault = SubheadingStyle defaultStyle
     , cssCommon = Just do
         C.marginTop C.nil
         C.fontSize $ C.px 24.0
-        styleFont SourceSansProSemibold
+        styleFont MontserratLight
     , cssScreen = Just $
         C.marginBottom $ C.px 36.0
     , cssPrint  = Just $
@@ -132,7 +133,8 @@ paragraphStyle className marginBottom = ParagraphStyle defaultStyle
     , cssCommon = Just do
         C.marginTop C.nil
         C.marginBottom $ C.px marginBottom
-        C.fontSize $ C.px 18.0
+        C.fontSize $ C.px 19.0
+        C.lineHeight $ C.Size $ C.value 1.4
         styleFont SourceSansProLight
     }
 
