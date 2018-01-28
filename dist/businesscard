@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Siegfried Weber
+N:Weber;Siegfried;;;
+TITLE:Freiberuflicher Softwareentwickler
+REV:2018-01-28
+UID:99162fa5-6a92-482c-a320-d761ef088467
+ADR:;;Bernhardstr. 16;Aschaffenburg;;63741;Deutschland
+TEL;TYPE=cell:+49 151 55855451
+EMAIL:mail@siegfriedweber.net
+URL:https://www.siegfriedweber.net
+END:VCARD
