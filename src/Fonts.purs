@@ -9,7 +9,7 @@ import Data.NonEmpty ((:|), singleton)
 
 import CSS as C
 
-data Font = MontserratLight
+data Font = MontserratRegular
           | SourceSansProLight
           | SourceSansProSemibold
 
@@ -26,11 +26,11 @@ type FontFile =
     }
 
 fontFace :: Font -> FontFace
-fontFace MontserratLight =
-    { name   : "Montserrat Light"
+fontFace MontserratRegular =
+    { name   : "Montserrat Regular"
     , family : "Montserrat"
-    , weight : toFontWeight "300"
-    , files  : [ { filename: "fonts/Montserrat-Light.woff"
+    , weight : toFontWeight "400"
+    , files  : [ { filename: "fonts/Montserrat-Regular.woff"
                  , format: C.WOFF
                  }
                ]
@@ -64,7 +64,7 @@ styleFont = fontFace >>> \font -> do
 
 styleFontFaces :: C.CSS
 styleFontFaces = do
-    createFontFace MontserratLight
+    createFontFace MontserratRegular
     createFontFace SourceSansProLight
     createFontFace SourceSansProSemibold
   where
