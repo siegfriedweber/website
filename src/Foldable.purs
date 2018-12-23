@@ -4,7 +4,6 @@ module Foldable
 
 import Prelude
 import Data.Foldable (class Foldable, intercalate)
-import Data.Monoid (class Monoid)
 
 intersperse :: forall a f
              . Foldable f

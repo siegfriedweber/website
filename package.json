@@ -5,6 +5,6 @@
   },
   "devDependencies": {
     "jsmin": "^1.0.1",
-    "pulp": "^11.0.2"
+    "pulp": "^12.3.0"
   }
 }

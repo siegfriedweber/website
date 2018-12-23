@@ -1,28 +1,27 @@
 module Main where
 
 import Prelude
-import Control.Monad.Aff (Aff)
-import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Exception (error)
 import Control.Monad.Error.Class (throwError)
 import Data.Const (Const)
 import Data.Maybe (Maybe(Nothing), maybe)
 import Data.Newtype (unwrap)
+import Effect (Effect)
+import Effect.Aff (Aff)
+import Effect.Exception (error)
 
-import DOM (DOM)
-import DOM.HTML.Types (HTMLElement)
-import DOM.Node.ParentNode (QuerySelector(QuerySelector))
 import Halogen (Component, ComponentHTML, component)
-import Halogen.Aff (HalogenEffects, awaitLoad, runHalogenAff, selectElement)
+import Halogen.Aff (awaitLoad, runHalogenAff, selectElement)
 import Halogen.HTML (HTML)
 import Halogen.VDom.Driver (runUI)
+import Web.DOM.ParentNode (QuerySelector(QuerySelector))
+import Web.HTML.HTMLElement (HTMLElement)
 
-import Language (LANGUAGE, getDisplayLanguage)
+import Language (getDisplayLanguage)
 import LinkedData (linkedData)
 import Page (content)
 import Styles (styles)
 
-main :: Eff (HalogenEffects (language :: LANGUAGE)) Unit
+main :: Effect Unit
 main = do
     language <- getDisplayLanguage
     runHalogenAff do
@@ -31,17 +30,15 @@ main = do
         staticUi styles "head"
         staticUi (content language) "body"
   where
-    staticUi :: forall eff
-              . ComponentHTML (Const Void)
+    staticUi :: ComponentHTML (Const Void)
              -> String
-             -> Aff (HalogenEffects eff) Unit
+             -> Aff Unit
     staticUi content = getHtmlElement
                    >=> runUI (staticComponent content) unit
                    >=> const (pure unit)
 
-    getHtmlElement :: forall eff
-                    . String
-                   -> Aff (dom :: DOM | eff) HTMLElement
+    getHtmlElement :: String
+                   -> Aff HTMLElement
     getHtmlElement = selectElement <<< QuerySelector
                  >=> maybe (throwError $ error "Could not find element")
                         pure

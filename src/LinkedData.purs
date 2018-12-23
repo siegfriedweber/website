@@ -3,7 +3,7 @@ module LinkedData
     ) where
 
 import Prelude
-import Data.Argonaut ((:=), (~>), jsonEmptyObject)
+import Data.Argonaut ((:=), (~>), jsonEmptyObject, stringify)
 import Data.MediaType (MediaType(MediaType))
 
 import Halogen.HTML as HH
@@ -14,7 +14,7 @@ import Language (Language(..))
 linkedData :: forall p i. Language -> HH.HTML p i
 linkedData language = HH.script
     [ HP.type_ $ MediaType "application/ld+json" ]
-    [ HH.text $ show content ]
+    [ HH.text $ stringify content ]
   where
     content = "@context" := "http://schema.org"
            ~> "@type"    := "Person"

@@ -1,22 +1,21 @@
 module Language
-    ( LANGUAGE
-    , Language(..)
+    ( Language(..)
     , getDisplayLanguage
     , languageCode
     ) where
 
 import Prelude
-import Control.Monad.Eff (kind Effect, Eff)
 import Control.Monad.Except (runExcept)
 import Data.Array (catMaybes, fromFoldable, head)
 import Data.Either (Either, either, fromRight)
-import Data.Maybe (Maybe(Just, Nothing), fromMaybe)
 import Data.Foldable (fold)
-import Data.Foreign (Foreign, readArray, readString)
+import Data.Maybe (Maybe(Just, Nothing), fromMaybe)
 import Data.String (take)
 import Data.String.Regex (Regex, regex, test)
 import Data.String.Regex.Flags (noFlags)
 import Data.Traversable (traverse)
+import Effect (Effect)
+import Foreign (Foreign, readArray, readString)
 import Partial.Unsafe (unsafePartial)
 
 data Language = De | En
@@ -28,7 +27,7 @@ languageCode :: Language -> String
 languageCode De = "de"
 languageCode En = "en"
 
-getDisplayLanguage :: forall e. Eff (language :: LANGUAGE | e) Language
+getDisplayLanguage :: Effect Language
 getDisplayLanguage = do
     languages <- readLanguages
     language <- readLanguage
@@ -54,22 +53,20 @@ getDisplayLanguage = do
     twoLetterCodeRegex = unsafePartial $ fromRight $
         regex "^[a-z][a-z](?:\\-\\w+)*$" noFlags
 
-foreign import data LANGUAGE :: Effect
-
-readLanguages :: forall e. Eff (language :: LANGUAGE | e) (Array String)
+readLanguages :: Effect (Array String)
 readLanguages = readForeignStringArray <$> navigatorLanguages
 
-foreign import navigatorLanguages :: forall e. Eff (language :: LANGUAGE | e) Foreign
+foreign import navigatorLanguages :: Effect Foreign
 
-readLanguage :: forall e. Eff (language :: LANGUAGE | e) (Maybe String)
+readLanguage :: Effect (Maybe String)
 readLanguage = readForeignString <$> navigatorLanguage
 
-foreign import navigatorLanguage :: forall e. Eff (language :: LANGUAGE | e) Foreign
+foreign import navigatorLanguage :: Effect Foreign
 
-readUserLanguage :: forall e. Eff (language :: LANGUAGE | e) (Maybe String)
+readUserLanguage :: Effect (Maybe String)
 readUserLanguage = readForeignString <$> navigatorUserLanguage
 
-foreign import navigatorUserLanguage :: forall e. Eff (language :: LANGUAGE | e) Foreign
+foreign import navigatorUserLanguage :: Effect Foreign
 
 readForeignString :: Foreign -> Maybe String
 readForeignString = readString >>> runExcept >>> eitherToMaybe
