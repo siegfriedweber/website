@@ -128,8 +128,8 @@ availability language = E.section_
         , en : "Availability"
         }
     , E.paragraph E.paragraphStyleNoMargin $ E.text $ E.choose language
-        { de : "Für Vollzeitprojekte bin ich erst wieder ab Januar 2019 verfügbar."
-        , en : "I will be available for fulltime projects from January 2019."
+        { de : "Für Vollzeitprojekte bin ich erst wieder ab Juli 2019 verfügbar."
+        , en : "I will be available for fulltime projects from July 2019."
         }
     ]
 
