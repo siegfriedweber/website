@@ -22,7 +22,9 @@ import Elements.List
     , listStyleInline
     )
 import Elements.Icon
-    ( linkedIcon_
+    ( linkedIcon
+    , linkedIcon_
+    , linkedIconStyleOriginalSize
     )
 import Elements.Image
     ( image
@@ -126,22 +128,22 @@ links language =
     section sectionStyleLinks
         [ list listStyleInline
             [ linkedIcon_ "Gulp"
-                          "images/gulp-1.png"
+                          "images/gulp-1.svg"
                           "https://www.gulp.de/gulp2/home/profil/siegfriedweber"
             , linkedIcon_ "Xing"
-                          "images/xing-1.png"
+                          "images/xing-1.svg"
                           "https://www.xing.com/profile/Siegfried_Weber18"
             , linkedIcon_ "Linked in"
-                          "images/linkedin-1.png"
+                          "images/linkedin-1.svg"
                           "https://de.linkedin.com/in/siegfriedweber"
             , linkedIcon_ "GitHub"
-                          "images/github-1.png"
+                          "images/github-1.svg"
                           "https://github.com/siegfriedweber"
             , linkedIcon_ "E-Mail"
-                          "images/mail-1.png"
+                          "images/mail-1.svg"
                           "mailto:mail@siegfriedweber.net"
             , linkedIcon_ "Feed"
-                          "images/feed-1.png"
+                          "images/feed-1.svg"
                           $ choose language
                               { de: "feed-de"
                               , en: "feed-en"
@@ -479,7 +481,10 @@ coverage language = section_
         { de : "Absicherung"
         , en : "Coverage"
         }
-    , linkedIcon_ "Weiter zur IT-Haftpflicht von Siegfried Weber, Flörsheim am Main" "https://www.exali.de/siegel/Haftpflicht_Siegel_2_a42d2266a3bae930f0024c87da406fd5.png" "http://www.exali.de/siegel/Siegfried-Weber"
+    , linkedIcon linkedIconStyleOriginalSize
+        "Weiter zur IT-Haftpflicht von Siegfried Weber, Flörsheim am Main"
+        "https://www.exali.de/siegel/Haftpflicht_Siegel_2_a42d2266a3bae930f0024c87da406fd5.png"
+        "http://www.exali.de/siegel/Siegfried-Weber"
     ]
 
 footer :: Language -> PlainHTML

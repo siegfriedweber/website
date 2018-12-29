@@ -3,6 +3,7 @@ module Elements.Icon
     , iconStyles
     , linkedIcon
     , linkedIcon_
+    , linkedIconStyleOriginalSize
     , linkedIconStyleDefault
     ) where
 
@@ -18,6 +19,7 @@ import Elements.Types (Style, defaultStyle)
 
 iconStyles :: Array Style
 iconStyles = getIconStyles linkedIconStyleDefault
+          <> getIconStyles linkedIconStyleOriginalSize
 
 newtype LinkedIconStyle = LinkedIconStyle
     { link :: Style
@@ -40,7 +42,19 @@ linkedIconStyleDefault = LinkedIconStyle
         }
     , icon : defaultStyle
         { className = "linked-icon__image"
-        , cssCommon = Just $ CV.verticalAlign CV.Top
+        , cssCommon = Just do
+            C.height $ C.px 24.0
+            CV.verticalAlign CV.Top
+        }
+    }
+
+linkedIconStyleOriginalSize :: LinkedIconStyle
+linkedIconStyleOriginalSize = LinkedIconStyle
+    { link : defaultStyle
+        { className = "linked-icon-original-size"
+        }
+    , icon : defaultStyle
+        { className = "linked-icon-original-size__image"
         }
     }
 
