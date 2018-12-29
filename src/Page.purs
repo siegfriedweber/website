@@ -482,7 +482,7 @@ coverage language = section_
         , en : "Coverage"
         }
     , linkedIcon linkedIconStyleOriginalSize
-        "Weiter zur IT-Haftpflicht von Siegfried Weber, Flörsheim am Main"
+        "Weiter zur IT-Haftpflicht von Siegfried Weber, Aschaffenburg"
         "https://www.exali.de/siegel/Haftpflicht_Siegel_2_a42d2266a3bae930f0024c87da406fd5.png"
         "http://www.exali.de/siegel/Siegfried-Weber"
     ]
