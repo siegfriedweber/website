@@ -11,10 +11,9 @@ import Halogen.HTML.Properties as HP
 
 import Language (Language(..), languageCode)
 
-multilingualContent :: forall p i
-                     . Language
-                    -> Array (HH.HTML p i)
-                    -> HH.HTML p i
+multilingualContent :: Language
+                    -> Array HH.PlainHTML
+                    -> HH.PlainHTML
 multilingualContent l = HH.div [ langAttr $ languageCode l ]
 
 type Lang a =

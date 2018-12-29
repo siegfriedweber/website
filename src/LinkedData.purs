@@ -11,7 +11,7 @@ import Halogen.HTML.Properties as HP
 
 import Language (Language(..))
 
-linkedData :: forall p i. Language -> HH.HTML p i
+linkedData :: Language -> HH.PlainHTML
 linkedData language = HH.script
     [ HP.type_ $ MediaType "application/ld+json" ]
     [ HH.text $ stringify content ]

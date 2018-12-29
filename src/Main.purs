@@ -9,9 +9,9 @@ import Effect (Effect)
 import Effect.Aff (Aff)
 import Effect.Exception (error)
 
-import Halogen (Component, ComponentHTML, component)
+import Halogen (Component, component)
 import Halogen.Aff (awaitLoad, runHalogenAff, selectElement)
-import Halogen.HTML (HTML)
+import Halogen.HTML (HTML, PlainHTML, fromPlainHTML)
 import Halogen.VDom.Driver (runUI)
 import Web.DOM.ParentNode (QuerySelector(QuerySelector))
 import Web.HTML.HTMLElement (HTMLElement)
@@ -30,7 +30,7 @@ main = do
         staticUi styles "head"
         staticUi (content language) "body"
   where
-    staticUi :: ComponentHTML (Const Void)
+    staticUi :: PlainHTML
              -> String
              -> Aff Unit
     staticUi content = getHtmlElement
@@ -44,11 +44,11 @@ main = do
                         pure
 
     staticComponent :: forall m
-                     . ComponentHTML (Const Void)
+                     . PlainHTML
                     -> Component HTML (Const Void) Unit Void m
     staticComponent content = component
         { initialState : const unit
-        , render       : const content
+        , render       : const $ fromPlainHTML content
         , eval         : absurd <<< unwrap
         , receiver     : const Nothing
         }

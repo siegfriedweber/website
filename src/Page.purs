@@ -4,8 +4,6 @@ module Page
 
 import Prelude
 
-import Halogen.HTML as HH
-
 import Elements.Box
     ( box
     , box_
@@ -53,11 +51,14 @@ import Elements.Text
     , subheading_
     , text
     )
+import Halogen.HTML
+    ( PlainHTML
+    )
 import Language
     ( Language
     )
 
-content :: forall p i. Language -> HH.HTML p i
+content :: Language -> PlainHTML
 content language = multilingualContent language
     [ header language
     , links language
@@ -68,7 +69,7 @@ content language = multilingualContent language
     , footer language
     ]
 
-header :: forall p i. Language -> HH.HTML p i
+header :: Language -> PlainHTML
 header language =
     section sectionStyleHeader
         [ boxes boxesStyleNoSpacing
@@ -118,38 +119,38 @@ header language =
             ]
         ]
 
-links :: forall p i. Language -> HH.HTML p i
+links :: Language -> PlainHTML
 links language =
     section sectionStyleLinks
         [ list listStyleInline
             [ linkedIcon_ "Gulp"
-                            "images/gulp-1.png"
-                            "https://www.gulp.de/gulp2/home/profil/siegfriedweber"
+                          "images/gulp-1.png"
+                          "https://www.gulp.de/gulp2/home/profil/siegfriedweber"
             , linkedIcon_ "Xing"
-                            "images/xing-1.png"
-                            "https://www.xing.com/profile/Siegfried_Weber18"
+                          "images/xing-1.png"
+                          "https://www.xing.com/profile/Siegfried_Weber18"
             , linkedIcon_ "Linked in"
-                            "images/linkedin-1.png"
-                            "https://de.linkedin.com/in/siegfriedweber"
+                          "images/linkedin-1.png"
+                          "https://de.linkedin.com/in/siegfriedweber"
             , linkedIcon_ "GitHub"
-                            "images/github-1.png"
-                            "https://github.com/siegfriedweber"
+                          "images/github-1.png"
+                          "https://github.com/siegfriedweber"
             , linkedIcon_ "Stack Overflow"
-                            "images/stackoverflow-1.png"
-                            "https://stackoverflow.com/users/7312398/siegfried-weber"
+                          "images/stackoverflow-1.png"
+                          "https://stackoverflow.com/users/7312398/siegfried-weber"
             , linkedIcon_ "E-Mail"
-                            "images/mail-1.png"
-                            "mailto:mail@siegfriedweber.net"
+                          "images/mail-1.png"
+                          "mailto:mail@siegfriedweber.net"
             , linkedIcon_ "Feed"
-                            "images/feed-1.png"
-                            $ choose language
-                                { de: "feed-de"
-                                , en: "feed-en"
-                                }
+                          "images/feed-1.png"
+                          $ choose language
+                              { de: "feed-de"
+                              , en: "feed-en"
+                              }
             ]
         ]
 
-about :: forall p i. Language -> HH.HTML p i
+about :: Language -> PlainHTML
 about language = section_
     [ heading_ $ choose language
         { de : "Hallo, ich bin Siegfried Weber!"
@@ -185,7 +186,7 @@ about language = section_
         }
     ]
 
-availability :: forall p i. Language -> HH.HTML p i
+availability :: Language -> PlainHTML
 availability language = section_
     [ heading_ $ choose language
         { de : "Verfügbarkeit"
@@ -197,7 +198,7 @@ availability language = section_
         }
     ]
 
-skills :: forall p i. Language -> HH.HTML p i
+skills :: Language -> PlainHTML
 skills language = section_
     [ heading_ $ choose language
         { de : "Meine Kompetenzen"
@@ -473,7 +474,7 @@ skills language = section_
         ]
     ]
 
-coverage :: forall p i. Language -> HH.HTML p i
+coverage :: Language -> PlainHTML
 coverage language = section_
     [ heading_ $ choose language
         { de : "Absicherung"
@@ -482,7 +483,7 @@ coverage language = section_
     , linkedIcon_ "Weiter zur IT-Haftpflicht von Siegfried Weber, Flörsheim am Main" "https://www.exali.de/siegel/Haftpflicht_Siegel_2_a42d2266a3bae930f0024c87da406fd5.png" "http://www.exali.de/siegel/Siegfried-Weber"
     ]
 
-footer :: forall p i. Language -> HH.HTML p i
+footer :: Language -> PlainHTML
 footer language =
     section sectionStyleFooter
         [ boxes boxesStyleSmallSpacing
