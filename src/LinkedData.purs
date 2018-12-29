@@ -30,7 +30,6 @@ linkedData language = HH.script
                             , "https://www.xing.com/profile/Siegfried_Weber18"
                             , "https://de.linkedin.com/in/siegfriedweber"
                             , "https://github.com/siegfriedweber"
-                            , "https://stackoverflow.com/users/7312398/siegfried-weber"
                             ]
            ~> jsonEmptyObject
 
