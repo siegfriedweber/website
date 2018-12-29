@@ -59,15 +59,17 @@ import Language
     )
 
 content :: Language -> PlainHTML
-content language = multilingualContent language
-    [ header language
-    , links language
-    , about language
-    , availability language
-    , skills language
-    , coverage language
-    , footer language
-    ]
+content language = multilingualContent language sections
+  where
+    sections = (#) language <$>
+        [ header
+        , links
+        , about
+        , availability
+        , skills
+        , coverage
+        , footer
+        ]
 
 header :: Language -> PlainHTML
 header language =
