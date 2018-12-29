@@ -6,13 +6,61 @@ import Prelude
 
 import Halogen.HTML as HH
 
-import Elements as E
-import Language (Language)
+import Elements.Box
+    ( box
+    , box_
+    , boxes
+    , boxes_
+    , boxesStyleNoSpacing
+    , boxesStyleSmallSpacing
+    , boxStyleRightSidePaddings
+    )
+import Elements.Language
+    ( choose
+    , multilingualContent
+    )
+import Elements.List
+    ( list
+    , listStyleInline
+    )
+import Elements.Icon
+    ( linkedIcon_
+    )
+import Elements.Image
+    ( image
+    , imageStyleFill
+    )
+import Elements.Section
+    ( section
+    , section_
+    , sectionStyleFooter
+    , sectionStyleHeader
+    , sectionStyleLinks
+    )
+import Elements.Skills
+    ( skillSet_
+    )
+import Elements.Text
+    ( email_
+    , heading
+    , heading_
+    , headingStyleSmallMargin
+    , link_
+    , paragraph
+    , paragraph_
+    , paragraphStyleNoMargin
+    , phone_
+    , subheading_
+    , text
+    )
+import Language
+    ( Language
+    )
 
 content :: forall p i. Language -> HH.HTML p i
-content language = E.multilingualContent language
+content language = multilingualContent language
     [ header language
-    , links
+    , links language
     , about language
     , availability language
     , skills language
@@ -22,44 +70,44 @@ content language = E.multilingualContent language
 
 header :: forall p i. Language -> HH.HTML p i
 header language =
-    E.section E.sectionStyleHeader
-        [ E.boxes E.boxesStyleNoSpacing
-            [ E.box_
-                [ E.image E.imageStyleFill
+    section sectionStyleHeader
+        [ boxes boxesStyleNoSpacing
+            [ box_
+                [ image imageStyleFill
                     "Siegfried Weber" "images/siegfried_weber-2.jpg"
                 ]
-            , E.box E.boxStyleRightSidePaddings
-                [ E.heading E.headingStyleSmallMargin "Siegfried Weber"
-                , E.paragraph_ $ E.text $ E.choose language
+            , box boxStyleRightSidePaddings
+                [ heading headingStyleSmallMargin "Siegfried Weber"
+                , paragraph_ $ text $ choose language
                     { de : "Freiberuflicher Softwareentwickler und\n\
                            \Experte für funktionale Programmierung"
                     , en : "Freelance software developer and\n\
                            \expert for functional programming"
                     }
-                , E.skillSet_
+                , skillSet_
                     [ { name      : "Haskell, PureScript"
-                      , expertise : E.choose language
+                      , expertise : choose language
                                     { de : "Experte"
                                     , en : "Expert"
                                     }
                       , rating    : 9
                       }
                     , { name      : "Java, Spring Boot"
-                      , expertise : E.choose language
+                      , expertise : choose language
                                     { de : "Experte"
                                     , en : "Expert"
                                     }
                       , rating    : 10
                       }
                     , { name      : "HTML, CSS, JavaScript"
-                      , expertise : E.choose language
+                      , expertise : choose language
                                     { de : "Profi"
                                     , en : "Proficient"
                                     }
                       , rating    : 8
                       }
                     , { name      : "Microservices"
-                      , expertise : E.choose language
+                      , expertise : choose language
                                     { de : "3 Jahre Erfahrung"
                                     , en : "3 years of experience"
                                     }
@@ -70,38 +118,44 @@ header language =
             ]
         ]
 
-links :: forall p i. HH.HTML p i
-links =
-    E.section E.sectionStyleLinks
-        [ E.list E.listStyleInline
-            [ E.linkedIcon_ "Gulp"
+links :: forall p i. Language -> HH.HTML p i
+links language =
+    section sectionStyleLinks
+        [ list listStyleInline
+            [ linkedIcon_ "Gulp"
                             "images/gulp-1.png"
                             "https://www.gulp.de/gulp2/home/profil/siegfriedweber"
-            , E.linkedIcon_ "Xing"
+            , linkedIcon_ "Xing"
                             "images/xing-1.png"
                             "https://www.xing.com/profile/Siegfried_Weber18"
-            , E.linkedIcon_ "Linked in"
+            , linkedIcon_ "Linked in"
                             "images/linkedin-1.png"
                             "https://de.linkedin.com/in/siegfriedweber"
-            , E.linkedIcon_ "GitHub"
+            , linkedIcon_ "GitHub"
                             "images/github-1.png"
                             "https://github.com/siegfriedweber"
-            , E.linkedIcon_ "Stack Overflow"
+            , linkedIcon_ "Stack Overflow"
                             "images/stackoverflow-1.png"
                             "https://stackoverflow.com/users/7312398/siegfried-weber"
-            , E.linkedIcon_ "E-Mail"
+            , linkedIcon_ "E-Mail"
                             "images/mail-1.png"
                             "mailto:mail@siegfriedweber.net"
+            , linkedIcon_ "Feed"
+                            "images/feed-1.png"
+                            $ choose language
+                                { de: "feed-de"
+                                , en: "feed-en"
+                                }
             ]
         ]
 
 about :: forall p i. Language -> HH.HTML p i
-about language = E.section_
-    [ E.heading_ $ E.choose language
+about language = section_
+    [ heading_ $ choose language
         { de : "Hallo, ich bin Siegfried Weber!"
         , en : "Hello, I am Siegfried Weber!"
         }
-    , E.paragraph E.paragraphStyleNoMargin $ E.text $ E.choose language
+    , paragraph_ $ text $ choose language
         { de : "Ich bin freiberuflicher Softwareentwickler und immer an \
                \spannenden Projekten interessiert, vorzugsweise \"remote\" \
                \oder im Rhein-Main-Gebiet. \
@@ -119,70 +173,80 @@ about language = E.section_
                \projects. So if you intend to create something great \
                \then let us do it together!"
         }
+    , paragraph paragraphStyleNoMargin $ choose language
+        { de : text "Änderungen an meiner Verfügbarkeit und meinen \
+               \Kompetenzen verfolgen Sie, indem Sie meinen "
+            <> link_ "feed-de" (text "Web-Feed")
+            <> text "abonnieren."
+        , en : text "For getting notified about changes on my availability \
+               \and skills please subscribe to my "
+            <> link_ "feed-en" (text "web feed")
+            <> text "."
+        }
     ]
 
 availability :: forall p i. Language -> HH.HTML p i
-availability language = E.section_
-    [ E.heading_ $ E.choose language
+availability language = section_
+    [ heading_ $ choose language
         { de : "Verfügbarkeit"
         , en : "Availability"
         }
-    , E.paragraph E.paragraphStyleNoMargin $ E.text $ E.choose language
-        { de : "Für Vollzeitprojekte bin ich erst wieder ab Juli 2019 verfügbar."
+    , paragraph paragraphStyleNoMargin $ text $ choose language
+        { de : "Für Vollzeitprojekte werde ich erst wieder ab Juli 2019 verfügbar sein."
         , en : "I will be available for fulltime projects from July 2019."
         }
     ]
 
 skills :: forall p i. Language -> HH.HTML p i
-skills language = E.section_
-    [ E.heading_ $ E.choose language
+skills language = section_
+    [ heading_ $ choose language
         { de : "Meine Kompetenzen"
         , en : "My skills"
         }
-    , E.boxes_
-        [ E.box_
-            [ E.subheading_ $ E.choose language
+    , boxes_
+        [ box_
+            [ subheading_ $ choose language
                 { de : "Programmier­sprachen"
                 , en : "Programming languages"
                 }
-            , E.skillSet_
+            , skillSet_
                 [ { name      : "Haskell (Servant, ...)"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
                   , rating    : 9
                   }
                 , { name      : "PureScript (Halogen)"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
                   , rating    : 9
                   }
                 , { name      : "Java (Spring Boot)"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
                   , rating    : 10
                   }
                 , { name      : "JavaScript (AngularJS)"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Profi"
                                 , en : "Proficient"
                                 }
                   , rating    : 8
                   }
                 , { name      : "C++ (STL)"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Länger nicht verwendet"
                                 , en : "Haven't used it for a while"
                                 }
                   , rating    : 7
                   }
                 , { name      : "Scala"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Länger nicht verwendet"
                                 , en : "Haven't used it for a while"
                                 }
@@ -190,42 +254,42 @@ skills language = E.section_
                   }
                 ]
             ]
-        , E.box_
-            [ E.subheading_ $ E.choose language
+        , box_
+            [ subheading_ $ choose language
                 { de : "Werkzeuge"
                 , en : "Tools"
                 }
-            , E.skillSet_
+            , skillSet_
                 [ { name      : "Vim"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
                   , rating    : 10
                   }
                 , { name      : "IntelliJ IDEA"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Profi"
                                 , en : "Proficient"
                                 }
                   , rating    : 9
                   }
                 , { name      : "Eclipse"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Profi"
                                 , en : "Proficient"
                                 }
                   , rating    : 8
                   }
                 , { name      : "Git"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
                   , rating    : 10
                   }
                 , { name      : "Jenkins"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Profi"
                                 , en : "Proficient"
                                 }
@@ -233,28 +297,28 @@ skills language = E.section_
                   }
                 ]
             ]
-        , E.box_
-            [ E.subheading_ $ E.choose language
+        , box_
+            [ subheading_ $ choose language
                 { de : "Methoden"
                 , en : "Methods"
                 }
-            , E.skillSet_
+            , skillSet_
                 [ { name      : "Scrum/Kanban"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
                   , rating    : 8
                   }
                 , { name      : "Microservices"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "3 Jahre Erfahrung"
                                 , en : "3 years of experience"
                                 }
                   , rating    : 9
                   }
                 , { name      : "REST"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
@@ -262,28 +326,28 @@ skills language = E.section_
                   }
                 ]
             ]
-        , E.box_
-            [ E.subheading_ $ E.choose language
+        , box_
+            [ subheading_ $ choose language
                 { de : "Datenbank­management­systeme"
                 , en : "Database management systems"
                 }
-            , E.skillSet_
+            , skillSet_
                 [ { name      : "MongoDB"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
                   , rating    : 9
                   }
                 , { name      : "MySQL"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Profi"
                                 , en : "Proficient"
                                 }
                   , rating    : 7
                   }
                 , { name      : "SQLite"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Fortgeschritten"
                                 , en : "Advanced"
                                 }
@@ -291,28 +355,28 @@ skills language = E.section_
                   }
                 ]
             ]
-        , E.box_
-            [ E.subheading_ $ E.choose language
+        , box_
+            [ subheading_ $ choose language
                 { de : "Betriebssysteme"
                 , en : "Operating systems"
                 }
-            , E.skillSet_
+            , skillSet_
                 [ { name      : "Microsoft Windows"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
                   , rating    : 9
                   }
                 , { name      : "Debian GNU/Linux"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
                   , rating    : 10
                   }
                 , { name      : "NixOS"
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Fortgeschritten"
                                 , en : "Advanced"
                                 }
@@ -320,47 +384,47 @@ skills language = E.section_
                   }
                 ]
             ]
-        , E.box_
-            [ E.subheading_ $ E.choose language
+        , box_
+            [ subheading_ $ choose language
                 { de : "Branchen"
                 , en : "Sectors"
                 }
-            , E.skillSet_
-                [ { name      : E.choose language
+            , skillSet_
+                [ { name      : choose language
                                 { de : "Transport & Verkehr"
                                 , en : "Transportation"
                                 }
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Profi"
                                 , en : "Proficient"
                                 }
                   , rating    : 7
                   }
-                , { name      : E.choose language
+                , { name      : choose language
                                 { de : "Finanzen"
                                 , en : "Financial sector"
                                 }
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Profi"
                                 , en : "Proficient"
                                 }
                   , rating    : 7
                   }
-                , { name      : E.choose language
+                , { name      : choose language
                                 { de : "Versicherungen"
                                 , en : "Insurance business"
                                 }
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Profi"
                                 , en : "Proficient"
                                 }
                   , rating    : 8
                   }
-                , { name      : E.choose language
+                , { name      : choose language
                                 { de : "Computerspiele"
                                 , en : "Gaming industry"
                                 }
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Experte"
                                 , en : "Expert"
                                 }
@@ -368,37 +432,37 @@ skills language = E.section_
                   }
                 ]
             ]
-        , E.box_
-            [ E.subheading_ $ E.choose language
+        , box_
+            [ subheading_ $ choose language
                 { de : "Sprachen"
                 , en : "Languages"
                 }
-            , E.skillSet_
-                [ { name      : E.choose language
+            , skillSet_
+                [ { name      : choose language
                                 { de : "Deutsch"
                                 , en : "German"
                                 }
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Muttersprache"
                                 , en : "Native language"
                                 }
                   , rating    : 10
                   }
-                , { name      : E.choose language
+                , { name      : choose language
                                 { de : "Englisch"
                                 , en : "English"
                                 }
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Verhandlungssicher"
                                 , en : "Business fluent"
                                 }
                   , rating    : 8
                   }
-                , { name      : E.choose language
+                , { name      : choose language
                                 { de : "Französisch"
                                 , en : "French"
                                 }
-                  , expertise : E.choose language
+                  , expertise : choose language
                                 { de : "Mittelstufe"
                                 , en : "Intermediate"
                                 }
@@ -410,43 +474,43 @@ skills language = E.section_
     ]
 
 coverage :: forall p i. Language -> HH.HTML p i
-coverage language = E.section_
-    [ E.heading_ $ E.choose language
+coverage language = section_
+    [ heading_ $ choose language
         { de : "Absicherung"
         , en : "Coverage"
         }
-    , E.linkedIcon_ "Weiter zur IT-Haftpflicht von Siegfried Weber, Flörsheim am Main" "https://www.exali.de/siegel/Haftpflicht_Siegel_2_a42d2266a3bae930f0024c87da406fd5.png" "http://www.exali.de/siegel/Siegfried-Weber"
+    , linkedIcon_ "Weiter zur IT-Haftpflicht von Siegfried Weber, Flörsheim am Main" "https://www.exali.de/siegel/Haftpflicht_Siegel_2_a42d2266a3bae930f0024c87da406fd5.png" "http://www.exali.de/siegel/Siegfried-Weber"
     ]
 
 footer :: forall p i. Language -> HH.HTML p i
 footer language =
-    E.section E.sectionStyleFooter
-        [ E.boxes E.boxesStyleSmallSpacing
-            [ E.box_
-                [ E.paragraph E.paragraphStyleNoMargin $ E.text $
+    section sectionStyleFooter
+        [ boxes boxesStyleSmallSpacing
+            [ box_
+                [ paragraph paragraphStyleNoMargin $ text $
                     "Siegfried Weber\n\
                     \Bernhardstr. 16\n\
                     \63741 Aschaffenburg\n" <>
-                    E.choose language
+                    choose language
                         { de : "Deutschland"
                         , en : "Germany"
                         }
                 ]
-            , E.box_
-                [ E.paragraph E.paragraphStyleNoMargin $
-                    E.text (E.choose language
+            , box_
+                [ paragraph paragraphStyleNoMargin $
+                    text (choose language
                                 { de : "Telefon: "
                                 , en : "Phone: "
                                 }
                            ) <>
-                    E.phone_ "+49 151 55855451" <>
-                    E.text "\n" <>
-                    E.text (E.choose language
+                    phone_ "+49 151 55855451" <>
+                    text "\n" <>
+                    text (choose language
                                 { de : "E-Mail: "
                                 , en : "E-mail: "
                                 }
                            ) <>
-                    E.email_ "mail@siegfriedweber.net"
+                    email_ "mail@siegfriedweber.net"
                 ]
             ]
         ]

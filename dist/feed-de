@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="de">
+
+  <title>Siegfried Weber — Freiberuflicher Softwareentwickler</title>
+  <link href="https://www.siegfriedweber.net/"/>
+  <updated>2018-12-29T18:00:00+01:00</updated>
+  <author>
+    <name>Siegfried Weber</name>
+  </author>
+  <id>urn:uuid:777d85ad-3588-4514-8a2d-64d3a8276a05</id>
+  <link rel="self" type="application/atom+xml"
+      href="http://www.siegfriedweber.net/feed-de"/>
+
+  <entry>
+    <title>Verfügbar ab Juli 2019</title>
+    <link href="https://www.siegfriedweber.net/"/>
+    <id>urn:uuid:9b4082da-3c05-4c9c-b6ec-63d3ad75d5c7</id>
+    <updated>2018-12-29T18:00:00+01:00</updated>
+    <summary>Für Vollzeitprojekte werde ich erst wieder ab Juli 2019 verfügbar sein.</summary>
+  </entry>
+
+</feed>

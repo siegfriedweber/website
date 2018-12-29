@@ -1,13 +1,5 @@
 module Elements
-    ( module Box
-    , module Icon
-    , module Image
-    , module Language
-    , module List
-    , module Section
-    , module Skills
-    , module Text
-    , styleElements
+    ( styleElements
     ) where
 
 import Prelude
@@ -19,14 +11,13 @@ import Data.NonEmpty (NonEmpty, (:|), singleton)
 import CSS as C
 import CSS.Media as CM
 
-import Elements.Box as Box
-import Elements.Icon as Icon
-import Elements.Image as Image
-import Elements.Language as Language
-import Elements.List as List
-import Elements.Section as Section
-import Elements.Skills as Skills
-import Elements.Text as Text
+import Elements.Box (boxStyles)
+import Elements.Icon (iconStyles)
+import Elements.Image (imageStyles)
+import Elements.List (listStyles)
+import Elements.Section (sectionStyles)
+import Elements.Skills (skillSetStyles)
+import Elements.Text (textStyles)
 import Elements.Types (Style)
 
 type ClassCss =
@@ -38,13 +29,13 @@ styleElements :: C.CSS
 styleElements = stylesToCss allStyles
   where
     allStyles :: Array Style
-    allStyles = Box.boxStyles
-             <> Icon.iconStyles
-             <> Image.imageStyles
-             <> List.listStyles
-             <> Skills.skillSetStyles
-             <> Section.sectionStyles
-             <> Text.textStyles
+    allStyles = boxStyles
+             <> iconStyles
+             <> imageStyles
+             <> listStyles
+             <> skillSetStyles
+             <> sectionStyles
+             <> textStyles
 
     stylesToCss :: Array Style -> C.CSS
     stylesToCss styles = do

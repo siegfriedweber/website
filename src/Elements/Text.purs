@@ -12,6 +12,7 @@ module Elements.Text
     , link
     , link_
     , linkStyleDefault
+    , linkStyleNoDecoration
     , paragraph
     , paragraph_
     , paragraphStyleDefault
@@ -34,7 +35,6 @@ import CSS as C
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 
-import Elements.Colors (lightTextColor)
 import Elements.Types (Style, defaultStyle)
 import Foldable (intersperse)
 import Fonts (Font(MontserratRegular, SourceSansProLight), styleFont)
@@ -47,6 +47,7 @@ textStyles =
     , unwrap paragraphStyleDefault
     , unwrap paragraphStyleNoMargin
     , unwrap linkStyleDefault
+    , unwrap linkStyleNoDecoration
     ]
 
 newtype HeadingStyle = HeadingStyle Style
@@ -155,10 +156,19 @@ derive instance newtypeLinkStyle :: Newtype LinkStyle _
 linkStyleDefault :: LinkStyle
 linkStyleDefault = LinkStyle defaultStyle
     { className = "link"
+    , cssScreen = Just $
+        C.key (C.fromString "color") "inherit"
+    , cssPrint  = Just $
+        C.color C.black
+    }
+
+linkStyleNoDecoration :: LinkStyle
+linkStyleNoDecoration = LinkStyle defaultStyle
+    { className = "link-no-decoration"
     , cssCommon = Just $
         C.textDecoration C.noneTextDecoration
     , cssScreen = Just $
-        C.color lightTextColor -- TODO change to inherit
+        C.key (C.fromString "color") "inherit"
     , cssPrint  = Just $
         C.color C.black
     }
@@ -176,7 +186,7 @@ link (LinkStyle style) ref = pure <<<
     HH.a [ HP.href ref, HP.class_ $ HH.ClassName style.className ]
 
 phone_ :: forall p i. String -> Array (HH.HTML p i)
-phone_ = phone linkStyleDefault
+phone_ = phone linkStyleNoDecoration
 
 phone :: forall p i. LinkStyle -> String -> Array (HH.HTML p i)
 phone style ref = link style ("tel:" <> uri) $ text ref
@@ -184,7 +194,7 @@ phone style ref = link style ("tel:" <> uri) $ text ref
     uri = replaceAll (Pattern " ") (Replacement "") ref
 
 email_ :: forall p i. String -> Array (HH.HTML p i)
-email_ = email linkStyleDefault
+email_ = email linkStyleNoDecoration
 
 email :: forall p i. LinkStyle -> String -> Array (HH.HTML p i)
 email style ref = link style ("mailto:" <> ref) $ text ref
