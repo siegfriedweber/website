@@ -179,7 +179,7 @@ about language = section_
         { de : text "Änderungen an meiner Verfügbarkeit und meinen \
                \Kompetenzen verfolgen Sie, indem Sie meinen "
             <> link_ "feed-de" (text "Web-Feed")
-            <> text "abonnieren."
+            <> text " abonnieren."
         , en : text "For getting notified about changes on my availability \
                \and skills please subscribe to my "
             <> link_ "feed-en" (text "web feed")
