@@ -16,25 +16,21 @@ import CSS as C
 import CSS.Border as CB
 import CSS.Common as CC
 import CSS.ListStyle.Type as CL
-import CSS.TextAlign as CA
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 
 import Elements.Colors (darkBackgroundColor)
 import Elements.Types (Style, defaultStyle)
-import Fonts (Font(SourceSansProLight, SourceSansProSemibold), styleFont)
+import Fonts (Font(SourceSansProSemibold), styleFont)
 
 type Skill =
     { name      :: String
-    , expertise :: String
     , rating    :: Int
     }
 
 newtype SkillSetStyle = SkillSetStyle
     { list          :: Style
-    , header        :: Style
     , name          :: Style
-    , expertise     :: Style
     , barForeground :: Style
     , barBackground :: Style
     }
@@ -42,9 +38,7 @@ newtype SkillSetStyle = SkillSetStyle
 getStyles :: SkillSetStyle -> Array Style
 getStyles (SkillSetStyle style) =
     [ style.list
-    , style.header
     , style.name
-    , style.expertise
     , style.barForeground
     , style.barBackground
     ]
@@ -63,29 +57,13 @@ skillSetStyleDefault = SkillSetStyle
             C.marginBottom C.nil
             C.paddingLeft C.nil
         }
-    , header : defaultStyle
-        { className = "skill-set__header"
-        , cssCommon = Just do
-            C.display C.flex
-            C.justifyContent C.spaceBetween
-            C.alignItems CC.baseline
-            C.marginTop $ C.px 12.0
-            C.marginBottom $ C.px 8.0
-        }
     , name : defaultStyle
         { className = "skill-set__name"
         , cssCommon = Just do
             styleFont SourceSansProSemibold
             C.fontSize $ C.px 18.0
-        }
-    , expertise : defaultStyle
-        { className = "skill-set__expertise"
-        , cssCommon = Just do
-            styleFont SourceSansProLight
-            CA.textAlign CA.rightTextAlign
-            C.fontSize $ C.px 16.0
-        , cssScreen = Just $
-            C.color $ C.fromInt 0x404040
+            C.marginTop $ C.px 12.0
+            C.marginBottom $ C.px 8.0
         }
     , barForeground : defaultStyle
         { className = "skill-set__bar-foreground"
@@ -125,15 +103,9 @@ skillSet styles@(SkillSetStyle style) = map (skillBar styles)
 
 skillBar :: forall p i. SkillSetStyle -> Skill -> Array (HH.HTML p i)
 skillBar styles@(SkillSetStyle style) skill =
-    [ HH.h3
-        [ HP.class_ $ HH.ClassName style.header.className ]
-        [ HH.span
-            [ HP.class_ $ HH.ClassName style.name.className ]
-            [ HH.text skill.name ]
-        , HH.span
-            [ HP.class_ $ HH.ClassName style.expertise.className ]
-            [ HH.text skill.expertise ]
-        ]
+    [ HH.div
+        [ HP.class_ $ HH.ClassName style.name.className ]
+        [ HH.text skill.name ]
     , bar styles skill.rating
     ]
 

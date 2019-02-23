@@ -67,6 +67,7 @@ content language = multilingualContent language sections
         [ header
         , links
         , about
+        , jobSites
         , availability
         , skills
         , coverage
@@ -91,31 +92,15 @@ header language =
                     }
                 , skillSet_
                     [ { name      : "Haskell, PureScript"
-                      , expertise : choose language
-                                    { de : "Experte"
-                                    , en : "Expert"
-                                    }
-                      , rating    : 9
+                      , rating    : 7
                       }
                     , { name      : "Java, Spring Boot"
-                      , expertise : choose language
-                                    { de : "Experte"
-                                    , en : "Expert"
-                                    }
                       , rating    : 10
                       }
-                    , { name      : "HTML, CSS, JavaScript"
-                      , expertise : choose language
-                                    { de : "Profi"
-                                    , en : "Proficient"
-                                    }
-                      , rating    : 8
+                    , { name      : "JavaScript, Vue.js"
+                      , rating    : 7
                       }
                     , { name      : "Microservices"
-                      , expertise : choose language
-                                    { de : "3 Jahre Erfahrung"
-                                    , en : "3 years of experience"
-                                    }
                       , rating    : 8
                       }
                     ]
@@ -154,26 +139,32 @@ links language =
 about :: Language -> PlainHTML
 about language = section_
     [ heading_ $ choose language
-        { de : "Hallo, ich bin Siegfried Weber!"
-        , en : "Hello, I am Siegfried Weber!"
+        { de : "Willkommen!"
+        , en : "Welcome!"
         }
-    , paragraph_ $ text $ choose language
-        { de : "Ich bin freiberuflicher Softwareentwickler und immer an \
-               \spannenden Projekten interessiert, vorzugsweise \"remote\" \
-               \oder im Rhein-Main-Gebiet. \
-               \Komplexen fachlichen Anforderungen stelle ich mich sehr \
-               \gerne. Meine Umsetzung genügt dabei höchsten Ansprüchen. \
-               \Andererseits stelle ich auch hohe Ansprüche an die \
-               \Projekte. Wenn Sie also etwas Großartiges schaffen \
-               \wollen, dann lassen Sie uns das gemeinsam tun!"
-        , en : "I am a freelance software developer and always interested \
-               \in exciting projects near Frankfurt/Main as well as \
-               \remote. \
-               \Complex requirements do not pose a problem for me. My \
-               \implementation of them fulfills the highest demands. \
-               \On the other side I also make high demands on the \
-               \projects. So if you intend to create something great \
-               \then let us do it together!"
+    , paragraph_ $ choose language
+        { de : text "Ich freue mich, dass Sie den Weg zu meinem \
+               \Internetauftritt gefunden haben. \
+               \Als potenzieller Auftraggeber oder direkt beauftragter \
+               \Vermittler finden Sie auf dieser Seite Informationen zu \
+               \meiner Verfügbarkeit, möglichen Einsatzorten und eine \
+               \Selbsteinschätzung meiner Kompetenzen. Falls ich damit \
+               \eine passende Besetzung für Ihr Projekt darstelle, freue \
+               \ich mich über eine Anfrage mit einer aussagekräftigen \
+               \Projektbeschreibung per "
+            <> link_ "mailto:mail@siegfriedweber.net" (text "E-Mail")
+            <> text ". Auf Wunsch sende ich Ihnen dann gerne mein Profil \
+               \mit ausführlicher Projekthistorie zu."
+        , en : text "Nice to see you on my web page. \
+               \As a potential customer or directly charged agency \
+               \you will find information about my availability, \
+               \possible job sites, and a self-rating of my skills. \
+               \If this matches with your project needs, I would be \
+               \glad to receive an "
+            <> link_ "mailto:mail@siegfriedweber.net" (text "e-mail")
+            <> text " with a meaningful project description. Upon \
+               \request I will send you a profile with a detailed \
+               \project history."
         }
     , paragraph paragraphStyleNoMargin $ choose language
         { de : text "Änderungen an meiner Verfügbarkeit und meinen \
@@ -187,6 +178,27 @@ about language = section_
         }
     ]
 
+jobSites :: Language -> PlainHTML
+jobSites language = section_
+    [ heading_ $ choose language
+        { de : "Einsatzorte"
+        , en : "Job Sites"
+        }
+    , paragraph paragraphStyleNoMargin $ text $ choose language
+        { de : "Projekte, die vollständig remote duchgeführt werden \
+               \können oder deren Laufzeit maximal zwei Wochen beträgt, \
+               \unterstütze ich gerne deutschlandweit. Projekte, die \
+               \eine Anwesenheit erfordern und längerfristig sind, nehme \
+               \ich nur in der Nähe von Aschaffenburg (Frankfurt am \
+               \Main, Darmstadt, Würzburg) an."
+        , en : "If a project can be completely done remotely or lasts up \
+               \to two weeks then I would like to support it in all of \
+               \Germany. Otherwise I accept projects only nearby \
+               \Aschaffenburg (Frankfurt on the Main, Darmstadt, \
+               \Würzburg)."
+        }
+    ]
+
 availability :: Language -> PlainHTML
 availability language = section_
     [ heading_ $ choose language
@@ -194,7 +206,8 @@ availability language = section_
         , en : "Availability"
         }
     , paragraph paragraphStyleNoMargin $ text $ choose language
-        { de : "Für Vollzeitprojekte werde ich erst wieder ab Juli 2019 verfügbar sein."
+        { de : "Für Vollzeitprojekte werde ich erst wieder ab Juli 2019 \
+               \verfügbar sein."
         , en : "I will be available for fulltime projects from July 2019."
         }
     ]
@@ -213,46 +226,16 @@ skills language = section_
                 }
             , skillSet_
                 [ { name      : "Haskell (Servant, ...)"
-                  , expertise : choose language
-                                { de : "Experte"
-                                , en : "Expert"
-                                }
-                  , rating    : 9
-                  }
-                , { name      : "PureScript (Halogen)"
-                  , expertise : choose language
-                                { de : "Experte"
-                                , en : "Expert"
-                                }
-                  , rating    : 9
-                  }
-                , { name      : "Java (Spring Boot)"
-                  , expertise : choose language
-                                { de : "Experte"
-                                , en : "Expert"
-                                }
-                  , rating    : 10
-                  }
-                , { name      : "JavaScript (AngularJS)"
-                  , expertise : choose language
-                                { de : "Profi"
-                                , en : "Proficient"
-                                }
-                  , rating    : 8
-                  }
-                , { name      : "C++ (STL)"
-                  , expertise : choose language
-                                { de : "Länger nicht verwendet"
-                                , en : "Haven't used it for a while"
-                                }
                   , rating    : 7
                   }
-                , { name      : "Scala"
-                  , expertise : choose language
-                                { de : "Länger nicht verwendet"
-                                , en : "Haven't used it for a while"
-                                }
-                  , rating    : 6
+                , { name      : "PureScript (Halogen)"
+                  , rating    : 8
+                  }
+                , { name      : "Java (Spring Boot)"
+                  , rating    : 10
+                  }
+                , { name      : "JavaScript (Vue.js)"
+                  , rating    : 7
                   }
                 ]
             ]
@@ -263,38 +246,15 @@ skills language = section_
                 }
             , skillSet_
                 [ { name      : "Vim"
-                  , expertise : choose language
-                                { de : "Experte"
-                                , en : "Expert"
-                                }
                   , rating    : 10
                   }
                 , { name      : "IntelliJ IDEA"
-                  , expertise : choose language
-                                { de : "Profi"
-                                , en : "Proficient"
-                                }
                   , rating    : 9
                   }
-                , { name      : "Eclipse"
-                  , expertise : choose language
-                                { de : "Profi"
-                                , en : "Proficient"
-                                }
-                  , rating    : 8
-                  }
-                , { name      : "Git"
-                  , expertise : choose language
-                                { de : "Experte"
-                                , en : "Expert"
-                                }
+                , { name      : "Git (Git Flow)"
                   , rating    : 10
                   }
                 , { name      : "Jenkins"
-                  , expertise : choose language
-                                { de : "Profi"
-                                , en : "Proficient"
-                                }
                   , rating    : 8
                   }
                 ]
@@ -306,25 +266,27 @@ skills language = section_
                 }
             , skillSet_
                 [ { name      : "Scrum/Kanban"
-                  , expertise : choose language
-                                { de : "Experte"
-                                , en : "Expert"
-                                }
                   , rating    : 8
                   }
                 , { name      : "Microservices"
-                  , expertise : choose language
-                                { de : "3 Jahre Erfahrung"
-                                , en : "3 years of experience"
-                                }
-                  , rating    : 9
+                  , rating    : 8
                   }
-                , { name      : "REST"
-                  , expertise : choose language
-                                { de : "Experte"
-                                , en : "Expert"
-                                }
+                ]
+            ]
+        , box_
+            [ subheading_ $ choose language
+                { de : "Schnittstellen"
+                , en : "Interfaces"
+                }
+            , skillSet_
+                [ { name      : "REST"
                   , rating    : 10
+                  }
+                , { name      : "Kafka"
+                  , rating    : 8
+                  }
+                , { name      : "RabbitMQ"
+                  , rating    : 7
                   }
                 ]
             ]
@@ -335,25 +297,13 @@ skills language = section_
                 }
             , skillSet_
                 [ { name      : "MongoDB"
-                  , expertise : choose language
-                                { de : "Experte"
-                                , en : "Expert"
-                                }
+                  , rating    : 9
+                  }
+                , { name      : "Solr"
                   , rating    : 9
                   }
                 , { name      : "MySQL"
-                  , expertise : choose language
-                                { de : "Profi"
-                                , en : "Proficient"
-                                }
                   , rating    : 7
-                  }
-                , { name      : "SQLite"
-                  , expertise : choose language
-                                { de : "Fortgeschritten"
-                                , en : "Advanced"
-                                }
-                  , rating    : 5
                   }
                 ]
             ]
@@ -364,25 +314,13 @@ skills language = section_
                 }
             , skillSet_
                 [ { name      : "Microsoft Windows"
-                  , expertise : choose language
-                                { de : "Experte"
-                                , en : "Expert"
-                                }
+                  , rating    : 9
+                  }
+                , { name      : "NixOS"
                   , rating    : 9
                   }
                 , { name      : "Debian GNU/Linux"
-                  , expertise : choose language
-                                { de : "Experte"
-                                , en : "Expert"
-                                }
                   , rating    : 10
-                  }
-                , { name      : "NixOS"
-                  , expertise : choose language
-                                { de : "Fortgeschritten"
-                                , en : "Advanced"
-                                }
-                  , rating    : 9
                   }
                 ]
             ]
@@ -396,19 +334,11 @@ skills language = section_
                                 { de : "Transport & Verkehr"
                                 , en : "Transportation"
                                 }
-                  , expertise : choose language
-                                { de : "Profi"
-                                , en : "Proficient"
-                                }
                   , rating    : 7
                   }
                 , { name      : choose language
                                 { de : "Finanzen"
                                 , en : "Financial sector"
-                                }
-                  , expertise : choose language
-                                { de : "Profi"
-                                , en : "Proficient"
                                 }
                   , rating    : 7
                   }
@@ -416,19 +346,11 @@ skills language = section_
                                 { de : "Versicherungen"
                                 , en : "Insurance business"
                                 }
-                  , expertise : choose language
-                                { de : "Profi"
-                                , en : "Proficient"
-                                }
                   , rating    : 8
                   }
                 , { name      : choose language
                                 { de : "Computerspiele"
                                 , en : "Gaming industry"
-                                }
-                  , expertise : choose language
-                                { de : "Experte"
-                                , en : "Expert"
                                 }
                   , rating    : 10
                   }
@@ -444,31 +366,13 @@ skills language = section_
                                 { de : "Deutsch"
                                 , en : "German"
                                 }
-                  , expertise : choose language
-                                { de : "Muttersprache"
-                                , en : "Native language"
-                                }
                   , rating    : 10
                   }
                 , { name      : choose language
                                 { de : "Englisch"
                                 , en : "English"
                                 }
-                  , expertise : choose language
-                                { de : "Verhandlungssicher"
-                                , en : "Business fluent"
-                                }
                   , rating    : 8
-                  }
-                , { name      : choose language
-                                { de : "Französisch"
-                                , en : "French"
-                                }
-                  , expertise : choose language
-                                { de : "Mittelstufe"
-                                , en : "Intermediate"
-                                }
-                  , rating    : 5
                   }
                 ]
             ]

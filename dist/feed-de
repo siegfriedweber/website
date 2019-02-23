@@ -3,7 +3,7 @@
 
   <title>Siegfried Weber — Freiberuflicher Softwareentwickler</title>
   <link href="https://www.siegfriedweber.net/"/>
-  <updated>2018-12-29T18:00:00+01:00</updated>
+  <updated>2019-02-22T20:00:00+01:00</updated>
   <author>
     <name>Siegfried Weber</name>
   </author>
@@ -12,11 +12,30 @@
       href="http://www.siegfriedweber.net/feed-de"/>
 
   <entry>
+    <title>
+      Mögliche Einsatzorte sind nun in Aschaffenburg und Umgebung
+    </title>
+    <link href="https://www.siegfriedweber.net/"/>
+    <id>urn:uuid:9e3cc8fc-d17d-434a-a2c8-17021c7ec438</id>
+    <updated>2019-02-22T20:00:00+01:00</updated>
+    <summary>
+      Projekte, die vollständig remote duchgeführt werden können oder
+      deren Laufzeit maximal zwei Wochen beträgt, unterstütze ich gerne
+      deutschlandweit. Projekte, die eine Anwesenheit erfordern und
+      längerfristig sind, nehme ich nur in der Nähe von Aschaffenburg
+      (Frankfurt am Main, Darmstadt, Würzburg) an.
+    </summary>
+  </entry>
+
+  <entry>
     <title>Verfügbar ab Juli 2019</title>
     <link href="https://www.siegfriedweber.net/"/>
     <id>urn:uuid:9b4082da-3c05-4c9c-b6ec-63d3ad75d5c7</id>
     <updated>2018-12-29T18:00:00+01:00</updated>
-    <summary>Für Vollzeitprojekte werde ich erst wieder ab Juli 2019 verfügbar sein.</summary>
+    <summary>
+      Für Vollzeitprojekte werde ich erst wieder ab Juli 2019 verfügbar
+      sein.
+    </summary>
   </entry>
 
 </feed>

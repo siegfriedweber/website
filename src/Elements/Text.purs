@@ -51,7 +51,6 @@ textStyles =
     ]
 
 newtype HeadingStyle = HeadingStyle Style
-
 derive instance newtypeHeadingStyle :: Newtype HeadingStyle _
 
 headingStyleDefault :: HeadingStyle

@@ -3,7 +3,7 @@
 
   <title>Siegfried Weber — Freelance software developer</title>
   <link href="https://www.siegfriedweber.net/"/>
-  <updated>2018-12-29T18:00:00+01:00</updated>
+  <updated>2019-02-22T20:00:00+01:00</updated>
   <author>
     <name>Siegfried Weber</name>
   </author>
@@ -12,11 +12,26 @@
       href="http://www.siegfriedweber.net/feed-en"/>
 
   <entry>
+    <title>Potential job sites are now nearby Aschaffenburg</title>
+    <link href="https://www.siegfriedweber.net/"/>
+    <id>urn:uuid:97edfc95-a509-4013-acad-c2adecdcdc2d</id>
+    <updated>2019-02-22T20:00:00+01:00</updated>
+    <summary>
+      If a project can be completely done remotely or lasts up to two
+      weeks then I would like to support it in all of Germany. Otherwise I
+      accept projects only nearby Aschaffenburg (Frankfurt on the Main,
+      Darmstadt, Würzburg).
+    </summary>
+  </entry>
+
+  <entry>
     <title>Available from July 2019</title>
     <link href="https://www.siegfriedweber.net/"/>
     <id>urn:uuid:abf77610-4621-4e85-ab22-9260cd3182f4</id>
     <updated>2018-12-29T18:00:00+01:00</updated>
-    <summary>I will be available for fulltime projects from July 2019.</summary>
+    <summary>
+      I will be available for fulltime projects from July 2019.
+    </summary>
   </entry>
 
 </feed>
