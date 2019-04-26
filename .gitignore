@@ -1,5 +1,6 @@
 /bower_components/
-/dist/main.js
+/build/
+/dist/
 /node_modules/
 /output/
 

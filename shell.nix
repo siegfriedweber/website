@@ -17,8 +17,12 @@ in
     buildInputs = with pkgs; [
       git
       haskellPackages.purescript
+      (haskellPackages.ghcWithPackages (self: [
+        self.shake
+      ]))
       nodejs
       nodePackages.bower
+      openssh
     ];
   }
 

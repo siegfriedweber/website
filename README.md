@@ -6,6 +6,12 @@ The source code for the website https://www.siegfriedweber.net.
 
 The code is written in [PureScript](http://www.purescript.org/) and based on the UI library [purescript-halogen](https://github.com/slamdata/purescript-halogen).
 
+## Build with Nix
+
+The project can be built with [Nix](https://nixos.org/nix/):
+
+    nix-shell --pure --command "runhaskell Build.hs"
+
 ## Structure
 
 The file [src/Page.purs](https://github.com/siegfriedweber/website/blob/master/src/Page.purs) contains the page content which is static. The components the page consists of are located in the directory [src/Elements](https://github.com/siegfriedweber/website/tree/master/src/Elements). Each element bundles its markup and its stylesheet. The styles of all elements are collected and rendered in the file [src/Elements.purs](https://github.com/siegfriedweber/website/blob/master/src/Elements.purs). The file [src/Main.purs](https://github.com/siegfriedweber/website/blob/master/src/Main.purs) contains the main function which runs the Halogen framework und renders the page.
