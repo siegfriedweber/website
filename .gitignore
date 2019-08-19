@@ -1,6 +1,5 @@
-/bower_components/
+/.spago/
 /build/
 /dist/
-/node_modules/
 /output/
 

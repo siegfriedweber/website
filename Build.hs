@@ -8,10 +8,9 @@ main = shakeArgs shakeOptions { shakeFiles = "build" } $ do
     want [ "dist" ]
 
     phony "clean" $ do
-        removeDirectory "bower_components"
+        removeDirectory ".spago"
         removeDirectory "build"
         removeDirectory "dist"
-        removeDirectory "node_modules"
         removeDirectory "output"
 
     phony "dist" $ do
@@ -23,24 +22,14 @@ main = shakeArgs shakeOptions { shakeFiles = "build" } $ do
 
     "build/main.js" %> \out -> do
         purs <- getDirectoryFiles "" [ "src//*.purs" ]
-        need $ "bower_components/purescript-halogen/bower.json"
-                : "node_modules/pulp/pulp.js"
-                : purs
-        cmd_ "node node_modules/pulp/pulp.js browserify --optimise --to" out
+        need purs
+        cmd_ "spago bundle-app --to build/main.js"
 
     "dist//*" %> \out -> do
         need [ "build/main.js" ]
         assets <- getDirectoryFiles "assets" [ "//*" ]
         sequence $ copyFileFromTo "assets" "dist" <$> assets
         copyFileFromTo "build" "dist" "main.js"
-
-    "bower_components//*" %> \out -> do
-        need [ "bower.json" ]
-        cmd_ "bower install --force"
-
-    "node_modules//*" %> \out -> do
-        need [ "package.json" ]
-        cmd_ "npm install"
 
 removeDirectory :: FilePath -> Action ()
 removeDirectory path = removeFilesAfter path [ "//" ]

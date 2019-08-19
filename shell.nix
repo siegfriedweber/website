@@ -24,6 +24,7 @@ in
   pkgs.mkShell {
     buildInputs = [
       easy-ps.purs
+      easy-ps.spago
       pkgs.git
       (pkgs.haskellPackages.ghcWithPackages (self: [
         self.shake
