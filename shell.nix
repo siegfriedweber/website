@@ -27,6 +27,7 @@ in
       easy-ps.spago
       pkgs.git
       (pkgs.haskellPackages.ghcWithPackages (self: [
+        self.hjsmin
         self.shake
       ]))
       pkgs.nodejs
