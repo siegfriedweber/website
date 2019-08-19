@@ -11,18 +11,26 @@ let
 
   pkgs = import src { };
 
+  easy-ps = import (pkgs.fetchFromGitHub {
+    owner = "justinwoo";
+    repo = "easy-purescript-nix";
+    rev = "a85ee748097fb70caaa953cb15bd18f81e4f85a1";
+    sha256 = "16xmsgjvwwxsf05n5wwpa63vjhr5y3bplkzhc5hcv99ns9x76m8x";
+  }) {
+    inherit pkgs;
+  };
+
 in
-  pkgs.stdenv.mkDerivation  {
-    name = "website";
-    buildInputs = with pkgs; [
-      git
-      haskellPackages.purescript
-      (haskellPackages.ghcWithPackages (self: [
+  pkgs.mkShell {
+    buildInputs = [
+      easy-ps.purs
+      pkgs.git
+      (pkgs.haskellPackages.ghcWithPackages (self: [
         self.shake
       ]))
-      nodejs
-      nodePackages.bower
-      openssh
+      pkgs.nodejs
+      pkgs.nodePackages.bower
+      pkgs.openssh
     ];
   }
 

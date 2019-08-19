@@ -3,13 +3,12 @@ module Main where
 import Prelude
 import Control.Monad.Error.Class (throwError)
 import Data.Const (Const)
-import Data.Maybe (Maybe(Nothing), maybe)
-import Data.Newtype (unwrap)
+import Data.Maybe (maybe)
 import Effect (Effect)
 import Effect.Aff (Aff)
 import Effect.Exception (error)
 
-import Halogen (Component, component)
+import Halogen (Component, defaultEval, mkComponent, mkEval)
 import Halogen.Aff (awaitLoad, runHalogenAff, selectElement)
 import Halogen.HTML (HTML, PlainHTML, fromPlainHTML)
 import Halogen.VDom.Driver (runUI)
@@ -46,10 +45,9 @@ main = do
     staticComponent :: forall m
                      . PlainHTML
                     -> Component HTML (Const Void) Unit Void m
-    staticComponent content = component
+    staticComponent content = mkComponent
         { initialState : const unit
         , render       : const $ fromPlainHTML content
-        , eval         : absurd <<< unwrap
-        , receiver     : const Nothing
+        , eval         : mkEval defaultEval
         }
 
