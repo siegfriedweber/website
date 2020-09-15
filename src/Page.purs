@@ -206,10 +206,10 @@ availability language = section_
         , en : "Availability"
         }
     , paragraph paragraphStyleNoMargin $ text $ choose language
-        { de : "Für Vollzeitprojekte werde ich erst wieder ab Oktober \
-               \2020 verfügbar sein."
-        , en : "I will be available for fulltime projects from October \
-               \2020."
+        { de : "Für Vollzeitprojekte werde ich erst wieder ab Januar \
+               \2021 verfügbar sein."
+        , en : "I will be available for fulltime projects from January \
+               \2021."
         }
     ]
 
